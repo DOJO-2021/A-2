@@ -25,6 +25,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッションスコープを破棄する
+		HttpSession session = request.getSession();
+		session.invalidate();
+
 		// ログインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
@@ -51,11 +55,15 @@ public class LoginServlet extends HttpServlet {
 			//unanswered.jspにリダイレクトする
 			response.sendRedirect("/WEB-INF/jsp/unanswered.jsp");
 		}
-
-
 		//ログインできなかった場合
+		else {
 			//リクエストスコープにエラーメッセージを格納
-			//login.jspにforwardする
+			String errMsg = "※IDかPWが間違えています。";
+			request.setAttribute("errMsg", errMsg);
+			this.doGet(request, response);
+		}
+
+
 
 	}
 
