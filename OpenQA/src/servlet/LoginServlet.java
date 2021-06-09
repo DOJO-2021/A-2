@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import model.LoginUser;
 
 /**
  * Servlet implementation class LoginServlet
@@ -42,10 +44,15 @@ public class LoginServlet extends HttpServlet {
 
 		//ログインできた場合
 		if (iDao.isLoginOK(id, pw)) {
-
-		}
 			//セッションスコープにIDを格納する
+			HttpSession session = request.getSession();
+			session.setAttribute("id", new LoginUser(id));
+
 			//unanswered.jspにリダイレクトする
+			response.sendRedirect("/WEB-INF/jsp/unanswered.jsp");
+		}
+
+
 		//ログインできなかった場合
 			//リクエストスコープにエラーメッセージを格納
 			//login.jspにforwardする
