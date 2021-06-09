@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDAO;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -30,8 +32,24 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//リクエストパラメータを取得する
+		request.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("ID");
+		String pw = request.getParameter("PW");
+
+		//ログイン処理
+		UserDAO iDao = new UserDAO();
+
+		//ログインできた場合
+		if (iDao.isLoginOK(id, pw)) {
+
+		}
+			//セッションスコープにIDを格納する
+			//unanswered.jspにリダイレクトする
+		//ログインできなかった場合
+			//リクエストスコープにエラーメッセージを格納
+			//login.jspにforwardする
+
 	}
 
 }
