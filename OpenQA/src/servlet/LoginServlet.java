@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 
@@ -23,6 +24,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッションスコープを破棄する
+		HttpSession session = request.getSession();
+		session.invalidate();
+
 		// ログインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
@@ -39,16 +44,26 @@ public class LoginServlet extends HttpServlet {
 
 		//ログイン処理
 		UserDAO iDao = new UserDAO();
+		User user = iDao.isLoginOK(id , pw);
 
 		//ログインできた場合
-		if (iDao.isLoginOK(id, pw)) {
-
-		}
+		if (user.getName() != null) {
 			//セッションスコープにIDを格納する
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+
 			//unanswered.jspにリダイレクトする
+			response.sendRedirect("/WEB-INF/jsp/unanswered.jsp");
+		}
 		//ログインできなかった場合
+		else {
 			//リクエストスコープにエラーメッセージを格納
-			//login.jspにforwardする
+			String errMsg = "※IDかPWが間違えています。";
+			request.setAttribute("errMsg", errMsg);
+			this.doGet(request, response);
+		}
+
+
 
 	}
 
