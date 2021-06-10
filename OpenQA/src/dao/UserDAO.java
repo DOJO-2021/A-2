@@ -14,7 +14,6 @@ public class UserDAO {
 	// ログインできるならtrueを返す
 	public User isLoginOK(String id, String pw) {
 		Connection conn = null;
-		boolean loginResult = false;
 		User user = new User();
 		try {
 			// JDBCドライバを読み込む
@@ -41,11 +40,9 @@ public class UserDAO {
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			loginResult = false;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			loginResult = false;
 		}
 		finally {
 			// データベースを切断
@@ -55,7 +52,6 @@ public class UserDAO {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					loginResult = false;
 				}
 			}
 		}
@@ -112,7 +108,7 @@ public class UserDAO {
 	}
 
 	//PW再設定
-	public boolean update(String pw) {
+	public boolean update(String pw, String id) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -124,11 +120,12 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql = "update user set pw=?";
+			String sql = "update user set pw=? where id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setString(1, pw);
+			pStmt.setString(2, id);
 			// SQL文を実行する
 			int num = pStmt.executeUpdate();
 			if(num == 1) {
