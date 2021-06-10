@@ -1,22 +1,23 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Answer implements Serializable {
 	// JavaBeansの作成
 
 	// フィールドの作成
 	// DBのanswerテーブルと同じでいいの？？
-	private int a_id;
-	private int id;
+	private String a_id;
+	private String id;
 	private int anonymity; // 0か1だからintでいいんだよね？？
-	private String date;
+	private Date date;
 	private String answer;
 	private String images; // パスを格納するからStringでいいんだよね？？
-	private int q_id;
+	private String q_id;
 
 	// 引数があるコンストラクタ
-	public Answer(int a_id, int id, int anonymity, String date, String answer, String images, int q_id) {
+	public Answer(String a_id, String id, int anonymity, Date date, String answer, String images, String q_id) {
 		super();
 		this.a_id = a_id;
 		this.id = id;
@@ -30,29 +31,29 @@ public class Answer implements Serializable {
 	// 引数がないコンストラクタ
 	public Answer() {
 		super();
-		this.a_id = 0;
-		this.id = 0;
+		this.a_id = "";
+		this.id = "";
 		this.anonymity = 0;
-		this.date = "";
+		this.date = null;
 		this.answer = "";
 		this.images = "";
-		this.q_id = 0;
+		this.q_id = "";
 	}
 
-	// getter/setterの作成（スコープに入れるとき）
-	public int getA_id() {
+	// getter/setterの生成
+	public String getA_id() {
 		return a_id;
 	}
 
-	public void setA_id(int a_id) {
+	public void setA_id(String a_id) {
 		this.a_id = a_id;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -64,11 +65,11 @@ public class Answer implements Serializable {
 		this.anonymity = anonymity;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -88,12 +89,14 @@ public class Answer implements Serializable {
 		this.images = images;
 	}
 
-	public int getQ_id() {
+	public String getQ_id() {
 		return q_id;
 	}
 
-	public void setQ_id(int q_id) {
+	public void setQ_id(String q_id) {
 		this.q_id = q_id;
 	}
+
+
 
 }
