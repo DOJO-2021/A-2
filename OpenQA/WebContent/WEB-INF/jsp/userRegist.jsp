@@ -22,8 +22,8 @@
 			お名前<input type="text" name="name" placeholder="お名前">
 		</p>
 		<p>
-			<input type="radio" name="student"  value="student" checked>受講生
-			<input type="radio" name="teacher"  value="student" checked>講師
+			<input type="radio" name="type"  value="student" checked>受講生
+			<input type="radio" name="type"  value="teacer" checked>講師
 		</p>
 		<p>
 			講師用PW<input type="text" name="ins_pw" placeholder="講師用PW">
