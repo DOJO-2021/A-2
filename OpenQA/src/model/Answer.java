@@ -30,14 +30,6 @@ public class Answer implements Serializable {
 
 	// 引数がないコンストラクタ
 	public Answer() {
-		super();
-		this.a_id = "";
-		this.id = "";
-		this.anonymity = 0;
-		this.date = null;
-		this.answer = "";
-		this.images = "";
-		this.q_id = "";
 	}
 
 	// getter/setterの生成

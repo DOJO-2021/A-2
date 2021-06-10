@@ -21,15 +21,8 @@ public class User implements Serializable {
 		this.type = type;
 		this.ins_pw = ins_pw;
 	}
-
 	// 引数がないコンストラクタ
 	public User() {
-		super();
-		this.id = "";
-		this.pw = "";
-		this.name = "";
-		this.type = 0; // デフォルト値設定
-		this.ins_pw = "";
 	}
 
 	// getter/setterの作成（スコープに入れるとき）

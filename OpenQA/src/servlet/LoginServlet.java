@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 		//ログイン処理
 		UserDAO iDao = new UserDAO();
 		User user = iDao.isLoginOK(id , pw);
+		System.out.println(user.getName()+"aaa");
 
 		//ログインできた場合
 		if (user.getName() != null) {
@@ -55,7 +56,8 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", user);
 
 			//unanswered.jspにリダイレクトする
-			response.sendRedirect("/WEB-INF/jsp/unanswered.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/unanswered.jsp");
+			dispatcher.forward(request, response);
 		}
 		//ログインできなかった場合
 		else {

@@ -37,19 +37,6 @@ public class Question implements Serializable {
 	}
 
 	public Question() {
-		super();
-		this.q_id = "";
-		this.to = 0;
-		this.id = "";
-		this.anonymity = 0;
-		this.b_category = "";
-		this.s_category = "";
-		this.date = null;
-		this.title = "";
-		this.content = "";
-		this.solution = 0;
-		this.metoo = 0;
-		this.images = "";
 	}
 
 	//setter getter
