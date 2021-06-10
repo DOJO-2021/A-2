@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Question;
 
@@ -177,7 +178,7 @@ public class QuestionDAO {
 	}
 
 
-	//SELECT * FROM BC WHERE  name LIKE ? OR company LIKE ?　OR　コンテンツ　like ?
+
 	//category検索のためのメソッド
 	public List<Question> cate_select(String b_category) {
 		Connection conn = null;
@@ -192,7 +193,7 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Question WHERE  b_category = ?";
+			String sql = "SELECT * FROM Question WHERE  b_category = ? order by s_category asc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -204,30 +205,30 @@ public class QuestionDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Question card = new Bc(
-				rs.getString("BC_ID"),
-				rs.getString("COMPANY"),
-				rs.getString("DEPARTMENT"),
-				rs.getString("POSITION"),
-				rs.getString("NAME"),
-				rs.getString("MAIL"),
-				rs.getString("POSTCODE"),
-				rs.getString("ADDRESS"),
-				rs.getString("TEL"),
-				rs.getString("FAX"),
-				rs.getString("MOBILE_PHONE"),
-				rs.getString("REMARKS")
+				Question card = new Question(
+				rs.getString("q_id"),
+				rs.getInt("to"),
+				rs.getString("id"),
+				rs.getInt("anonymity"),
+				rs.getString("b_category"),
+				rs.getString("s_category"),
+				rs.getDate("date"),
+				rs.getString("title"),
+				rs.getString("content"),
+				rs.getInt("solution"),
+				rs.getInt("metoo"),
+				rs.getString("images")
 				);
-				cardList.add(card);
+				questionList.add(card);
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			cardList = null;
+			questionList = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			cardList = null;
+			questionList = null;
 		}
 		finally {
 			// データベースを切断
@@ -237,15 +238,85 @@ public class QuestionDAO {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					cardList = null;
+					questionList = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return cardList;
-	}
+		return questionList;
 	}
 
+	//SELECT * FROM BC WHERE  name LIKE ? OR company LIKE ?　OR　コンテンツ　like ?
+	//あいまい検索
+	public List<Question> select(String word) {
+		Connection conn = null;
+		List<Question> questionList = new ArrayList<Question>();
+
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM Question WHERE  title like ? OR content like ? OR b_category like ? OR s_category like ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setString(1, "%" + word + "%");
+			pStmt.setString(2, "%" + word + "%");
+			pStmt.setString(3, "%" + word + "%");
+			pStmt.setString(4, "%" + word + "%");
+
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Question card = new Question(
+				rs.getString("q_id"),
+				rs.getInt("to"),
+				rs.getString("id"),
+				rs.getInt("anonymity"),
+				rs.getString("b_category"),
+				rs.getString("s_category"),
+				rs.getDate("date"),
+				rs.getString("title"),
+				rs.getString("content"),
+				rs.getInt("solution"),
+				rs.getInt("metoo"),
+				rs.getString("images")
+				);
+				questionList.add(card);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			questionList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			questionList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					questionList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return questionList;
+	}
 
 }
