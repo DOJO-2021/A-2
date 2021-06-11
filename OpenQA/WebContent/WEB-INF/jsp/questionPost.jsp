@@ -9,6 +9,7 @@
 </head>
 <body>
 <h2>質問登録</h2>
+<form method="POST" name = "subBut" action="/OpenQA/registServlet" ">
 <table>
 	<th>
 		<!-- 回答者を指定する -->
@@ -37,12 +38,22 @@
 		<!-- 二つ目のセレクトボックス（連動する） -->
 		<select name="s_category">
 		</select>
-
 	</th>
 
+	<td>
+	<p>タイトル <input type="text" name="title"></p>
+	<p>内容<textarea name="content"></textarea></p>
+
+	<label>
+		<img src="images/insert.jpeg" alt="画像添付">
+		<input type="file" accept="image/*">
+	</label>
+
+	<input type="submit" name="SUBMIT" value="質問投稿">
+	</td>
 
 </table>
 
-
+</form>
 </body>
 </html>
