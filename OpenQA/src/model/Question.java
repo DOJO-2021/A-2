@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Question implements Serializable {
 	private String q_id;
@@ -77,7 +76,7 @@ public class Question implements Serializable {
 	public void setS_category(String s_category) {
 		this.s_category = s_category;
 	}
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 	public void setDate(Timestamp date) {
