@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AnswerDAO;
+import dao.QuestionDAO;
 import dao.UserDAO;
 import model.Result;
+import model.User;
+
 /**
  * Servlet implementation class RegistServlet
  */
@@ -71,7 +76,7 @@ public class RegistServlet extends HttpServlet {
 		}
 
 		String buttonID =request.getParameter("regist");
- 		// もしもuserRegistのregistボタンが押されたら以下の処理を行う
+ 		// ①もしもuserRegistのregistボタンが押されたら以下の処理を行う
 		if(buttonID.equals("登録")) {
 
 			// userRegist.jspのリクエストパラメータを取得する
@@ -81,13 +86,6 @@ public class RegistServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			int type = Integer.parseInt(request.getParameter("type"));
 			String ins_pw = request.getParameter("ins_pw");
-
-			/*
-			int intType=0;
-			if(type.equals("teacher")) {
-				intType=1;
-			}*/
-
 
 			// 講師用PWが合っているか確認
 			if(type == 1) {
@@ -111,10 +109,51 @@ public class RegistServlet extends HttpServlet {
 			}
 		}
 
-		// もしもquestionPost.jspのボタンが押されたら以下の処理を行う
-		String  =request.getParameter("");
+		// ②もしもquestionPost.jspのボタンが押されたら以下の処理を行う
+		String questionButton =request.getParameter("SUBMIT"); // 確認
+		if(questionButton.equals("質問投稿")) {
 
-		// もしもanswerPost.jspのボタンが押されたら以下の処理を行う
+			// questionPost.jspのリクエストパラメータを取得する
+			request.setCharacterEncoding("UTF-8");
+			int to = Integer.parseInt(request.getParameter("to"));
+			// userのidをセッションスコープから持ってくる
+			User user = (User)session.getAttribute("user");
+			String id = user.getId();
+			int anonymity = Integer.parseInt(request.getParameter("anonymity"));
+			String b_category = request.getParameter("b_category");
+			String s_category = request.getParameter("s_category");
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			String images = request.getParameter("images");
+
+			// 登録処理を行う
+			QuestionDAO bDao = new QuestionDAO();
+
+			// 登録成功したら...
+			bDao.insert(to, id, anonymity, b_category, s_category, timestamp, title, content, 0, 0, images);
+		}
+
+		// ③もしもanswerPost.jspのボタンが押されたら以下の処理を行う
+		String answerButton =request.getParameter("SUBMIT");
+		if(answerButton.equals("回答投稿")) {
+
+			// answerPost.jspのリクエストパラメータを取得する
+			request.setCharacterEncoding("UTF-8");
+			// userのidをセッションスコープから持ってくる
+			User user = (User)session.getAttribute("user");
+			String id = user.getId();
+			int anonymity = Integer.parseInt(request.getParameter("anonymity"));
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String content = request.getParameter("content");
+			String images = request.getParameter("images");
+
+			// 登録処理を行う
+			AnswerDAO bDao = new AnswerDAO();
+
+			// 登録成功したらresult.javaに表示
+			bDao.insert(0, id, anonymity,  timestamp, content, images, 0);
+		}
 
 	}
 
