@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>質問登録</h2>
-<form method="POST" name = "subBut" action="/OpenQA/registServlet" ">
+<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question" ">
 <table>
 	<th>
 		<!-- 回答者を指定する -->
@@ -27,12 +27,12 @@
 
 		<!-- ひとつめのセレクトボックス -->
 		<!-- web開発コースは保留  -->
-		<select name="b_category">
+		<select name="b_category" id="b_category" >
 			<option value="">カテゴリー</option>
-			<option id="" value="パーソナルスキル">パーソナルスキル</option>
-			<option id="" value="IT基礎">IT基礎コース</option>
-			<option id="" value="java基礎">java基礎コース</option>
-			<option id="" value="その他">その他</option>
+			<option  value="パーソナルスキル">パーソナルスキル</option>
+			<option  value="IT基礎">IT基礎コース</option>
+			<option  value="java基礎">java基礎コース</option>
+			<option  value="その他">その他</option>
 		</select>
 
 		<!-- 二つ目のセレクトボックス（連動する） -->

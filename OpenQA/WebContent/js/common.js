@@ -17,8 +17,7 @@
 	//ここから関数-----------------------------------------------------------------
 	//ひとつめの配列の値が変更されたときに動く関数
 	document.getElementsByName('b_category')[0].onchange = function () {
-		let input = document.getElementsByName('b_category');
-		let b_category = input.children.getAttribute('value');
+		let b_category = document.getElementsById('b_category').value;
 		let elm = document.getElementsByName('s_category')[0];
 		elm.options.length = 0;
 		for (let i = 0; i < s_categoryArray[b_category].length; i++) {
