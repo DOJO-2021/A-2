@@ -16,8 +16,10 @@
 			<option value="0">だれでも</option>
 			<option value="1">講師</option>
 			<option value="2">受講者</option>
-			${user.name}
 		</select>
+		from. ${user.name}
+		<input type="hidden" name="anonymity" value="0">
+		<input type="checkbox" name="anonymity" value="1">匿名
 	</th>
 
 
