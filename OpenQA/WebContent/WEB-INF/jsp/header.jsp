@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Header</title>
 <link rel="stylesheet" href="/OpenQA/WebContent/css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/OpenQA/WebContent/js/zdo_drawer_menu.js"></script>
