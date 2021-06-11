@@ -25,8 +25,8 @@
 					name="submit" value="Search">
 			</form>
 
-			<!-- search and mypage -->
-			<a href="/OpenQA/RegistServlet?mode=question"> <img
+			<!-- regist and mypage -->
+			<a href="/OpenQA/RegistServlet?mode=question target="_blank" rel="noopener noreferrer""> <img
 				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
 				src="/OpenQA/images/myPage.png"></a>
 
