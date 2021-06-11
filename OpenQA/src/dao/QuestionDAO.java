@@ -212,13 +212,14 @@ public class QuestionDAO {
 				rs.getInt("anonymity"),
 				rs.getString("b_category"),
 				rs.getString("s_category"),
-				rs.getDate("date"),
+				rs.getTimestamp("date"),
 				rs.getString("title"),
 				rs.getString("content"),
 				rs.getInt("solution"),
 				rs.getInt("metoo"),
 				rs.getString("images")
 				);
+
 				questionList.add(card);
 			}
 		}
@@ -284,7 +285,7 @@ public class QuestionDAO {
 				rs.getInt("anonymity"),
 				rs.getString("b_category"),
 				rs.getString("s_category"),
-				rs.getDate("date"),
+				rs.getTimestamp("date"),
 				rs.getString("title"),
 				rs.getString("content"),
 				rs.getInt("solution"),
