@@ -1,11 +1,11 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import model.Question;
 public class QuestionDAO {
 
 	//登録するためのメソッド
-	public boolean insert(String q_id, int to, String id, int anonymity, String b_category, String s_category, Date date,
+	public boolean insert(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
 			String title, String content, int solution, int metoo, String images) {
 		Connection conn = null;
 		boolean result = false;
@@ -36,7 +36,7 @@ public class QuestionDAO {
 			pStmt.setInt(3, anonymity);
 			pStmt.setString(4, b_category);
 			pStmt.setString(5, s_category);
-			pStmt.setDate(6, date);
+			pStmt.setTimestamp(6, date);
 			pStmt.setString(7, title);
 			pStmt.setString(8, content);
 			pStmt.setInt(9, solution);
@@ -72,7 +72,7 @@ public class QuestionDAO {
 	}
 
 	//編集のためのメソッド
-	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category, Date date,
+	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
 			String title, String content, int solution, int metoo, String images) {
 		Connection conn = null;
 		boolean result = false;
@@ -93,7 +93,7 @@ public class QuestionDAO {
 			pStmt.setInt(3, anonymity);
 			pStmt.setString(4, b_category);
 			pStmt.setString(5, s_category);
-			pStmt.setDate(6, date);
+			pStmt.setTimestamp(6, date);
 			pStmt.setString(7, title);
 			pStmt.setString(8, content);
 			pStmt.setInt(9, solution);
