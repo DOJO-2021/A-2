@@ -151,8 +151,8 @@ public class RegistServlet extends HttpServlet {
 			// 登録処理を行う
 			AnswerDAO bDao = new AnswerDAO();
 
-			// 登録成功したらresult.javaに表示
-			bDao.insert(0, id, anonymity,  timestamp, content, images, 0);
+			// 登録成功したら...
+			bDao.insert(null, id, anonymity,  timestamp, content, images, 0);
 		}
 
 	}
