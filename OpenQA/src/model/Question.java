@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Question implements Serializable {
@@ -10,7 +11,7 @@ public class Question implements Serializable {
 	private int anonymity;
 	private String b_category;
 	private String s_category;
-	private Date date;
+	private Timestamp date;
 	private String title;
 	private String content;
 	private int solution;
@@ -19,7 +20,7 @@ public class Question implements Serializable {
 
 
 	//コンストラクタ
-	public Question(String q_id, int to, String id, int anonymity, String b_category, String s_category, Date date,
+	public Question(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
 			String title, String content, int solution, int metoo, String images) {
 		super();
 		this.q_id = q_id;
@@ -79,7 +80,7 @@ public class Question implements Serializable {
 	public Date getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 	public String getTitle() {

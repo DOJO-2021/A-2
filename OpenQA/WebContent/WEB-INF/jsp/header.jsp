@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Header</title>
 <link rel="stylesheet" href="/OpenQA/WebContent/css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/OpenQA/WebContent/js/zdo_drawer_menu.js"></script>
@@ -25,8 +25,8 @@
 					name="submit" value="Search">
 			</form>
 
-			<!-- search and mypage -->
-			<a href="/OpenQA/RegistServlet?mode=question"> <img
+			<!-- regist and mypage -->
+			<a href="/OpenQA/RegistServlet?mode=question target="_blank" rel="noopener noreferrer""> <img
 				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
 				src="/OpenQA/images/myPage.png"></a>
 
