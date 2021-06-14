@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import dao.AnswerDAO;
 import dao.QuestionDAO;
 import dao.UserDAO;
-import model.Question;
 import model.Result;
 import model.User;
 
@@ -135,12 +134,6 @@ public class RegistServlet extends HttpServlet {
 
 			// 登録成功したら...
 			bDao.insert("", to, id, anonymity, b_category, s_category, timestamp, title, content, 0, 0, images);
-
-			// new
-			Question question = new Question();
-
-			//セッションスコープにQuestionを格納する
-			session.setAttribute("question", question);
 		}
 
 		// ③もしもanswerPost.jspのボタンが押されたら以下の処理を行う
@@ -152,20 +145,17 @@ public class RegistServlet extends HttpServlet {
 			// userのidをセッションスコープから持ってくる
 			User user = (User)session.getAttribute("user");
 			String id = user.getId();
-			String a_id = request.getParameter("a_id");
 			int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String content = request.getParameter("content");
 			String images = request.getParameter("images");
-			Question question = (Question)session.getAttribute("question");
-			String q_id = question.getQ_id();
-			// String q_id = request.getParameter("q_id");
+			String q_id = request.getParameter("q_id");
 
 			// 登録処理を行う
 			AnswerDAO bDao = new AnswerDAO();
 
 			// 登録成功したら...
-			bDao.insert(a_id , id, anonymity,  timestamp, content, images, q_id);
+			bDao.insert(id, anonymity,  timestamp, content, images, q_id);
 		}
 
 	}
