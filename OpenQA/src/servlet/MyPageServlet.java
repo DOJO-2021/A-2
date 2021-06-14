@@ -9,9 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dao.BcDAO;
-import model.Bc;
+import dao.AnswerDAO;
+import dao.QuestionDAO;
+import model.Answer;
+import model.Question;
+import model.User;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -29,16 +33,30 @@ public class MyPageServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	// 自分のした質問
-	// Questionテーブルはセッションスコープのidと一致するquestionを持ってくる。
-	// QuestionDAOの内容をごっそりとってきてListに入れる。
-	request.setAttribute("mypageQuestionList", mypageQuestionList);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}
 
-	//	自分が回答した質問の一覧
-	//	１、answerテーブルのセッションスコープのidと一致するanswerを持ってくる。
-	//	２、answerのq_idと一致するquestionを持ってくる。
-	//	QuestionDAOで質問IDから検索できるメソッドを作る。
-	//	その引数はmypageAnswerメソッドで入手したq_id
-	//	３、その持ってきたq_idと一致するanswerをすべて持ってくる。
+			// 自分のした質問
+			// Questionテーブルはセッションスコープのidと一致するquestionを持ってくる。
+			// QuestionDAOの内容をごっそりとってきてListに入れる。
+			QuestionDAO qDao = new QuestionDAO();
+			User user = (User) session.getAttribute("user");
+			List<Question> mypageQuestionList = qDao.mypageQuestion(user.getId());
 
+			//	自分が回答した質問の一覧
+			//	１、answerテーブルのセッションスコープのidと一致するanswerを持ってくる。
+			AnswerDAO aDao = new AnswerDAO();
+			List<Answer> mypageAnswerList = aDao.mypageAnswer(user.getId());
+			//	２、answerのq_idと一致するquestionを持ってくる。
+			List<Answer> mypageQuestionIdList = qDao.mypageQuestionId(.getQ_id());
+			//	QuestionDAOで質問IDから検索できるメソッドを作る。
+			//	その引数はmypageAnswerメソッドで入手したq_id
+			//	３、その持ってきたq_idと一致するanswerをすべて持ってくる。
+
+		}
 }

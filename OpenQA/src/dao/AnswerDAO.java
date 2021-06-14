@@ -14,7 +14,7 @@ import model.Answer;
 public class AnswerDAO {
 
 	// ①マイページに自分の回答結果を一覧表示
-	public List<Answer> mypageAnswer(Answer param) { // ★保留！
+	public List<Answer> mypageAnswer(String id) { // ★保留！
 		Connection conn = null;
 		List<Answer> mypageAnswerList = new ArrayList<Answer>();
 
@@ -32,12 +32,7 @@ public class AnswerDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			if (param.getId() != null) {
-				pStmt.setString(1, "%" + param.getId() + "%");
-			}
-			else {
-				pStmt.setString(1, "%");
-			}
+			pStmt.setString(1, id);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
