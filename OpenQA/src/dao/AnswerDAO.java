@@ -86,7 +86,7 @@ public class AnswerDAO {
 
 	// ②回答投稿（登録）
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
-	public boolean insert(String a_id, String id, int anonymity, Timestamp date, String answer, String images, String q_id) {
+	public boolean insert(String id, int anonymity, Timestamp date, String answer, String images, String q_id) {
 		Connection conn = null;
 		// 処理の結果を入れる変数
 		boolean result = false;
@@ -103,13 +103,12 @@ public class AnswerDAO {
 			String sql = "insert into answer values(?, ?, ?, ?, ?, ?, ?) ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, a_id);
-			pStmt.setString(2, id);
-			pStmt.setInt(3, anonymity);
-			pStmt.setTimestamp(4, date);
-			pStmt.setString(5, answer);
-			pStmt.setString(6, images);
-			pStmt.setString(7, q_id);
+			pStmt.setString(1, id);
+			pStmt.setInt(2, anonymity);
+			pStmt.setTimestamp(3, date);
+			pStmt.setString(4, answer);
+			pStmt.setString(5, images);
+			pStmt.setString(6, q_id);
 
 			// 登録できたら1でtrue
 			int num = pStmt.executeUpdate();

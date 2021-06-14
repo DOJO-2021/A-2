@@ -320,4 +320,80 @@ public class QuestionDAO {
 		return questionList;
 	}
 
+	// マイページに自分の質問を一覧表示させる
+	public List<Question> mypageQuestion(Question param) {
+		Connection conn = null;
+		List<Question> mypageQuestionList = new ArrayList<Question>();
+
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
+
+			// SELECT文を準備する
+			// idでDB検索
+			String sql = "select * from question where ID = ?  ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			if (param.getId() != null) {
+				pStmt.setString(1, "%" + param.getId() + "%");
+			}
+			else {
+				pStmt.setString(1, "%");
+			}
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする(リスト)
+			while (rs.next()) {
+				Question mypage = new Question(
+						rs.getString("q_id"),
+						rs.getInt("to"),
+						rs.getString("id"),
+						rs.getInt("anonymity"),
+						rs.getString("b_category"),
+						rs.getString("s_category"),
+						rs.getTimestamp("date"),
+						rs.getString("title"),
+						rs.getString("content"),
+						rs.getInt("solution"),
+						rs.getInt("metoo"),
+						rs.getString("images")
+						);
+
+				// ArrayListに上記7つのデータを格納
+				mypageQuestionList.add(mypage);
+			}
+		}
+
+		catch (SQLException e) {
+			// コンソール画面に例外状況を記す
+			e.printStackTrace();
+			mypageQuestionList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			mypageQuestionList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					mypageQuestionList = null;
+				}
+			}
+		}
+		// 結果を返す
+		return mypageQuestionList;
+	}
+
 }

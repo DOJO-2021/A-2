@@ -10,6 +10,7 @@
 <body>
 <h2>回答登録</h2>
 <form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=answer" enctype="multipart/form-data">
+<input type=hidden name="q_id" value=${}><!-- 保留 -->
 <table>
 	<th>
 
