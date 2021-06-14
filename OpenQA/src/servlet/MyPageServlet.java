@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -52,8 +53,11 @@ public class MyPageServlet extends HttpServlet {
 			//	１、answerテーブルのセッションスコープのidと一致するanswerを持ってくる。
 			AnswerDAO aDao = new AnswerDAO();
 			List<Answer> mypageAnswerList = aDao.mypageAnswer(user.getId());
+
 			//	２、answerのq_idと一致するquestionを持ってくる。
-			List<Answer> mypageQuestionIdList = qDao.mypageQuestionId(.getQ_id());
+			// セッションスコープに入っていないテーブルの情報を取得したい
+			ArrayList<Question> list = qDao.mypageQuestionId(getQ_id());
+
 			//	QuestionDAOで質問IDから検索できるメソッドを作る。
 			//	その引数はmypageAnswerメソッドで入手したq_id
 			//	３、その持ってきたq_idと一致するanswerをすべて持ってくる。
