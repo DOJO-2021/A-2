@@ -250,9 +250,9 @@ public class QuestionDAO {
 
 	//SELECT * FROM BC WHERE  name LIKE ? OR company LIKE ?　OR　コンテンツ　like ?
 	//あいまい検索
-	public List<Question> select(String word) {
+	public ArrayList<Question> select(String word) {
 		Connection conn = null;
-		List<Question> questionList = new ArrayList<Question>();
+		ArrayList<Question> questionList = new ArrayList<Question>();
 
 
 		try {
@@ -278,7 +278,7 @@ public class QuestionDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Question card = new Question(
+				Question qs = new Question(
 				rs.getString("q_id"),
 				rs.getInt("to"),
 				rs.getString("id"),
@@ -292,7 +292,7 @@ public class QuestionDAO {
 				rs.getInt("metoo"),
 				rs.getString("images")
 				);
-				questionList.add(card);
+				questionList.add(qs);
 			}
 		}
 		catch (SQLException e) {

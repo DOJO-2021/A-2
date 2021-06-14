@@ -20,9 +20,9 @@
 
 			<!-- serch -->
 			<form method="POST" action="/OpenQA/SearchServlet">
-				<input type="text" style="width: 150px;" name="search"><input
+				<input type="text" style="width: 150px;" name="word"><input
 					type="image" src="/OpenQA/WebContent/images/search.png" alt="送信する"
-					name="submit" value="Search">
+					name="submit" value="word">
 			</form>
 
 			<!-- regist and mypage -->
