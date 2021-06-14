@@ -26,7 +26,7 @@
 			</form>
 
 			<!-- regist and mypage -->
-			<a href="/OpenQA/RegistServlet?mode=question target="_blank" rel="noopener noreferrer""> <img
+			<a href="/OpenQA/RegistServlet?mode=question" target="_blank" rel="noopener noreferrer"> <img
 				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
 				src="/OpenQA/images/myPage.png"></a>
 
