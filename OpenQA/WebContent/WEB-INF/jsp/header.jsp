@@ -14,14 +14,14 @@
 		<!-- logo and title -->
 		<header class="site-header">
 			<h1 class="site-logo">
-				<img src="/OpenQA/WebContent/images/mainLogo.png">
+				<img src="/OpenQA/images/mainLogo.png">
 			</h1>
 			<h1>Open Q&amp;A System</h1>
 
 			<!-- serch -->
 			<form method="POST" action="/OpenQA/SearchServlet">
 				<input type="text" style="width: 150px;" name="word"><input
-					type="image" src="/OpenQA/WebContent/images/search.png" alt="送信する"
+					type="image" src="/OpenQA/images/search.png" alt="送信する"
 					name="submit" value="word">
 			</form>
 
