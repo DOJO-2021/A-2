@@ -28,7 +28,7 @@
 
 		<!-- ひとつめのセレクトボックス -->
 		<!-- web開発コースは保留  -->
-		<select name="b_category" id="b_category" >
+		<select name="b_category" id="b_category" onchange="category()">
 			<option value="">カテゴリー</option>
 			<option  value="パーソナルスキル">パーソナルスキル</option>
 			<option  value="IT基礎">IT基礎コース</option>
