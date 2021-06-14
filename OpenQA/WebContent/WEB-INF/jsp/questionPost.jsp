@@ -11,6 +11,7 @@
 <h2>質問登録</h2>
 <form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question"  enctype="multipart/form-data">
 <table>
+<tr>
 	<th>
 		<!-- 回答者を指定する -->
 		<select name="to">
@@ -39,7 +40,8 @@
 		<select name="s_category">
 		</select>
 	</th>
-
+</tr>
+<tr>
 	<td>
 	<p>タイトル <input type="text" name="title"></p>
 	<p>内容<textarea name="content"></textarea></p>
@@ -52,12 +54,14 @@
 
 	<input type="submit" name="SUBMIT" value="質問投稿">
 	</td>
-
+</tr>
 </table>
 
 </form>
 </body>
 <script>
+'use strict'
+
 	function previewImage(obj){
 
 		var fileReader = new FileReader();
@@ -80,7 +84,8 @@
 		});
 		// 画像読み込み
 		fileReader.readAsDataURL(obj.files[0]);
-		console.log(fileReader.result)
+		console.log(fileReader.result);
+	}
 </script>
 
 </html>
