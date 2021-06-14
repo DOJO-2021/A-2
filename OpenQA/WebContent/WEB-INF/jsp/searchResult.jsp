@@ -14,7 +14,15 @@
 <c:forEach var="e" items="${QuestionList}" >
 <table>
 <tr>
-<td></td>
+<td><c:out value="${list.to}" /></td>
+<td><c:if test="${sessionScope.user.type==1}">
+	${requestScope.QuestionUser.name}
+</c:if>
+<c:if test="${sessionScope.user.flg==0}">
+	匿名
+</c:if></td>
+<td><c:out value="${list.title}" /></td>
+
 </tr>
 </table>
 </c:forEach>
