@@ -1,11 +1,11 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class AnswerDAO {
 						rs.getString("a_id"),
 						rs.getString("id"),
 						rs.getInt("anonymity"),
-						rs.getDate("date"),
+						rs.getTimestamp("date"),
 						rs.getString("answer"),
 						rs.getString("images"),
 						rs.getString("q_id")
@@ -86,7 +86,7 @@ public class AnswerDAO {
 
 	// ②回答投稿（登録）
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
-	public boolean insert(String a_id, String id, int anonymity, Date date, String answer, String images, String q_id) {
+	public boolean insert(String a_id, String id, int anonymity, Timestamp date, String answer, String images, String q_id) {
 		Connection conn = null;
 		// 処理の結果を入れる変数
 		boolean result = false;
@@ -106,7 +106,7 @@ public class AnswerDAO {
 			pStmt.setString(1, a_id);
 			pStmt.setString(2, id);
 			pStmt.setInt(3, anonymity);
-			pStmt.setDate(4, date);
+			pStmt.setTimestamp(4, date);
 			pStmt.setString(5, answer);
 			pStmt.setString(6, images);
 			pStmt.setString(7, q_id);
@@ -142,7 +142,7 @@ public class AnswerDAO {
 	// 回答編集 update
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
 
-	public boolean update(String a_id, String id, int anonymity, Date date, String answer, String images, String q_id) {
+	public boolean update(String a_id, String id, int anonymity, Timestamp date, String answer, String images, String q_id) {
 		Connection conn = null;
 		// 処理の結果を入れる変数
 		boolean result = false;
@@ -160,7 +160,7 @@ public class AnswerDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, anonymity);
-			pStmt.setDate(2, date);
+			pStmt.setTimestamp(2, date);
 			pStmt.setString(3, answer);
 			pStmt.setString(4, images);
 
