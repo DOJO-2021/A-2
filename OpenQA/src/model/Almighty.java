@@ -12,7 +12,7 @@ public class Almighty implements Serializable {
 	private int q_anonymity;
 	private String b_category;
 	private String s_category;
-	private Timestamp date;
+	private Timestamp q_date;
 	private String title;
 	private String content;
 	private int solution;
@@ -22,6 +22,7 @@ public class Almighty implements Serializable {
 	private String a_id;
 	private String a_name;
 	private int a_anonymity;
+	private Timestamp a_date;
 	private String answer;
 	private String a_images;
 	public String getQ_id() {
@@ -66,11 +67,18 @@ public class Almighty implements Serializable {
 	public void setS_category(String s_category) {
 		this.s_category = s_category;
 	}
-	public Timestamp getDate() {
-		return date;
+
+	public Timestamp getQ_date() {
+		return q_date;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setQ_date(Timestamp q_date) {
+		this.q_date = q_date;
+	}
+	public Timestamp getA_date() {
+		return a_date;
+	}
+	public void setA_date(Timestamp a_date) {
+		this.a_date = a_date;
 	}
 	public String getTitle() {
 		return title;
