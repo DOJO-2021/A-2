@@ -18,6 +18,11 @@
 			</h1>
 			<h1>Open Q&amp;A System</h1>
 
+			<!-- regist and mypage -->
+			<a href="/OpenQA/RegistServlet?mode=question" target="_blank" rel="noopener noreferrer"> <img
+				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
+				src="/OpenQA/images/myPage.png"></a>
+
 			<!-- serch -->
 			<form method="POST" action="/OpenQA/SearchServlet">
 				<input type="text" style="width: 150px;" name="word"><input
@@ -25,10 +30,6 @@
 					name="submit" value="word">
 			</form>
 
-			<!-- regist and mypage -->
-			<a href="/OpenQA/RegistServlet?mode=question" target="_blank" rel="noopener noreferrer"> <img
-				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
-				src="/OpenQA/images/myPage.png"></a>
 
 			<!-- drawer menu -->
 			<div class="zdo_drawer_menu">
