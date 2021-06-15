@@ -290,7 +290,7 @@ public class QuestionDAO {
 				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 				mypage.setB_category(rs.getString("question.b_category"));
 				mypage.setS_category(rs.getString("question.s_category"));
-				mypage.setDate(rs.getTimestamp("question.date"));
+				mypage.setQ_date(rs.getTimestamp("question.date"));
 				mypage.setTitle(rs.getString("question.title"));
 				mypage.setContent(rs.getString("question.content"));
 				mypage.setSolution(rs.getInt("question.solution"));
@@ -299,6 +299,7 @@ public class QuestionDAO {
 				mypage.setA_id(rs.getString("answer.a_id"));
 				mypage.setA_name(rs.getString("answer.name"));
 				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+				mypage.setA_date(rs.getTimestamp("answer.date"));
 				mypage.setAnswer(rs.getString("answer.answer"));
 				mypage.setA_images(rs.getString("answer.images"));
 				// ArrayListに上記7つのデータを格納
@@ -364,7 +365,7 @@ public class QuestionDAO {
 				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 				mypage.setB_category(rs.getString("question.b_category"));
 				mypage.setS_category(rs.getString("question.s_category"));
-				mypage.setDate(rs.getTimestamp("question.date"));
+				mypage.setQ_date(rs.getTimestamp("question.date"));
 				mypage.setTitle(rs.getString("question.title"));
 				mypage.setContent(rs.getString("question.content"));
 				mypage.setSolution(rs.getInt("question.solution"));
@@ -373,6 +374,7 @@ public class QuestionDAO {
 				mypage.setA_id(rs.getString("answer.a_id"));
 				mypage.setA_name(rs.getString("answer.name"));
 				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+				mypage.setA_date(rs.getTimestamp("answer.date"));
 				mypage.setAnswer(rs.getString("answer.answer"));
 				mypage.setA_images(rs.getString("answer.images"));
 				// ArrayListに上記7つのデータを格納
@@ -446,7 +448,7 @@ public class QuestionDAO {
 					mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 					mypage.setB_category(rs.getString("question.b_category"));
 					mypage.setS_category(rs.getString("question.s_category"));
-					mypage.setDate(rs.getTimestamp("question.date"));
+					mypage.setQ_date(rs.getTimestamp("question.date"));
 					mypage.setTitle(rs.getString("question.title"));
 					mypage.setContent(rs.getString("question.content"));
 					mypage.setSolution(rs.getInt("question.solution"));
@@ -455,6 +457,7 @@ public class QuestionDAO {
 					mypage.setA_id(rs.getString("answer.a_id"));
 					mypage.setA_name(rs.getString("answer.name"));
 					mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+					mypage.setA_date(rs.getTimestamp("answer.date"));
 					mypage.setAnswer(rs.getString("answer.answer"));
 					mypage.setA_images(rs.getString("answer.images"));
 					// ArrayListに上記7つのデータを格納
