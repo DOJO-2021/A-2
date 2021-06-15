@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Almighty;
 import model.Question;
 
 
@@ -16,7 +17,7 @@ public class QuestionDAO {
 
 	//登録するためのメソッド
 	public boolean insert(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
-			String title, String content, int solution, int metoo, String images) {
+			String title, String content, int solution, int metoo, String images, String name) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -29,7 +30,7 @@ public class QuestionDAO {
 
 			// SQL文を準備する
 			String sql =
-					"insert into Question values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					"insert into Question values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, to);
 			pStmt.setString(2, id);
@@ -42,6 +43,7 @@ public class QuestionDAO {
 			pStmt.setInt(9, solution);
 			pStmt.setInt(10, metoo);
 			pStmt.setString(11, images);
+			pStmt.setString(12, name);
 
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
 			if (pStmt.executeUpdate() == 1) {
@@ -73,7 +75,7 @@ public class QuestionDAO {
 
 	//編集のためのメソッド
 	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
-			String title, String content, int solution, int metoo, String images) {
+			String title, String content, int solution, int metoo, String images, String name) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -99,7 +101,8 @@ public class QuestionDAO {
 			pStmt.setInt(9, solution);
 			pStmt.setInt(10, metoo);
 			pStmt.setString(11, images);
-			pStmt.setString(12, q_id);
+			pStmt.setString(12, name);
+			pStmt.setString(13, q_id);
 
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
 			if (pStmt.executeUpdate() == 1) {
@@ -209,6 +212,7 @@ public class QuestionDAO {
 				rs.getString("q_id"),
 				rs.getInt("to"),
 				rs.getString("id"),
+				rs.getString("name"),
 				rs.getInt("anonymity"),
 				rs.getString("b_category"),
 				rs.getString("s_category"),
@@ -282,6 +286,7 @@ public class QuestionDAO {
 				rs.getString("q_id"),
 				rs.getInt("to"),
 				rs.getString("id"),
+				rs.getString("name"),
 				rs.getInt("anonymity"),
 				rs.getString("b_category"),
 				rs.getString("s_category"),
@@ -321,9 +326,9 @@ public class QuestionDAO {
 	}
 
 	// マイページに自分の質問を一覧表示させる
-	public List<Question> mypageQuestion(String id) {
+	public List<Almighty> mypageQuestion(String id) {
 		Connection conn = null;
-		List<Question> mypageQuestionList = new ArrayList<Question>();
+		List<Almighty> mypageQuestionList = new ArrayList<Almighty>();
 
 
 		try {
@@ -335,7 +340,8 @@ public class QuestionDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "select * from question where ID = ?  ";
+			String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.id = ?; ";
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -346,21 +352,22 @@ public class QuestionDAO {
 
 			// 結果表をコレクションにコピーする(リスト)
 			while (rs.next()) {
-				Question mypage = new Question(
-						rs.getString("q_id"),
-						rs.getInt("to"),
-						rs.getString("id"),
-						rs.getInt("anonymity"),
-						rs.getString("b_category"),
-						rs.getString("s_category"),
-						rs.getTimestamp("date"),
-						rs.getString("title"),
-						rs.getString("content"),
-						rs.getInt("solution"),
-						rs.getInt("metoo"),
-						rs.getString("images")
-						);
-
+				Almighty mypage = new Almighty();
+						mypage.setQ_id(rs.getString("question.q_id"));
+						mypage.setTo(rs.getInt("question.to"));
+						mypage.setName(rs.getString("question.id"));
+						mypage.setAnonymity(rs.getInt("question.anonymity"));
+						mypage.setB_category(rs.getString("question.b_category"));
+						mypage.setS_category(rs.getString("question.s_category"));
+						mypage.setDate(rs.getTimestamp("question.date"));
+						mypage.setTitle(rs.getString("question.title"));
+						mypage.setContent(rs.getString("question.content"));
+						mypage.setSolution(rs.getInt("question.solution"));
+						mypage.setMetoo(rs.getInt("question.metoo"));
+						mypage.setImages(rs.getString("question.images"));
+						mypage.setA_id(rs.getString("answer.a_id"));
+						mypage.setAnswer(rs.getString("answer.answer"));
+						mypage.setImages(rs.getString("answer.images"));
 				// ArrayListに上記7つのデータを格納
 				mypageQuestionList.add(mypage);
 			}
@@ -421,6 +428,7 @@ public class QuestionDAO {
 						rs.getString("q_id"),
 						rs.getInt("to"),
 						rs.getString("id"),
+						rs.getString("name"),
 						rs.getInt("anonymity"),
 						rs.getString("b_category"),
 						rs.getString("s_category"),

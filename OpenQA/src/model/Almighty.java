@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Almighty implements Serializable {
 	//question
@@ -11,7 +11,7 @@ public class Almighty implements Serializable {
 	private int anonymity;
 	private String b_category;
 	private String s_category;
-	private Date date;
+	private Timestamp date;
 	private String title;
 	private String content;
 	private int solution;
@@ -26,7 +26,9 @@ public class Almighty implements Serializable {
 	private int type;
 	private String ins_pw;
 
-	//question
+
+
+
 	public String getQ_id() {
 		return q_id;
 	}
@@ -63,10 +65,10 @@ public class Almighty implements Serializable {
 	public void setS_category(String s_category) {
 		this.s_category = s_category;
 	}
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 	public String getTitle() {
@@ -99,7 +101,6 @@ public class Almighty implements Serializable {
 	public void setImages(String images) {
 		this.images = images;
 	}
-	//answer
 	public String getA_id() {
 		return a_id;
 	}
@@ -112,8 +113,6 @@ public class Almighty implements Serializable {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-
-	//user
 	public String getPw() {
 		return pw;
 	}
@@ -138,7 +137,4 @@ public class Almighty implements Serializable {
 	public void setIns_pw(String ins_pw) {
 		this.ins_pw = ins_pw;
 	}
-
-
-
 }
