@@ -86,8 +86,29 @@
 		fileReader.readAsDataURL(obj.files[0]);
 		console.log(fileReader.result);
 	}
-	
-	window
+
+	// 未入力アラート
+	document.getElementById('form').onsumbit = function(event) {
+		const title = document.getElementById('form').title.value;
+		const content = docuent.getElementById('form').content.value;
+		if(title === "" || content === "") {
+			window.alert("タイトルおよび内容を入力してください");
+		}
+	}
+
+	// 投稿した後のアラート
+	document.getElementById('form').onsumbit = function(event) {
+		const title = document.getElementById('form').title.value;
+		const content = docuent.getElementById('form').content.value;
+		if(title != "" || content != "") {
+		 	if( confirm("投稿してもよろしいですか。") ) {
+	        	window.alert("投稿しました。");
+	        	// windowを閉じる処理
+	   		}
+	    	else {
+	        	alert("移動をやめました。");
+	    	}
+	}
 </script>
 
 </html>
