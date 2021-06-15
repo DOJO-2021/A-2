@@ -286,6 +286,7 @@ public class QuestionDAO {
 				Almighty mypage = new Almighty();
 				mypage.setQ_id(rs.getString("question.q_id"));
 				mypage.setTo(rs.getInt("question.to"));
+				mypage.setQ_userId(rs.getString("question.id"));
 				mypage.setQ_name(rs.getString("question.name"));
 				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 				mypage.setB_category(rs.getString("question.b_category"));
@@ -297,6 +298,7 @@ public class QuestionDAO {
 				mypage.setMetoo(rs.getInt("question.metoo"));
 				mypage.setQ_images(rs.getString("question.images"));
 				mypage.setA_id(rs.getString("answer.a_id"));
+				mypage.setA_userId(rs.getString("answer.id"));
 				mypage.setA_name(rs.getString("answer.name"));
 				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
 				mypage.setA_date(rs.getTimestamp("answer.date"));
@@ -361,6 +363,7 @@ public class QuestionDAO {
 				Almighty mypage = new Almighty();
 				mypage.setQ_id(rs.getString("question.q_id"));
 				mypage.setTo(rs.getInt("question.to"));
+				mypage.setQ_userId(rs.getString("question.id"));
 				mypage.setQ_name(rs.getString("question.name"));
 				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 				mypage.setB_category(rs.getString("question.b_category"));
@@ -372,6 +375,7 @@ public class QuestionDAO {
 				mypage.setMetoo(rs.getInt("question.metoo"));
 				mypage.setQ_images(rs.getString("question.images"));
 				mypage.setA_id(rs.getString("answer.a_id"));
+				mypage.setA_userId(rs.getString("answer.id"));
 				mypage.setA_name(rs.getString("answer.name"));
 				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
 				mypage.setA_date(rs.getTimestamp("answer.date"));
@@ -433,6 +437,7 @@ public class QuestionDAO {
 				Almighty mypage = new Almighty();
 				mypage.setQ_id(rs.getString("question.q_id"));
 				mypage.setTo(rs.getInt("question.to"));
+				mypage.setQ_userId(rs.getString("question.id"));
 				mypage.setQ_name(rs.getString("question.name"));
 				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 				mypage.setB_category(rs.getString("question.b_category"));
@@ -444,6 +449,7 @@ public class QuestionDAO {
 				mypage.setMetoo(rs.getInt("question.metoo"));
 				mypage.setQ_images(rs.getString("question.images"));
 				mypage.setA_id(rs.getString("answer.a_id"));
+				mypage.setA_userId(rs.getString("answer.id"));
 				mypage.setA_name(rs.getString("answer.name"));
 				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
 				mypage.setA_date(rs.getTimestamp("answer.date"));
@@ -516,6 +522,7 @@ public class QuestionDAO {
 					Almighty mypage = new Almighty();
 					mypage.setQ_id(rs.getString("question.q_id"));
 					mypage.setTo(rs.getInt("question.to"));
+					mypage.setQ_userId(rs.getString("question.id"));
 					mypage.setQ_name(rs.getString("question.name"));
 					mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 					mypage.setB_category(rs.getString("question.b_category"));
@@ -527,6 +534,7 @@ public class QuestionDAO {
 					mypage.setMetoo(rs.getInt("question.metoo"));
 					mypage.setQ_images(rs.getString("question.images"));
 					mypage.setA_id(rs.getString("answer.a_id"));
+					mypage.setA_userId(rs.getString("answer.id"));
 					mypage.setA_name(rs.getString("answer.name"));
 					mypage.setA_anonymity(rs.getInt("answer.anonymity"));
 					mypage.setA_date(rs.getTimestamp("answer.date"));
@@ -565,7 +573,7 @@ public class QuestionDAO {
 
 
 
-	//	QuestionDAOで質問IDから検索できるメソッドを作る。
+	//	QuestionDAOで質問IDから検索できるメソッドを作る。★いらなくね
 	public List<Question> mypageQuestionId(String q_id) {
 		Connection conn = null;
 		List<Question> mypageQuestionList = new ArrayList<Question>();
