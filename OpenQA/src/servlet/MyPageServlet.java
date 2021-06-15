@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,11 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnswerDAO;
 import dao.QuestionDAO;
-import model.Answer;
-import model.Question;
+import model.Almighty;
 import model.User;
+
 
 /**
  * Servlet implementation class MyPageServlet
@@ -47,20 +45,13 @@ public class MyPageServlet extends HttpServlet {
 			// QuestionDAOの内容をごっそりとってきてListに入れる。
 			QuestionDAO qDao = new QuestionDAO();
 			User user = (User) session.getAttribute("user");
-			List<Question> mypageQuestionList = qDao.mypageQuestion(user.getId());
+			List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
 
 			//	自分が回答した質問の一覧
-			//	１、answerテーブルのセッションスコープのidと一致するanswerを持ってくる。
-			AnswerDAO aDao = new AnswerDAO();
-			List<Answer> mypageAnswerList = aDao.mypageAnswer(user.getId());
+			List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
 
-			//	２、answerのq_idと一致するquestionを持ってくる。
-			// セッションスコープに入っていないテーブルの情報を取得したい
-			ArrayList<Question> list = qDao.mypageQuestionId(getQ_id());
-
-			//	QuestionDAOで質問IDから検索できるメソッドを作る。
-			//	その引数はmypageAnswerメソッドで入手したq_id
-			//	３、その持ってきたq_idと一致するanswerをすべて持ってくる。
+			request.setAttribute("question", mypageQuestionList);
+			request.setAttribute("answer", mypageQanswerList);
 
 		}
 }

@@ -401,6 +401,77 @@ public class QuestionDAO {
 		return mypageQuestionList;
 	}
 
+	public List<Almighty> unansweredQuestion() {
+		Connection conn = null;
+		List<Almighty> mypageQuestionList = new ArrayList<Almighty>();
+
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
+
+			// SELECT文を準備する
+			// idでDB検索
+			String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.solution = 0; ";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする(リスト)
+			while (rs.next()) {
+				Almighty mypage = new Almighty();
+				mypage.setQ_id(rs.getString("question.q_id"));
+				mypage.setTo(rs.getInt("question.to"));
+				mypage.setQ_name(rs.getString("question.name"));
+				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
+				mypage.setB_category(rs.getString("question.b_category"));
+				mypage.setS_category(rs.getString("question.s_category"));
+				mypage.setDate(rs.getTimestamp("question.date"));
+				mypage.setTitle(rs.getString("question.title"));
+				mypage.setContent(rs.getString("question.content"));
+				mypage.setSolution(rs.getInt("question.solution"));
+				mypage.setMetoo(rs.getInt("question.metoo"));
+				mypage.setQ_images(rs.getString("question.images"));
+				mypage.setA_id(rs.getString("answer.a_id"));
+				mypage.setA_name(rs.getString("answer.name"));
+				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+				mypage.setAnswer(rs.getString("answer.answer"));
+				mypage.setA_images(rs.getString("answer.images"));
+				// ArrayListに上記7つのデータを格納
+				mypageQuestionList.add(mypage);
+			}
+		}
+
+		catch (SQLException e) {
+			// コンソール画面に例外状況を記す
+			e.printStackTrace();
+			mypageQuestionList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			mypageQuestionList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					mypageQuestionList = null;
+				}
+			}
+		}
+		// 結果を返す
+		return mypageQuestionList;
+	}
+
 
 	// マイページに自分の質問を一覧表示させる
 	public List<Almighty> mypageQanswer(String id) {
