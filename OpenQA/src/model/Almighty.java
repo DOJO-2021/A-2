@@ -8,7 +8,8 @@ public class Almighty implements Serializable {
 	private String q_id;
 	private int to;
 	private String id;
-	private int anonymity;
+	private String q_name;
+	private int q_anonymity;
 	private String b_category;
 	private String s_category;
 	private Timestamp date;
@@ -16,19 +17,13 @@ public class Almighty implements Serializable {
 	private String content;
 	private int solution;
 	private int metoo;
-	private String images;
+	private String q_images;
 	//answer
 	private String a_id;
+	private String a_name;
+	private int a_anonymity;
 	private String answer;
-	//user
-	private String pw;
-	private String name;
-	private int type;
-	private String ins_pw;
-
-
-
-
+	private String a_images;
 	public String getQ_id() {
 		return q_id;
 	}
@@ -47,11 +42,17 @@ public class Almighty implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getAnonymity() {
-		return anonymity;
+	public String getQ_name() {
+		return q_name;
 	}
-	public void setAnonymity(int anonymity) {
-		this.anonymity = anonymity;
+	public void setQ_name(String q_name) {
+		this.q_name = q_name;
+	}
+	public int getQ_anonymity() {
+		return q_anonymity;
+	}
+	public void setQ_anonymity(int q_anonymity) {
+		this.q_anonymity = q_anonymity;
 	}
 	public String getB_category() {
 		return b_category;
@@ -95,11 +96,11 @@ public class Almighty implements Serializable {
 	public void setMetoo(int metoo) {
 		this.metoo = metoo;
 	}
-	public String getImages() {
-		return images;
+	public String getQ_images() {
+		return q_images;
 	}
-	public void setImages(String images) {
-		this.images = images;
+	public void setQ_images(String q_images) {
+		this.q_images = q_images;
 	}
 	public String getA_id() {
 		return a_id;
@@ -107,34 +108,29 @@ public class Almighty implements Serializable {
 	public void setA_id(String a_id) {
 		this.a_id = a_id;
 	}
+	public String getA_name() {
+		return a_name;
+	}
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
 	public String getAnswer() {
 		return answer;
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public String getPw() {
-		return pw;
+	public String getA_images() {
+		return a_images;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setA_images(String a_images) {
+		this.a_images = a_images;
 	}
-	public String getName() {
-		return name;
+	public int getA_anonymity() {
+		return a_anonymity;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setA_anonymity(int a_anonymity) {
+		this.a_anonymity = a_anonymity;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
-	public String getIns_pw() {
-		return ins_pw;
-	}
-	public void setIns_pw(String ins_pw) {
-		this.ins_pw = ins_pw;
-	}
+
 }

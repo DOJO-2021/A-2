@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Almighty;
+import model.Answer;
 import model.Question;
 
 
@@ -209,20 +210,20 @@ public class QuestionDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Question card = new Question(
-				rs.getString("q_id"),
-				rs.getInt("to"),
-				rs.getString("id"),
-				rs.getString("name"),
-				rs.getInt("anonymity"),
-				rs.getString("b_category"),
-				rs.getString("s_category"),
-				rs.getTimestamp("date"),
-				rs.getString("title"),
-				rs.getString("content"),
-				rs.getInt("solution"),
-				rs.getInt("metoo"),
-				rs.getString("images")
-				);
+						rs.getString("q_id"),
+						rs.getInt("to"),
+						rs.getString("id"),
+						rs.getString("name"),
+						rs.getInt("anonymity"),
+						rs.getString("b_category"),
+						rs.getString("s_category"),
+						rs.getTimestamp("date"),
+						rs.getString("title"),
+						rs.getString("content"),
+						rs.getInt("solution"),
+						rs.getInt("metoo"),
+						rs.getString("images")
+						);
 
 				questionList.add(card);
 			}
@@ -283,20 +284,20 @@ public class QuestionDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Question qs = new Question(
-				rs.getString("q_id"),
-				rs.getInt("to"),
-				rs.getString("id"),
-				rs.getString("name"),
-				rs.getInt("anonymity"),
-				rs.getString("b_category"),
-				rs.getString("s_category"),
-				rs.getTimestamp("date"),
-				rs.getString("title"),
-				rs.getString("content"),
-				rs.getInt("solution"),
-				rs.getInt("metoo"),
-				rs.getString("images")
-				);
+						rs.getString("q_id"),
+						rs.getInt("to"),
+						rs.getString("id"),
+						rs.getString("name"),
+						rs.getInt("anonymity"),
+						rs.getString("b_category"),
+						rs.getString("s_category"),
+						rs.getTimestamp("date"),
+						rs.getString("title"),
+						rs.getString("content"),
+						rs.getInt("solution"),
+						rs.getInt("metoo"),
+						rs.getString("images")
+						);
 				questionList.add(qs);
 			}
 		}
@@ -353,21 +354,23 @@ public class QuestionDAO {
 			// 結果表をコレクションにコピーする(リスト)
 			while (rs.next()) {
 				Almighty mypage = new Almighty();
-						mypage.setQ_id(rs.getString("question.q_id"));
-						mypage.setTo(rs.getInt("question.to"));
-						mypage.setName(rs.getString("question.id"));
-						mypage.setAnonymity(rs.getInt("question.anonymity"));
-						mypage.setB_category(rs.getString("question.b_category"));
-						mypage.setS_category(rs.getString("question.s_category"));
-						mypage.setDate(rs.getTimestamp("question.date"));
-						mypage.setTitle(rs.getString("question.title"));
-						mypage.setContent(rs.getString("question.content"));
-						mypage.setSolution(rs.getInt("question.solution"));
-						mypage.setMetoo(rs.getInt("question.metoo"));
-						mypage.setImages(rs.getString("question.images"));
-						mypage.setA_id(rs.getString("answer.a_id"));
-						mypage.setAnswer(rs.getString("answer.answer"));
-						mypage.setImages(rs.getString("answer.images"));
+				mypage.setQ_id(rs.getString("question.q_id"));
+				mypage.setTo(rs.getInt("question.to"));
+				mypage.setQ_name(rs.getString("question.name"));
+				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
+				mypage.setB_category(rs.getString("question.b_category"));
+				mypage.setS_category(rs.getString("question.s_category"));
+				mypage.setDate(rs.getTimestamp("question.date"));
+				mypage.setTitle(rs.getString("question.title"));
+				mypage.setContent(rs.getString("question.content"));
+				mypage.setSolution(rs.getInt("question.solution"));
+				mypage.setMetoo(rs.getInt("question.metoo"));
+				mypage.setQ_images(rs.getString("question.images"));
+				mypage.setA_id(rs.getString("answer.a_id"));
+				mypage.setA_name(rs.getString("answer.name"));
+				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+				mypage.setAnswer(rs.getString("answer.answer"));
+				mypage.setA_images(rs.getString("answer.images"));
 				// ArrayListに上記7つのデータを格納
 				mypageQuestionList.add(mypage);
 			}
@@ -397,6 +400,91 @@ public class QuestionDAO {
 		// 結果を返す
 		return mypageQuestionList;
 	}
+
+
+	// マイページに自分の質問を一覧表示させる
+	public List<Almighty> mypageQanswer(String id) {
+		Connection conn = null;
+		List<Almighty> mypageQuestionList = new ArrayList<Almighty>();
+
+
+		try {
+
+
+			AnswerDAO ans = new AnswerDAO();
+			List<Answer> myAnswer = ans.mypageAnswer(id);
+			for (Answer value : myAnswer) {
+
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
+
+				// SELECT文を準備する
+				// idでDB検索
+				String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.id = ?; ";
+
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				pStmt.setString(1, value.getQ_id());
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする(リスト)
+				while (rs.next()) {
+					Almighty mypage = new Almighty();
+					mypage.setQ_id(rs.getString("question.q_id"));
+					mypage.setTo(rs.getInt("question.to"));
+					mypage.setQ_name(rs.getString("question.name"));
+					mypage.setQ_anonymity(rs.getInt("question.anonymity"));
+					mypage.setB_category(rs.getString("question.b_category"));
+					mypage.setS_category(rs.getString("question.s_category"));
+					mypage.setDate(rs.getTimestamp("question.date"));
+					mypage.setTitle(rs.getString("question.title"));
+					mypage.setContent(rs.getString("question.content"));
+					mypage.setSolution(rs.getInt("question.solution"));
+					mypage.setMetoo(rs.getInt("question.metoo"));
+					mypage.setQ_images(rs.getString("question.images"));
+					mypage.setA_id(rs.getString("answer.a_id"));
+					mypage.setA_name(rs.getString("answer.name"));
+					mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+					mypage.setAnswer(rs.getString("answer.answer"));
+					mypage.setA_images(rs.getString("answer.images"));
+					// ArrayListに上記7つのデータを格納
+					mypageQuestionList.add(mypage);
+				}
+			}
+		}
+
+		catch (SQLException e) {
+			// コンソール画面に例外状況を記す
+			e.printStackTrace();
+			mypageQuestionList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			mypageQuestionList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					mypageQuestionList = null;
+				}
+			}
+		}
+		// 結果を返す
+		return mypageQuestionList;
+	}
+
+
 
 	//	QuestionDAOで質問IDから検索できるメソッドを作る。
 	public List<Question> mypageQuestionId(String q_id) {
