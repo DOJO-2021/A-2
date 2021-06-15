@@ -86,6 +86,8 @@
 		fileReader.readAsDataURL(obj.files[0]);
 		console.log(fileReader.result);
 	}
+	
+	window
 </script>
 
 </html>
