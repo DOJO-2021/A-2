@@ -23,6 +23,7 @@
 		for (let i = 0; i < s_categoryArray[b_category].length; i++) {
 			let op = document.createElement('option');
 			op.value = s_categoryArray[b_category][i];
+			
 			op.textContent = s_categoryArray[b_category][i];
 			elm.appendChild(op);
 		}
