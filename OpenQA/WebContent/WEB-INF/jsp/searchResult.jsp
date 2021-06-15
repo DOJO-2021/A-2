@@ -41,6 +41,9 @@
 				<td><input type="checkbox" name="solution" value="0"></td>
 				<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${e.metoo}" /></td>
 			</tr>
+			<tr>
+
+			</tr>
 		</table>
 		</form>
 	</c:forEach>

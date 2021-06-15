@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.QuestionDAO;
-import model.Question;
+import model.Almighty;
 /**
  * Servlet implementation class SearchServlet
  */
@@ -55,7 +55,7 @@ public class SearchServlet extends HttpServlet {
 		String word = request.getParameter("word");
 
 		QuestionDAO qDAO = new QuestionDAO();
-		ArrayList<Question> list = qDAO.select(word);
+		ArrayList<Almighty> list = qDAO.select(word);
 		if(list.size() == 0) {
 			request.setAttribute("msg", "検索した項目は見つかりませんでした");
 			//遷移
