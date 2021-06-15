@@ -7,7 +7,7 @@ public class Almighty implements Serializable {
 	//question
 	private String q_id;
 	private int to;
-	private String id;
+	private String q_userId;
 	private String q_name;
 	private int q_anonymity;
 	private String b_category;
@@ -20,11 +20,14 @@ public class Almighty implements Serializable {
 	private String q_images;
 	//answer
 	private String a_id;
+	private String a_userId;
 	private String a_name;
 	private int a_anonymity;
 	private Timestamp a_date;
 	private String answer;
 	private String a_images;
+
+
 	public String getQ_id() {
 		return q_id;
 	}
@@ -37,11 +40,11 @@ public class Almighty implements Serializable {
 	public void setTo(int to) {
 		this.to = to;
 	}
-	public String getId() {
-		return id;
+	public String getQ_userId() {
+		return q_userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setQ_userId(String q_userId) {
+		this.q_userId = q_userId;
 	}
 	public String getQ_name() {
 		return q_name;
@@ -67,18 +70,11 @@ public class Almighty implements Serializable {
 	public void setS_category(String s_category) {
 		this.s_category = s_category;
 	}
-
 	public Timestamp getQ_date() {
 		return q_date;
 	}
 	public void setQ_date(Timestamp q_date) {
 		this.q_date = q_date;
-	}
-	public Timestamp getA_date() {
-		return a_date;
-	}
-	public void setA_date(Timestamp a_date) {
-		this.a_date = a_date;
 	}
 	public String getTitle() {
 		return title;
@@ -116,11 +112,29 @@ public class Almighty implements Serializable {
 	public void setA_id(String a_id) {
 		this.a_id = a_id;
 	}
+	public String getA_userId() {
+		return a_userId;
+	}
+	public void setA_userId(String a_userId) {
+		this.a_userId = a_userId;
+	}
 	public String getA_name() {
 		return a_name;
 	}
 	public void setA_name(String a_name) {
 		this.a_name = a_name;
+	}
+	public int getA_anonymity() {
+		return a_anonymity;
+	}
+	public void setA_anonymity(int a_anonymity) {
+		this.a_anonymity = a_anonymity;
+	}
+	public Timestamp getA_date() {
+		return a_date;
+	}
+	public void setA_date(Timestamp a_date) {
+		this.a_date = a_date;
 	}
 	public String getAnswer() {
 		return answer;
@@ -134,11 +148,7 @@ public class Almighty implements Serializable {
 	public void setA_images(String a_images) {
 		this.a_images = a_images;
 	}
-	public int getA_anonymity() {
-		return a_anonymity;
-	}
-	public void setA_anonymity(int a_anonymity) {
-		this.a_anonymity = a_anonymity;
-	}
+
+
 
 }
