@@ -255,9 +255,9 @@ public class QuestionDAO {
 
 	//SELECT * FROM BC WHERE  name LIKE ? OR company LIKE ?　OR　コンテンツ　like ?
 	//あいまい検索
-	public ArrayList<Question> select(String word) {
+	public ArrayList<Almighty> select(String word) {
 		Connection conn = null;
-		ArrayList<Question> questionList = new ArrayList<Question>();
+		ArrayList<Almighty> questionList = new ArrayList<Almighty>();
 
 
 		try {
@@ -268,7 +268,7 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Question WHERE  title like ? OR content like ? OR b_category like ? OR s_category like ?";
+			String sql = "SELECT * FROM question left outer join answer on question.q_id = answer.q_id WHERE  title like ? OR content like ? OR b_category like ? OR s_category like ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -283,22 +283,27 @@ public class QuestionDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Question qs = new Question(
-						rs.getString("q_id"),
-						rs.getInt("to"),
-						rs.getString("id"),
-						rs.getString("name"),
-						rs.getInt("anonymity"),
-						rs.getString("b_category"),
-						rs.getString("s_category"),
-						rs.getTimestamp("date"),
-						rs.getString("title"),
-						rs.getString("content"),
-						rs.getInt("solution"),
-						rs.getInt("metoo"),
-						rs.getString("images")
-						);
-				questionList.add(qs);
+				Almighty mypage = new Almighty();
+				mypage.setQ_id(rs.getString("question.q_id"));
+				mypage.setTo(rs.getInt("question.to"));
+				mypage.setQ_name(rs.getString("question.name"));
+				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
+				mypage.setB_category(rs.getString("question.b_category"));
+				mypage.setS_category(rs.getString("question.s_category"));
+				mypage.setQ_date(rs.getTimestamp("question.date"));
+				mypage.setTitle(rs.getString("question.title"));
+				mypage.setContent(rs.getString("question.content"));
+				mypage.setSolution(rs.getInt("question.solution"));
+				mypage.setMetoo(rs.getInt("question.metoo"));
+				mypage.setQ_images(rs.getString("question.images"));
+				mypage.setA_id(rs.getString("answer.a_id"));
+				mypage.setA_name(rs.getString("answer.name"));
+				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+				mypage.setA_date(rs.getTimestamp("answer.date"));
+				mypage.setAnswer(rs.getString("answer.answer"));
+				mypage.setA_images(rs.getString("answer.images"));
+				// ArrayListに上記7つのデータを格納
+				questionList.add(mypage);
 			}
 		}
 		catch (SQLException e) {
@@ -360,7 +365,7 @@ public class QuestionDAO {
 				mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 				mypage.setB_category(rs.getString("question.b_category"));
 				mypage.setS_category(rs.getString("question.s_category"));
-				mypage.setDate(rs.getTimestamp("question.date"));
+				mypage.setQ_date(rs.getTimestamp("question.date"));
 				mypage.setTitle(rs.getString("question.title"));
 				mypage.setContent(rs.getString("question.content"));
 				mypage.setSolution(rs.getInt("question.solution"));
@@ -369,6 +374,7 @@ public class QuestionDAO {
 				mypage.setA_id(rs.getString("answer.a_id"));
 				mypage.setA_name(rs.getString("answer.name"));
 				mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+				mypage.setA_date(rs.getTimestamp("answer.date"));
 				mypage.setAnswer(rs.getString("answer.answer"));
 				mypage.setA_images(rs.getString("answer.images"));
 				// ArrayListに上記7つのデータを格納
@@ -513,7 +519,7 @@ public class QuestionDAO {
 					mypage.setQ_anonymity(rs.getInt("question.anonymity"));
 					mypage.setB_category(rs.getString("question.b_category"));
 					mypage.setS_category(rs.getString("question.s_category"));
-					mypage.setDate(rs.getTimestamp("question.date"));
+					mypage.setQ_date(rs.getTimestamp("question.date"));
 					mypage.setTitle(rs.getString("question.title"));
 					mypage.setContent(rs.getString("question.content"));
 					mypage.setSolution(rs.getInt("question.solution"));
@@ -522,6 +528,7 @@ public class QuestionDAO {
 					mypage.setA_id(rs.getString("answer.a_id"));
 					mypage.setA_name(rs.getString("answer.name"));
 					mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+					mypage.setA_date(rs.getTimestamp("answer.date"));
 					mypage.setAnswer(rs.getString("answer.answer"));
 					mypage.setA_images(rs.getString("answer.images"));
 					// ArrayListに上記7つのデータを格納

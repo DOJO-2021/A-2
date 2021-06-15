@@ -11,13 +11,13 @@
 	<h1>検索結果一覧</h1>
 	<hr>
 
-	<c:forEach var="e" items="${QuestionList}">
+	<c:forEach var="e" items="${questionList}">
 	<form method="POST" action="/OpenQA/UpdateDeleteServlet">
 		<table>
 			<tr>
 				<td><c:out value="${e.to}" /></td>
 				<td><c:if test="${sessionScope.user.type==1}">
-				${e.name}
+				${e.Q_name}
 				</c:if> <c:if test="${sessionScope.user.type==0 && e.anonymity== 1}">
 				匿名
 				</c:if>
@@ -40,6 +40,9 @@
 				<!-- jsの文章は後で考えよう -->
 				<td><input type="checkbox" name="solution" value="0"></td>
 				<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${e.metoo}" /></td>
+			</tr>
+			<tr>
+
 			</tr>
 		</table>
 		</form>
