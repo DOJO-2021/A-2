@@ -100,15 +100,25 @@
 	document.getElementById('form').onsumbit = function(event) {
 		const title = document.getElementById('form').title.value;
 		const content = docuent.getElementById('form').content.value;
-		if(title != "" || content != "") {
+		if(title != "" && content != "") {
 		 	if( confirm("投稿してもよろしいですか。") ) {
-	        	window.alert("投稿しました。");
+		 		$(window).on('beforeunload', function(e) {
+				// ウィンドウを閉じる時にメッセージを表示する.
+				    let result = confirm('投稿しました。');
+				    return result;
+				});
+		 		// [閉じる]ボタン押下処理
+		 		function onClickClose() {
+		 		    let result = confirm('本当に閉じていいの？');
+		 		    if (result) {
+		 		        window.close();
+		 		    }
+		 		}
 	        	// windowを閉じる処理
 	   		}
-	    	else {
-	        	alert("移動をやめました。");
-	    	}
+		}
 	}
+
 </script>
 
 </html>
