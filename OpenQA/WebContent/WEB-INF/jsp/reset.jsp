@@ -7,7 +7,7 @@
 <title>Open Q&A System</title>
 </head>
 <body>
-	<form method="POST" action="/OpenQA/UpdateDeleteServlet" id="form">
+	<form method="POST" name="form" action="/OpenQA/UpdateDeleteServlet" id="form">
 
 		<p>
 			ID<input type="text" name="ID" placeholder="ID">
@@ -16,13 +16,33 @@
 			お名前<input type="text" name="name" placeholder="お名前">
 		</p>
 		<p>
-			新しいPW<input type="text" name="pw" placeholder="新しいPW">
+			新しいPW<input type="text" name="pw1" placeholder="新しいPW">
 		</p>
 		<p>
-			確認用PW<input type="text" name="pw" placeholder="確認用PW">
+			確認用PW<input type="text" name="pw2" placeholder="確認用PW">
 		</p>
 
-		<input type="submit" name="reset" value="再設定">
+		<input type="submit" name="reset" value="再設定" onclick="return checkForm();">
 	</form>
 </body>
+<script>
+	function checkForm(){
+			if(document.form.pw1.value != document.form.pw2.value && result == false){
+				window.alert("確認用PWが一致しません。IDとお名前が一致しません。");
+			}else{
+				if(document.form.pw1.value != document.form.pw2.value){
+		    		window.alert("確認用PWが一致しません。");
+					return false;
+				} else{
+					if(result == false) {
+						window.alert("IDとお名前が一致しません。");
+						return false;
+					} else{
+						if(confirm('PWを再設定をしてもよろしいですか？')) {
+						return true;
+						}
+				}
+		}
+	}
+</script>
 </html>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>質問登録</h2>
-<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question"  enctype="multipart/form-data">
+<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question"  enctype="multipart/form-data" id="form">
 <table>
 <tr>
 	<th>
@@ -52,7 +52,7 @@
 		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);">
 	</label>
 
-	<input type="submit" name="SUBMIT" value="質問投稿">
+	<input type="submit" name="SUBMIT" value="質問投稿" onclick="return checkForm();">
 	</td>
 </tr>
 </table>
@@ -88,35 +88,23 @@
 	}
 
 	// 未入力アラート
-	document.getElementById('form').onsumbit = function(event) {
-		const title = document.getElementById('form').title.value;
-		const content = docuent.getElementById('form').content.value;
-		if(title === "" || content === "") {
-			window.alert("タイトルおよび内容を入力してください");
-		}
-	}
-
-	// 投稿した後のアラート
-	document.getElementById('form').onsumbit = function(event) {
-		const title = document.getElementById('form').title.value;
-		const content = docuent.getElementById('form').content.value;
-		if(title != "" && content != "") {
-		 	if( confirm("投稿してもよろしいですか。") ) {
-		 		$(window).on('beforeunload', function(e) {
-				// ウィンドウを閉じる時にメッセージを表示する.
-				    let result = confirm('投稿しました。');
-				    return result;
-				});
-		 		// [閉じる]ボタン押下処理
-		 		function onClickClose() {
-		 		    let result = confirm('本当に閉じていいの？');
-		 		    if (result) {
-		 		        window.close();
-		 		    }
-		 		}
-	        	// windowを閉じる処理
-	   		}
-		}
+	function checkForm(){
+    	if(document.subBut.title.value == "" || document.subBut.content.value == ""){
+        	window.alert("タイトルおよび内容を入力してください");
+			return false;
+    	}else{
+    		if(confirm('投稿してもよろしいですか？')) {
+    			alert("投稿しました");
+    			// windowを閉じる処理
+    			window.close();
+    			return true;
+    		}
+    		else{
+    			alert("キャンセルしました");
+    			return false;
+    		}
+			return true;
+   		}
 	}
 
 </script>
