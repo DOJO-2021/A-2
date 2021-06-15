@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>質問登録</h2>
-<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question"  enctype="multipart/form-data">
+<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question"  enctype="multipart/form-data" id="form">
 <table>
 <tr>
 	<th>
