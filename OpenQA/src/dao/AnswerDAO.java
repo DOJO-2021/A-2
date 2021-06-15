@@ -46,7 +46,8 @@ public class AnswerDAO {
 						rs.getTimestamp("date"),
 						rs.getString("answer"),
 						rs.getString("images"),
-						rs.getString("q_id")
+						rs.getString("q_id"),
+						rs.getString("name")
 						);
 
 				// ArrayListに上記7つのデータを格納
@@ -81,7 +82,7 @@ public class AnswerDAO {
 
 	// ②回答投稿（登録）
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
-	public boolean insert(String id, int anonymity, Timestamp date, String answer, String images, String q_id) {
+	public boolean insert(String id, int anonymity, Timestamp date, String answer, String images, String q_id,String name) {
 		Connection conn = null;
 		// 処理の結果を入れる変数
 		boolean result = false;
@@ -95,7 +96,7 @@ public class AnswerDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "insert into answer values(?, ?, ?, ?, ?, ?, ?) ";
+			String sql = "insert into answer values(?, ?, ?, ?, ?, ?, ?,?) ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, id);
@@ -104,6 +105,7 @@ public class AnswerDAO {
 			pStmt.setString(4, answer);
 			pStmt.setString(5, images);
 			pStmt.setString(6, q_id);
+			pStmt.setString(7, name);
 
 			// 登録できたら1でtrue
 			int num = pStmt.executeUpdate();

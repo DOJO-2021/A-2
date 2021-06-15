@@ -15,9 +15,11 @@ public class Answer implements Serializable {
 	private String answer;
 	private String images; // パスを格納するからStringでいいんだよね？？
 	private String q_id;
+	private String name;
+
 
 	// 引数があるコンストラクタ
-	public Answer(String a_id, String id, int anonymity, Date date, String answer, String images, String q_id) {
+	public Answer(String a_id, String id, int anonymity, Date date, String answer, String images, String q_id,String name) {
 		super();
 		this.a_id = a_id;
 		this.id = id;
@@ -26,6 +28,7 @@ public class Answer implements Serializable {
 		this.answer = answer;
 		this.images = images;
 		this.q_id = q_id;
+		this.name = name;
 	}
 
 	// 引数がないコンストラクタ
@@ -87,6 +90,13 @@ public class Answer implements Serializable {
 
 	public void setQ_id(String q_id) {
 		this.q_id = q_id;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
