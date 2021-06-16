@@ -38,8 +38,8 @@
 				<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><a href="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer"> <img
 				src="/OpenQA/images/reply.png"></a></td>
-				<!-- checkbox 押されたらcheckbox以下の内容が出る 上の私もボタンが消える。解決済 -->
-				<td class="del" id="delId${status.index}"><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}"></td>
+				<!-- checkbox 押されたらcheckbox以下の内容が出る 上の私もボタンが消える。解決済 詳細の文字を隠すに変えなきゃ！ -->
+				<td class="del" id="delId${status.index}"><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 				<td class="del" id="delId${status.index}"><c:out value="${value1.title}" /></td>
 				<td class="del" id="delId${status.index}"><c:out value="${value1.content}" /></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
