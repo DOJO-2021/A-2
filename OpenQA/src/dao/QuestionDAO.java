@@ -184,9 +184,9 @@ public class QuestionDAO {
 
 
 	//category検索のためのメソッド
-	public List<Question> cate_select(String b_category) {
+	public ArrayList<Almighty> cate_select(String b_category) {
 		Connection conn = null;
-		List<Question> questionList = new ArrayList<Question>();
+		ArrayList<Almighty> questionList = new ArrayList<Almighty>();
 
 
 		try {
@@ -197,7 +197,7 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Question WHERE  b_category = ? order by s_category asc";
+			String sql = "SELECT * FROM question left outer join answer on question.q_id = answer.q_id WHERE  b_category = ? order by s_category asc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -209,23 +209,28 @@ public class QuestionDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Question card = new Question(
-						rs.getString("q_id"),
-						rs.getInt("to"),
-						rs.getString("id"),
-						rs.getString("name"),
-						rs.getInt("anonymity"),
-						rs.getString("b_category"),
-						rs.getString("s_category"),
-						rs.getTimestamp("date"),
-						rs.getString("title"),
-						rs.getString("content"),
-						rs.getInt("solution"),
-						rs.getInt("metoo"),
-						rs.getString("images")
-						);
-
-				questionList.add(card);
+				Almighty cate = new Almighty();
+				cate.setQ_id(rs.getString("question.q_id"));
+				cate.setTo(rs.getInt("question.to"));
+				cate.setQ_userId(rs.getString("question.id"));
+				cate.setQ_name(rs.getString("question.name"));
+				cate.setQ_anonymity(rs.getInt("question.anonymity"));
+				cate.setB_category(rs.getString("question.b_category"));
+				cate.setS_category(rs.getString("question.s_category"));
+				cate.setQ_date(rs.getTimestamp("question.date"));
+				cate.setTitle(rs.getString("question.title"));
+				cate.setContent(rs.getString("question.content"));
+				cate.setSolution(rs.getInt("question.solution"));
+				cate.setMetoo(rs.getInt("question.metoo"));
+				cate.setQ_images(rs.getString("question.images"));
+				cate.setA_id(rs.getString("answer.a_id"));
+				cate.setA_userId(rs.getString("answer.id"));
+				cate.setA_name(rs.getString("answer.name"));
+				cate.setA_anonymity(rs.getInt("answer.anonymity"));
+				cate.setA_date(rs.getTimestamp("answer.date"));
+				cate.setAnswer(rs.getString("answer.answer"));
+				cate.setA_images(rs.getString("answer.images"));
+				questionList.add(cate);
 			}
 		}
 		catch (SQLException e) {
