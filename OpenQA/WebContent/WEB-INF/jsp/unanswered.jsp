@@ -101,6 +101,8 @@
 			hide.setAttribute('class','del');
 			hidden.setAttribute('class','');
 		}
+		var check =document.getElementById('checkId'+indexNo);
+		var button = document.getElementById('buttonId'+indexNo);
 		if(check.checked){
 			//ボタンを活性化
 			button.disabled = false;
