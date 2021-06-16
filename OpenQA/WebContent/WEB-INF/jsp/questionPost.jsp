@@ -103,7 +103,6 @@
     			alert("キャンセルしました");
     			return false;
     		}
-			return true;
    		}
 	}
 

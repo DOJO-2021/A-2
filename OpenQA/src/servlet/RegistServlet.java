@@ -128,12 +128,13 @@ public class RegistServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			String images = request.getParameter("images");
+			String name = user.getName();
 
 			// 登録処理を行う
 			QuestionDAO bDao = new QuestionDAO();
 
 			// 登録成功したら...
-			bDao.insert("", to, id, anonymity, b_category, s_category, timestamp, title, content, 0, 0, images);
+			bDao.insert("", to, id, anonymity, b_category, s_category, timestamp, title, content, 0, 0, images, name);
 		}
 
 		// ③もしもanswerPost.jspのボタンが押されたら以下の処理を行う
@@ -150,12 +151,13 @@ public class RegistServlet extends HttpServlet {
 			String content = request.getParameter("content");
 			String images = request.getParameter("images");
 			String q_id = request.getParameter("q_id");
+			String name = user.getName();
 
 			// 登録処理を行う
 			AnswerDAO bDao = new AnswerDAO();
 
 			// 登録成功したら...
-			bDao.insert(id, anonymity,  timestamp, content, images, q_id);
+			bDao.insert(id, anonymity,  timestamp, content, images, q_id, name);
 		}
 
 	}
