@@ -6,6 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	..tab_wrap{width:500px; margin:80px auto;}
+	input[type="radio"]{display:none;}
+	.tab_area{font-size:0; margin:0 10px;}
+	.tab_area label{width:150px; margin:0 5px; display:inline-block; padding:12px 0; color:#999; background:#ddd; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
+	.tab_area label:hover{opacity:0.5;}
+	.panel_area{background:#fff;}
+	.tab_panel{width:100%; padding:80px 0; display:none;}
+	.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
+
+	#tab1:checked ~ .tab_area .tab1_label{background:#fff; color:#000;}
+	#tab1:checked ~ .panel_area #panel1{display:block;}
+	#tab2:checked ~ .tab_area .tab2_label{background:#fff; color:#000;}
+	#tab2:checked ~ .panel_area #panel2{display:block;}
+
+</style>
 </head>
 <body>
 
@@ -16,12 +32,13 @@
 
 	<div class="tab_area">
 	<label class="tab1_label" for="tab1">質問</label>
-	<label class="tab1_label" for="tab1">回答</label>
+	<label class="tab2_label" for="tab2">回答</label>
 	</div>
 
 	<div class="panel_area">
 		<!-- 質問タブ -->
 		<div id="panel1" class="tab_panel">
+			<c:set var="data" value="0" />
 			<c:set var="data" value="0" />
 			<c:forEach items="${mypageQuestionList}" var="value" varStatus="status">
 				<c:if test="${data != value.q_id}">
@@ -58,11 +75,27 @@
 
 					<c:remove var="data" />
 					<c:set var="data" value="${value.q_id}" />
-					<br>
-				<c:if test="${data == value.q_id}">
-				${value.a_id} ${value.a_name} ${value.answer} <br>
-				</c:if>
+					<tr class="del" id="delId${status.index}">
+					<!-- 回答を質問の下に表示 -->
+					<c:if test="${data == value.q_id}">
+					<!-- user typeが講師だった場合 -->
+					<td><c:if test="${sessionScope.user.type==1}">
+						<td><c:out value="${value1.a_name}"/></td>
+					</c:if>
+					<!-- user typeが受講者かつ匿名希望の場合 -->
+					</c:if> <c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
+						<td>匿名</td>
+					</c:if>
+					<!-- user typeが受講者かつ匿名を希望しない場合 -->
+					<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
+						<td><c:out value="${value1.a_name}"/></td>
+					</c:if>
+					<c:out value="${value1.date}" />
+					<td><c:out value="${value1.answer}" /></td>
+					<!-- 画像は保留 -->
+					<td><c:out value="${value1.q_images}" />
 			</c:forEach>
+	</c:forEach>
 		</div>
 
 		<!-- 回答タブ -->
