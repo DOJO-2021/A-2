@@ -31,7 +31,7 @@
 		<input type="file" accept="image/*" onchange="previewImage(this);">
 	</label>
 
-	<input type="submit" name="SUBMIT" value="回答投稿">
+	<input type="submit" name="SUBMIT" value="回答投稿" onclick="return checkForm();">
 	</td>
 
 </table>
@@ -63,6 +63,25 @@
 		// 画像読み込み
 		fileReader.readAsDataURL(obj.files[0]);
 		console.log(fileReader.result) // ← (確認用)null
+	}
+
+	// 未入力アラート
+	function checkForm(){
+    	if(document.subBut.content.value == ""){
+        	window.alert("内容を入力してください");
+			return false;
+    	}else{
+    		if(confirm('投稿してもよろしいですか？')) {
+    			alert("投稿しました");
+    			// windowを閉じる処理
+    			window.close();
+    			return true;
+    		}
+    		else{
+    			alert("キャンセルしました");
+    			return false;
+    		}
+   		}
 	}
 </script>
 

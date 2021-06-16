@@ -8,10 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 	<c:set var="data" value="0" />
 	<c:forEach items="${question}" var="value" >
 		<c:if test="${data != value.q_id}">
-		${value.q_id} ${value.q_name} ${value.title} ${value.content}<br>
+		${value.to}  ${value.q_name} ${value.title} ${value.b_category} ${value.s_category} ${value.date}<br>
+		${value.title}<br>
+		${value.content}<br>
+
 		</c:if>
 		<c:remove var="data" />
 		<c:set var="data" value="${value.q_id}" />
