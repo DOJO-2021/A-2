@@ -81,6 +81,25 @@
 		 var obj = document.getElementById("image");
 		 obj.value = "";
 	}
+
+	// 未入力アラート
+	function checkForm(){
+    	if(document.subBut.content.value == ""){
+        	window.alert("内容を入力してください");
+			return false;
+    	}else{
+    		if(confirm('再投稿してもよろしいですか？')) {
+    			alert("再投稿しました");
+    			// windowを閉じる処理
+    			window.close();
+    			return true;
+    		}
+    		else{
+    			alert("キャンセルしました");
+    			return false;
+    		}
+   		}
+	}
 </script>
 
 </html>
