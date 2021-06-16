@@ -15,7 +15,7 @@
 	.panel_area{background:#fff;}
 	.tab_panel{width:100%; padding:80px 0; display:none;}
 	.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
-
+	.del{display:none}
 	#tab1:checked ~ .tab_area .tab1_label{background:#fff; color:#000;}
 	#tab1:checked ~ .panel_area #panel1{display:block;}
 	#tab2:checked ~ .tab_area .tab2_label{background:#fff; color:#000;}
@@ -26,22 +26,6 @@
 <body>
 さんのマイページ
 <h1>過去に登録した投稿</h1>
-
-<c:set var="data" value="0" />
-
-				<c:forEach items="${question}" var="value1">
-					<!-- joinした物の一覧 -->
-					<c:if test="${data != value1.q_id}">
-						${value1.q_id}  ${value1.title}<br>
-					</c:if>
-					<c:remove var="data" />
-					<c:set var="data" value="${value1.q_id}" /><br>
-					<c:if test="${data == value1.q_id}">
-						${value1.a_id}  ${value1.content}
-					</c:if>
-					<br>
-				</c:forEach>
-
 <div class="tab_wrap">
 
 <input type="radio" id="tab1" name="tab_btn" checked>
@@ -56,24 +40,10 @@
 		<!-- 質問タブ -->
 		<div id="panel1" class="tab_panel">
 			<c:set var="data" value="0" />
-
-				<c:forEach items="${question}" var="value1">
-					<!-- joinした物の一覧 -->
-					<c:if test="${data != value1.q_id}">
-						${value1.q_id}  ${value1.title}<br>
-					</c:if>
-					<c:remove var="data" />
-					<c:set var="data" value="${value1.q_id}" /><br>
-					<c:if test="${data == value1.q_id}">
-						${value1.a_id}  ${value1.content}
-					</c:if>
-					<br>
-				</c:forEach>
-		</div>
-
 				<c:forEach items="${question}" var="value" varStatus="status">
 				<c:if test="${data != value.q_id}">
 					<!-- 「マイページ質問」の部分 -->
+					<table>
 					<tr>
 						<!-- 各項目 -->
 						<td><c:out value="${value.to}" /></td>
@@ -81,20 +51,21 @@
 						<td><c:out value="${value.title}" /></td>
 						<td><c:out value="${value.b_category}" /></td>
 						<td><c:out value="${value.s_category}" /></td>
-						<td><c:out value="${value.date}" /></td>
+						<td><c:out value="${value.q_date}" /></td>
 						<!-- 「わたしもボタン」 -->
 						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 						<!-- チェックボックス -->
-						<td><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}"></td>
+						<td><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')" id="checkId${status.index}">
 						<td class="del" id="del2Id${status.index}">詳細</td>
 						<td class="del" id="delId${status.index}">隠す</td>
 					</tr>
 
 					<!-- 詳細が押されたら以下が表示される -->
-					<tr class="del" id="delId${status.index}"><br>
+					<div class="del" id="delId${status.index}">
+					<tr>
 						<!-- タイトルと内容 -->
-						<td><c:out value="${value.title}" /></td><br>
-						<td><c:out value="${value.content}" /></td><br>
+						<td><c:out value="${value.title}" /></td>
+						<td><c:out value="${value.content}" /></td>
 
 						<!-- 編集/削除ボタン・解決ボタン・わたしもボタン -->
 						<td><input type="submit" class="button" name="SUBMIT" value="編集"></td>
@@ -102,6 +73,7 @@
 						<td><input type="checkbox" name="solution" value="0"></td>
 						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 					</tr>
+					</div>
 				</c:if>
 
 					<c:remove var="data" />
@@ -121,11 +93,13 @@
 					<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
 						<td><c:out value="${value.a_name}"/></td>
 					</c:if>
-					<c:out value="${value.date}" />
+					<c:out value="${value.a_date}" />
 					<td><c:out value="${value.answer}" /></td>
 					<!-- 画像は保留 -->
-					<td><c:out value="${value.q_images}" />
+					<td><c:out value="${value.q_images}" /><br>
+					</table>
 			</c:forEach>
+
 		</div>
 
 		<!-- 回答タブ -->
@@ -141,7 +115,7 @@
 						<td><c:out value="${value.title}" /></td>
 						<td><c:out value="${value.b_category}" /></td>
 						<td><c:out value="${value.s_category}" /></td>
-						<td><c:out value="${value.date}" /></td>
+						<td><c:out value="${value.a_date}" /></td>
 						<!-- 「わたしもボタン」 -->
 						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 						<!-- チェックボックス -->
@@ -191,6 +165,7 @@
 function disp(indexNo){
 	//ここは隠している項目を表示する部分-------------------
 	//チェックボックスの状態を取得
+	alert("aaaa");
 	var ch =document.getElementById('checkId'+indexNo);
 	//隠している部分の情報を取得
 	var hide =document.getElementById('delId'+indexNo);
@@ -206,10 +181,17 @@ function disp(indexNo){
 		hide.setAttribute('class','del');
 		hidden.setAttribute('class','');
 	}
+	if(check.checked){
+		//ボタンを活性化
+		button.disabled = false;
+	}else{
+		//ボタンを非活性
+		button.disabled = true;
+	}
 }
 
 // 削除確認アラート
-function delete() {
+function delete2() {
 	if(confirm("本当に削除してよろしいですか？")) {
 		alert("削除しました。");
 		return true;
