@@ -18,13 +18,16 @@
 	//ひとつめの配列の値が変更されたときに動く関数
 	function category() {
 		let b_category = document.getElementById('b_category').value;
+		let s_category = document.getElementById('s_category').value;
 		let elm = document.getElementsByName('s_category')[0];
 		elm.options.length = 0;
 		for (let i = 0; i < s_categoryArray[b_category].length; i++) {
 			let op = document.createElement('option');
 			op.value = s_categoryArray[b_category][i];
-			
 			op.textContent = s_categoryArray[b_category][i];
 			elm.appendChild(op);
+			if (s_categoryArray[b_category][i] == s_category) {
+				elm.options[i].selected = true;
+			}
 		}
 	};
