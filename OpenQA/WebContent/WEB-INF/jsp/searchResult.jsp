@@ -38,14 +38,14 @@
 				<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><a href="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer"> <img
 				src="/OpenQA/images/reply.png"></a></td>
-				<!-- checkbox 押されたらcheckbox以下の内容が出る 上の私もボタンが消える。解決済 -->
-				<td class="del" id="delId${status.index}"><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}"></td>
+				<!-- checkbox 押されたらcheckbox以下の内容が出る 上の私もボタンが消える。解決済 詳細の文字を隠すに変えなきゃ！ -->
+				<td class="del" id="delId${status.index}"><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 				<td class="del" id="delId${status.index}"><c:out value="${value1.title}" /></td>
 				<td class="del" id="delId${status.index}"><c:out value="${value1.content}" /></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_delete"></td>
 				<!-- solutionのjsの文章は後で考えよう -->
-				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0"></td>
+				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" onchange="disp('${solution.index }')"id="solutionId${solution.index}"></td>
 				<td class="del" id="delId${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 			</tr>
 			</c:if>
@@ -86,11 +86,14 @@
 		var hide =document.getElementById('delId'+indexNo);
 		//私もボタン用のdelId
 		var hidden =document.getElementById('del2Id'+indexNo);
+		//solution用の変数
+		var solution =document.getElementByID('solutionID'+indexNo);
 		//もし、チェックボックスにチェックがついたら
 		if(ch.checked){
 			//隠している部分のクラス適用（隠す）を無くす
 			hide.setAttribute('class','');
 			hidden.setAttribute('class','del');
+
 		}else{
 			//隠している部分のクラス適用（隠す）をつける
 			hide.setAttribute('class','del');
