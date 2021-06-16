@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.*;
 
 import dao.QuestionDAO;
 import model.Almighty;
@@ -82,12 +82,25 @@ public class MenuServlet extends HttpServlet {
 
 		QuestionDAO qDAO = new QuestionDAO();
 		ArrayList<Almighty> list = qDAO.cate_select(b_category);
-		ArrayList<Almighty> cate = new ArrayList<>();
-		ArraList
-		for (Almighty value : list) {
-			if (value.getS_category().equals("コンストラクタ")) {
+		String[] p = {"ビジネスマナー", "ビジネス文書", "Word", "Excel", "タイピング"};
+		String[] it = {"プログラミングの基本", "アルゴリズム", "ネットワークの基本", "HTML", "CSS", "JavaScript", "データベース", "SQL"};
+		String[] java = {"Javaの基本", "オブジェクト指向", "Servlet", "JSP","DAO", "Javaドリル", "SQLドリル", "名刺管理アプリ"};
+		String[] etc = {"機器トラブル"};
+
+		if (b_category.equals("パーソナルスキル")) {
+			for (Almighty value : list) {
+				if (value.getS_category().equals(p[0])) {
+
+				}
 
 			}
+
+		} else if (b_category.equals("IT基礎")) {
+
+		} else if (b_category.equals("java基礎")) {
+
+		} else {
+
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/category.jsp");
