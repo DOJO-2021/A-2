@@ -24,6 +24,23 @@
 </style>
 </head>
 <body>
+さんのマイページ
+<h1>過去に登録した投稿</h1>
+
+<c:set var="data" value="0" />
+
+				<c:forEach items="${question}" var="value1">
+					<!-- joinした物の一覧 -->
+					<c:if test="${data != value1.q_id}">
+						${value1.q_id}  ${value1.title}<br>
+					</c:if>
+					<c:remove var="data" />
+					<c:set var="data" value="${value1.q_id}" /><br>
+					<c:if test="${data == value1.q_id}">
+						${value1.a_id}  ${value1.content}
+					</c:if>
+					<br>
+				</c:forEach>
 
 <div class="tab_wrap">
 
@@ -39,7 +56,22 @@
 		<!-- 質問タブ -->
 		<div id="panel1" class="tab_panel">
 			<c:set var="data" value="0" />
-			<c:forEach items="${question}" var="value" varStatus="status">
+
+				<c:forEach items="${question}" var="value1">
+					<!-- joinした物の一覧 -->
+					<c:if test="${data != value1.q_id}">
+						${value1.q_id}  ${value1.title}<br>
+					</c:if>
+					<c:remove var="data" />
+					<c:set var="data" value="${value1.q_id}" /><br>
+					<c:if test="${data == value1.q_id}">
+						${value1.a_id}  ${value1.content}
+					</c:if>
+					<br>
+				</c:forEach>
+		</div>
+
+				<c:forEach items="${question}" var="value" varStatus="status">
 				<c:if test="${data != value.q_id}">
 					<!-- 「マイページ質問」の部分 -->
 					<tr>
@@ -51,7 +83,7 @@
 						<td><c:out value="${value.s_category}" /></td>
 						<td><c:out value="${value.date}" /></td>
 						<!-- 「わたしもボタン」 -->
-						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
+						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 						<!-- チェックボックス -->
 						<td><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}"></td>
 						<td class="del" id="del2Id${status.index}">詳細</td>
@@ -68,7 +100,7 @@
 						<td><input type="submit" class="button" name="SUBMIT" value="編集"></td>
 						<td><input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();"></td>
 						<td><input type="checkbox" name="solution" value="0"></td>
-						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
+						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 					</tr>
 				</c:if>
 
@@ -78,8 +110,8 @@
 					<!-- 回答を質問の下に表示 -->
 					<c:if test="${data == value.q_id}">
 					<!-- user typeが講師だった場合 -->
-					<td><c:if test="${sessionScope.user.type==1}">
-						<td><c:out value="${value1.a_name}"/></td>
+					<td><c:if test="${sessionScope.user.type==1}"></td>
+						<td><c:out value="${value.a_name}"/></td>
 					</c:if>
 					<!-- user typeが受講者かつ匿名希望の場合 -->
 					</c:if> <c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
@@ -87,12 +119,12 @@
 					</c:if>
 					<!-- user typeが受講者かつ匿名を希望しない場合 -->
 					<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
-						<td><c:out value="${value1.a_name}"/></td>
+						<td><c:out value="${value.a_name}"/></td>
 					</c:if>
-					<c:out value="${value1.date}" />
-					<td><c:out value="${value1.answer}" /></td>
+					<c:out value="${value.date}" />
+					<td><c:out value="${value.answer}" /></td>
 					<!-- 画像は保留 -->
-					<td><c:out value="${value1.q_images}" />
+					<td><c:out value="${value.q_images}" />
 			</c:forEach>
 		</div>
 
@@ -111,7 +143,7 @@
 						<td><c:out value="${value.s_category}" /></td>
 						<td><c:out value="${value.date}" /></td>
 						<!-- 「わたしもボタン」 -->
-						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
+						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 						<!-- チェックボックス -->
 						<td><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}"></td>
 						<td class="del" id="del2Id${status.index}">詳細</td>
@@ -125,7 +157,7 @@
 						<td><c:out value="${value.content}" /></td><br>
 
 						<!-- わたしもボタン -->
-						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
+						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 					</tr>
 				</c:if>
 
@@ -189,8 +221,12 @@ function delete() {
 
 // 未解決確認アラート
 function unanswered() {
-	if(confirm("")) {
-		alert
+	if(confirm("質問を未解決に戻してよろしいですか？")) {
+		alert("未解決に戻しました。");
+		return true;
+	} else {
+		alert("キャンセルしました。");
+		return false;
 	}
 }
 </script>

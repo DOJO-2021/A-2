@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>検索結果一覧</title>
 </head>
 <body>
 	<h1>検索結果一覧</h1>
@@ -32,10 +32,10 @@
 				<td><c:out value="${value1.b_category}" /></td>
 				<td><c:out value="${value1.s_category}" /></td>
 				<td><c:out value="${value1.q_date}" /></td>
-				<!-- 私もボタンは押せるようにしなきゃダメ cheackbox! 押されたら画像を変えてmetooの値を1増やす
-				　　めっちゃ難しそうなので明日考えます。チェックボックスが押されるまでは私もボタンを表示して
-				　　押されたら下のreplyボタンが出るようにする。 -->
-				<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
+				<!-- 私もボタンはcheackbox! 押されたら画像を変えて(CSS)metooの値を1増やす(yatta)
+				　　チェックボックスが押されるまでは私もボタンを表示して
+				　　押されたら下のreplyボタンが出るようにする。yatta -->
+				<td class="del" id="del2Id${status.index}"><input type="checkbox" name="meToo" value="0" id="meToo"/><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><a href="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer"> <img
 				src="/OpenQA/images/reply.png"></a></td>
 				<!-- checkbox 押されたらcheckbox以下の内容が出る 上の私もボタンが消える。解決済 詳細の文字を隠すに変えなきゃ！ -->
@@ -44,8 +44,8 @@
 				<td class="del" id="delId${status.index}"><c:out value="${value1.content}" /></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_delete"></td>
-				<!-- solutionのjsの文章は後で考えよう -->
-				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" onchange="disp('${solution.index }')"id="solution${solution.index}"></td>
+				<!-- solutionのjsの文章は後で考えよう tabunndekita -->
+				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" id="solution"></td>
 				<td class="del" id="delId${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><img src="${value1.q_images} }"></td>
 			</tr>
@@ -100,18 +100,39 @@
 			hide.setAttribute('class','del');
 			hidden.setAttribute('class','');
 		}
+		if(check.checked){
+			//ボタンを活性化
+			button.disabled = false;
+		}else{
+			//ボタンを非活性
+			button.disabled = true;
+		}
+    }
 
 		//solution Ajax(kari)
 		function valueChange(event){
 			$.ajax({
 				type:'post',
 				url: '/OpenQA/UpdateDeleteServlet?mode=solution',
-				data: {	solution: 1}
+				data: {	"solution": 1}
 			});
 		}
 
 		let saveCheckbox = document.getElementById('solution');
 		saveCheckbox.addEventListener('change', valueChange);
 	}
+
+    //meToo ajax(kari)
+	function valueChange(event){
+		$.ajax({
+			type:'post',
+			url: '/OpenQA/UpdateDeleteServlet?mode=meToo',
+			data: {	"meToo": 1}
+		});
+	}
+
+	let saveCheckbox = document.getElementById('meToo');
+	saveCheckbox.addEventListener('change', valueChange);
+}
 </script>
 </html>
