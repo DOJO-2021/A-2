@@ -45,7 +45,7 @@
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_delete"></td>
 				<!-- solutionのjsの文章は後で考えよう -->
-				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0"></td>
+				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" onchange="disp('${solution.index }')"id="solutionId${solution.index}"></td>
 				<td class="del" id="delId${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 			</tr>
 			</c:if>
@@ -86,11 +86,14 @@
 		var hide =document.getElementById('delId'+indexNo);
 		//私もボタン用のdelId
 		var hidden =document.getElementById('del2Id'+indexNo);
+		//solution用の変数
+		var solution =document.getElementByID('solutionID'+indexNo);
 		//もし、チェックボックスにチェックがついたら
 		if(ch.checked){
 			//隠している部分のクラス適用（隠す）を無くす
 			hide.setAttribute('class','');
 			hidden.setAttribute('class','del');
+
 		}else{
 			//隠している部分のクラス適用（隠す）をつける
 			hide.setAttribute('class','del');
