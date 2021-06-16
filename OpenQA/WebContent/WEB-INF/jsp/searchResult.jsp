@@ -47,6 +47,7 @@
 				<!-- solutionのjsの文章は後で考えよう -->
 				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" onchange="disp('${solution.index }')"id="solutionId${solution.index}"></td>
 				<td class="del" id="delId${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
+				<td class="del" id="delId${status.index}"><img src="${value1.q_images} }"></td>
 			</tr>
 			</c:if>
 			<c:remove var="data" />
@@ -62,7 +63,9 @@
 				<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
 				<c:out value="${value1.a_name}"/>
 				</c:if></td>
+				<td><c:out value="${value1.a_date}"/></td>
 				<td><c:out value="${value1.answer}" /></td>
+				<td><img src="${value1.a_images} }"></td>
 				<td><input type="submit" class="button" name="SUBMIT" value="a_update"></td>
 				<td><input type="submit" class="button" name="SUBMIT" value="a_delete"></td>
 				</c:if>
@@ -99,7 +102,14 @@
 			hide.setAttribute('class','del');
 			hidden.setAttribute('class','');
 		}
+		if(solution.checked){
+		//solution Ajax(kari)
+		var xhr = new XMLHttpRequest();
 
+		xhr.open('POST', '/OpenQA/UpdateDeleteServlet?mode=solution');
+		xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+		xhr.send( 'soltion=1' );
+		}
 
 		//ここからは、非活性のボタンを活性化する部分-------------------
 		//チェックボックスの状態を取得
@@ -114,6 +124,12 @@
 			//ボタンを非活性
 			button.disabled = true;
 		}
+		//solution Ajax(kari)
+		var xhr = new XMLHttpRequest();
+
+		xhr.open('POST', '/openQA/UpdateDeleteServlet?mode=solution');
+		xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+		xhr.send( 'soltion=1' );
 	}
 </script>
 </html>

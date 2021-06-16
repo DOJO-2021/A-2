@@ -657,7 +657,7 @@ public class QuestionDAO {
 
 			// SQL文を準備する
 			String sql =
-					"update Question set solution+1 where id=?";
+					"update Question set solution=1 where id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,id);
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
