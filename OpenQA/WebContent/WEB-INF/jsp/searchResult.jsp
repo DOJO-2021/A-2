@@ -45,7 +45,7 @@
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
 				<td class="del" id="delId${status.index}"><input type="submit" class="button" name="SUBMIT" value="q_delete"></td>
 				<!-- solutionのjsの文章は後で考えよう -->
-				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" onchange="disp('${solution.index }')"id="solutionId${solution.index}"></td>
+				<td class="del" id="delId${status.index}"><input type="checkbox" name="solution" value="0" onchange="disp('${solution.index }')"id="solution${solution.index}"></td>
 				<td class="del" id="delId${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><img src="${value1.q_images} }"></td>
 			</tr>
@@ -89,8 +89,6 @@
 		var hide =document.getElementById('delId'+indexNo);
 		//私もボタン用のdelId
 		var hidden =document.getElementById('del2Id'+indexNo);
-		//solution用の変数
-		var solution =document.getElementByID('solutionID'+indexNo);
 		//もし、チェックボックスにチェックがついたら
 		if(ch.checked){
 			//隠している部分のクラス適用（隠す）を無くす
@@ -102,34 +100,18 @@
 			hide.setAttribute('class','del');
 			hidden.setAttribute('class','');
 		}
-		if(solution.checked){
-		//solution Ajax(kari)
-		var xhr = new XMLHttpRequest();
 
-		xhr.open('POST', '/OpenQA/UpdateDeleteServlet?mode=solution');
-		xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-		xhr.send( 'soltion=1' );
+		//solution Ajax(kari)
+		function valueChange(event){
+			$.ajax({
+				type:'post',
+				url: '/OpenQA/UpdateDeleteServlet?mode=solution',
+				data: {	solution: 1}
+			});
 		}
 
-		//ここからは、非活性のボタンを活性化する部分-------------------
-		//チェックボックスの状態を取得
-		var check =document.getElementById('checkId'+indexNo);
-		//ボタンの情報を取得
-		var button = document.getElementById('buttonId'+indexNo);
-		//チェックを付けたら
-		if(check.checked){
-			//ボタンを活性化
-			button.disabled = false;
-		}else{
-			//ボタンを非活性
-			button.disabled = true;
-		}
-		//solution Ajax(kari)
-		var xhr = new XMLHttpRequest();
-
-		xhr.open('POST', '/openQA/UpdateDeleteServlet?mode=solution');
-		xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-		xhr.send( 'soltion=1' );
+		let saveCheckbox = document.getElementById('solution');
+		saveCheckbox.addEventListener('change', valueChange);
 	}
 </script>
 </html>
