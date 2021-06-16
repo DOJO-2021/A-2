@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>検索結果一覧</title>
 </head>
 <body>
 	<h1>検索結果一覧</h1>
@@ -100,6 +100,14 @@
 			hide.setAttribute('class','del');
 			hidden.setAttribute('class','');
 		}
+		if(check.checked){
+			//ボタンを活性化
+			button.disabled = false;
+		}else{
+			//ボタンを非活性
+			button.disabled = true;
+		}
+    }
 
 		//solution Ajax(kari)
 		function valueChange(event){
