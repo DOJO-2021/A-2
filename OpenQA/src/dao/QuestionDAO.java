@@ -644,7 +644,7 @@ public class QuestionDAO {
 		// 結果を返す
 		return mypageQuestionList;
 	}
-	public boolean solution(int solution) {
+	public boolean solution(int solution ,String id) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -657,8 +657,9 @@ public class QuestionDAO {
 
 			// SQL文を準備する
 			String sql =
-					"update Question set solution+1";
+					"update Question set solution+1 where id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1,id);
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
 						if (pStmt.executeUpdate() == 1) {
 							result = true;
