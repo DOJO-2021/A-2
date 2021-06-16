@@ -39,8 +39,7 @@
 		<!-- 質問タブ -->
 		<div id="panel1" class="tab_panel">
 			<c:set var="data" value="0" />
-			<c:set var="data" value="0" />
-			<c:forEach items="${mypageQuestionList}" var="value" varStatus="status">
+			<c:forEach items="${question}" var="value" varStatus="status">
 				<c:if test="${data != value.q_id}">
 					<!-- 「マイページ質問」の部分 -->
 					<tr>
@@ -95,7 +94,6 @@
 					<!-- 画像は保留 -->
 					<td><c:out value="${value1.q_images}" />
 			</c:forEach>
-	</c:forEach>
 		</div>
 
 		<!-- 回答タブ -->
