@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 import dao.QuestionDAO;
 import model.Almighty;
@@ -53,9 +54,10 @@ public class MenuServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		//unanswered.jspにフォワードする
 		} else if(mode.equals("unanswered")) {
+			QuestionDAO qDAO = new QuestionDAO();
+			List<Almighty> list = qDAO.unansweredQuestion();
 
-
-
+			request.setAttribute("unans",list);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/unanswered.jsp");
 			dispatcher.forward(request, response);
@@ -80,7 +82,13 @@ public class MenuServlet extends HttpServlet {
 
 		QuestionDAO qDAO = new QuestionDAO();
 		ArrayList<Almighty> list = qDAO.cate_select(b_category);
-		request.setAttribute("list", list);
+		ArrayList<Almighty> cate = new ArrayList<>();
+		ArraList
+		for (Almighty value : list) {
+			if (value.getS_category().equals("コンストラクタ")) {
+
+			}
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/category.jsp");
 		dispatcher.forward(request, response);
