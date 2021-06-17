@@ -81,27 +81,31 @@ public class MenuServlet extends HttpServlet {
 		String b_category = request.getParameter("b_category");
 
 		QuestionDAO qDAO = new QuestionDAO();
-		ArrayList<Almighty> list = qDAO.cate_select(b_category);
-		String[] p = {"ビジネスマナー", "ビジネス文書", "Word", "Excel", "タイピング"};
-		String[] it = {"プログラミングの基本", "アルゴリズム", "ネットワークの基本", "HTML", "CSS", "JavaScript", "データベース", "SQL"};
-		String[] java = {"Javaの基本", "オブジェクト指向", "Servlet", "JSP","DAO", "Javaドリル", "SQLドリル", "名刺管理アプリ"};
-		String[] etc = {"機器トラブル"};
+		ArrayList<Almighty> questions = qDAO.cate_select(b_category);
+		ArrayList<ArrayList<Almighty>>list = new ArrayList<>();
+		ArrayList<Almighty>s_list = null;
 
-		if (b_category.equals("パーソナルスキル")) {
-			for (Almighty value : list) {
-				if (value.getS_category().equals(p[0])) {
-
-				}
-
+		String cate = "";
+		int count = 0;
+		for (int i=0; i<questions.size(); i++) {
+			if (!questions.get(i).getS_category().equals(cate) && count!=0) {
+				list.add(s_list);
+				count = 0;
 			}
 
-		} else if (b_category.equals("IT基礎")) {
+			if (!questions.get(i).getS_category().equals(cate) && count==0) {
+				s_list = new ArrayList<>();
+				s_list.add(questions.get(i));
+				cate = questions.get(i).getS_category();
+				count++;
 
-		} else if (b_category.equals("java基礎")) {
-
-		} else {
+			} else if  (questions.get(i).getS_category().equals(cate)) {
+				s_list.add(questions.get(i));
+			}
 
 		}
+
+		request.setAttribute("list", list);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/category.jsp");
 		dispatcher.forward(request, response);
