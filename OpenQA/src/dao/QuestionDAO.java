@@ -13,11 +13,11 @@ import model.Almighty;
 import model.Answer;
 import model.Question;
 
-
 public class QuestionDAO {
 
 	//登録するためのメソッド
-	public boolean insert(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
+	public boolean insert(String q_id, int to, String id, int anonymity, String b_category, String s_category,
+			Timestamp date,
 			String title, String content, int solution, int metoo, String images, String name) {
 		Connection conn = null;
 		boolean result = false;
@@ -30,8 +30,7 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql =
-					"insert into Question values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into Question values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, to);
 			pStmt.setString(2, id);
@@ -51,20 +50,16 @@ public class QuestionDAO {
 				result = true;
 			}
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -75,7 +70,8 @@ public class QuestionDAO {
 	}
 
 	//編集のためのメソッド
-	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category, Timestamp date,
+	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category,
+			Timestamp date,
 			String title, String content, int solution, int metoo, String images, String name) {
 		Connection conn = null;
 		boolean result = false;
@@ -88,8 +84,7 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql =
-					"update Question set to = ?, id = ?, anonymity = ?, b_category = ?, s_category = ?, date = ?, title = ?, content = ?, solution = ?, metoo = ?, images = ? where q_id = ?";
+			String sql = "update Question set to = ?, id = ?, anonymity = ?, b_category = ?, s_category = ?, date = ?, title = ?, content = ?, solution = ?, metoo = ?, images = ? where q_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, to);
 			pStmt.setString(2, id);
@@ -110,20 +105,16 @@ public class QuestionDAO {
 				result = true;
 			}
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -146,8 +137,7 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql =
-					"delete from Question where q_id = ?";
+			String sql = "delete from Question where q_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる。
@@ -158,20 +148,16 @@ public class QuestionDAO {
 				result = true;
 			}
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -181,13 +167,10 @@ public class QuestionDAO {
 		return result;
 	}
 
-
-
 	//category検索のためのメソッド
 	public ArrayList<Almighty> cate_select(String b_category) {
 		Connection conn = null;
 		ArrayList<Almighty> questionList = new ArrayList<Almighty>();
-
 
 		try {
 			// JDBCドライバを読み込む
@@ -202,7 +185,6 @@ public class QuestionDAO {
 
 			// SQL文を完成させる
 			pStmt.setString(1, b_category);
-
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -232,22 +214,18 @@ public class QuestionDAO {
 				cate.setA_images(rs.getString("answer.images"));
 				questionList.add(cate);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			questionList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			questionList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					questionList = null;
 				}
@@ -263,7 +241,6 @@ public class QuestionDAO {
 	public ArrayList<Almighty> select(String word) {
 		Connection conn = null;
 		ArrayList<Almighty> questionList = new ArrayList<Almighty>();
-
 
 		try {
 			// JDBCドライバを読み込む
@@ -281,7 +258,6 @@ public class QuestionDAO {
 			pStmt.setString(2, "%" + word + "%");
 			pStmt.setString(3, "%" + word + "%");
 			pStmt.setString(4, "%" + word + "%");
-
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -312,22 +288,18 @@ public class QuestionDAO {
 				// ArrayListに上記7つのデータを格納
 				questionList.add(mypage);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			questionList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			questionList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					questionList = null;
 				}
@@ -342,7 +314,6 @@ public class QuestionDAO {
 	public List<Almighty> mypageQuestion(String id) {
 		Connection conn = null;
 		List<Almighty> mypageQuestionList = new ArrayList<Almighty>();
-
 
 		try {
 			// JDBCドライバを読み込む
@@ -395,18 +366,15 @@ public class QuestionDAO {
 			// コンソール画面に例外状況を記す
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					mypageQuestionList = null;
 				}
@@ -419,7 +387,6 @@ public class QuestionDAO {
 	public List<Almighty> unansweredQuestion() {
 		Connection conn = null;
 		List<Almighty> mypageQuestionList = new ArrayList<Almighty>();
-
 
 		try {
 			// JDBCドライバを読み込む
@@ -469,18 +436,15 @@ public class QuestionDAO {
 			// コンソール画面に例外状況を記す
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					mypageQuestionList = null;
 				}
@@ -490,15 +454,12 @@ public class QuestionDAO {
 		return mypageQuestionList;
 	}
 
-
 	// マイページに自分の質問を一覧表示させる
 	public List<Almighty> mypageQanswer(String id) {
 		Connection conn = null;
 		List<Almighty> mypageQuestionList = new ArrayList<Almighty>();
 
-
 		try {
-
 
 			AnswerDAO ans = new AnswerDAO();
 			List<Answer> myAnswer = ans.mypageAnswer(id);
@@ -555,18 +516,15 @@ public class QuestionDAO {
 			// コンソール画面に例外状況を記す
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					mypageQuestionList = null;
 				}
@@ -576,13 +534,10 @@ public class QuestionDAO {
 		return mypageQuestionList;
 	}
 
-
-
 	//	QuestionDAOで質問IDから検索できるメソッドを作る。★いらなくね
 	public List<Question> mypageQuestionId(String q_id) {
 		Connection conn = null;
 		List<Question> mypageQuestionList = new ArrayList<Question>();
-
 
 		try {
 			// JDBCドライバを読み込む
@@ -617,8 +572,7 @@ public class QuestionDAO {
 						rs.getString("content"),
 						rs.getInt("solution"),
 						rs.getInt("metoo"),
-						rs.getString("images")
-						);
+						rs.getString("images"));
 
 				// ArrayListに上記7つのデータを格納
 				mypageQuestionList.add(mypage);
@@ -629,18 +583,15 @@ public class QuestionDAO {
 			// コンソール画面に例外状況を記す
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			mypageQuestionList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					mypageQuestionList = null;
 				}
@@ -649,7 +600,8 @@ public class QuestionDAO {
 		// 結果を返す
 		return mypageQuestionList;
 	}
-	public boolean solution(int solution ,String id) {
+
+	public boolean solution(int solution, String q_id) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -661,37 +613,69 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql =
-					"update Question set solution=1 where id=?";
+			String sql = "update Question set solution=1 where q_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1,id);
+			pStmt.setString(1, q_id);
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
-						if (pStmt.executeUpdate() == 1) {
-							result = true;
-						}
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
-					}
-					catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					finally {
-						// データベースを切断
-						if (conn != null) {
-							try {
-								conn.close();
-							}
-							catch (SQLException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-
-					// 結果を返す
-					return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+	public boolean meToo(int meToo, String q_id) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
+
+			// SQL文を準備する
+			String sql = "update Question set meToo+1 where q_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, q_id);
+			// SQL文を実行するexecuteUpdateはupdateした数を返す
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 }
-
-
