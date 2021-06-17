@@ -64,8 +64,11 @@
 						<tr class="del" id="delId${status.index}">
 							<!-- タイトルと内容 -->
 							<td><c:out value="${value.title}" /></td>
+						</tr>
+						<tr class="del" id="delId4${status.index}">
 							<td><c:out value="${value.content}" /></td>
-
+						</tr>
+						<tr class="del" id="delId5${status.index}">
 							<!-- 編集/削除ボタン・解決ボタン・わたしもボタン -->
 							<td><input type="submit" class="button" name="SUBMIT" value="編集"></td>
 							<td><input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();"></td>
@@ -76,40 +79,45 @@
 
 					<c:remove var="data" />
 					<c:set var="data" value="${value.q_id}" />
-					<tr class="del" id="delId3${status.index}">
-						<!-- 回答を質問の下に表示 -->
-						<c:if test="${data == value.q_id}">
-							<!-- user typeが講師だった場合 -->
-							<td><c:if test="${sessionScope.user.type==1}">
-									<c:out value="${value.a_name}"/>
-								</c:if>
-							</td>
-							<!-- user typeが受講者かつ匿名希望の場合 -->
-						</c:if>
-						<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
-							<td>匿名</td>
-						</c:if>
-						<!-- user typeが受講者かつ匿名を希望しない場合 -->
-						<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
-							<td><c:out value="${value.a_name}"/></td>
-						</c:if>
-						<c:out value="${value.a_date}" />
-							<td><c:out value="${value.answer}" /></td>
-							<!-- 画像は保留 -->
-							<td><c:out value="${value.q_images}" /></td>
 
+						<tr class="del" id="delId3${status.index}">
+							<!-- 回答を質問の下に表示 -->
+							<c:if test="${data == value.q_id}">
+									<!-- user typeが講師だった場合 -->
+									<td><c:if test="${sessionScope.user.type==1}">
+											<c:out value="${value.a_name}"/>
+										</c:if>
+									</td>
+									<!-- user typeが受講者かつ匿名希望の場合 -->
+
+								<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
+									<td>匿名</td>
+								</c:if>
+								<!-- user typeが受講者かつ匿名を希望しない場合 -->
+								<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
+									<td><c:out value="${value.a_name}"/></td>
+								</c:if>
+								<c:out value="${value.a_date}" />
+									<td><c:out value="${value.answer}" /></td>
+									<!-- 画像は保留 -->
+									<td><c:out value="${value.q_images}" /></td>
+							</c:if>
+						</tr>
 			</c:forEach>
 			</table>
 		</div>
 
 		<!-- 回答タブ -->
 
+			</table>
+		</div>
 	</div>
 </div>
 </body>
 <script>
 //チェックボックスのチェックが動作したら動く
 function disp(indexNo){
+	//質問tab
 	//ここは隠している項目を表示する部分-------------------
 	//チェックボックスの状態を取得
 	var ch =document.getElementById('checkId'+indexNo);
@@ -117,6 +125,8 @@ function disp(indexNo){
 	var hide =document.getElementById('delId'+indexNo);
 	var hide2 =document.getElementById('delId2'+indexNo);
 	var hide3 =document.getElementById('delId3'+indexNo);
+	var hide4 =document.getElementById('delId4'+indexNo);
+	var hide5 =document.getElementById('delId5'+indexNo);
 	//私もボタン用のdelId
 	var hidden =document.getElementById('del2Id'+indexNo);
 	var hidden2 =document.getElementById('del2Id2'+indexNo);
@@ -126,6 +136,8 @@ function disp(indexNo){
 		hide.setAttribute('class','');
 		hide2.setAttribute('class','');
 		hide3.setAttribute('class','');
+		hide4.setAttribute('class','');
+		hide5.setAttribute('class','');
 		hidden.setAttribute('class','del');
 		hidden2.setAttribute('class','del');
 	}else{
@@ -133,10 +145,12 @@ function disp(indexNo){
 		hide.setAttribute('class','del');
 		hide2.setAttribute('class','del');
 		hide3.setAttribute('class','del');
+		hide4.setAttribute('class','del');
+		hide5.setAttribute('class','del');
 		hidden.setAttribute('class','');
 		hidden2.setAttribute('class','');
 	}
-	var check =document.getElementById('checkId'+indexNo);
+ 	var check =document.getElementById('checkId'+indexNo);
 	var button = document.getElementById('buttonId'+indexNo);
 	if(check.checked){
 		//ボタンを活性化
@@ -145,7 +159,6 @@ function disp(indexNo){
 		//ボタンを非活性
 		button.disabled = true;
 	}
-	alert("bb");
 }
 
 // 削除確認アラート
