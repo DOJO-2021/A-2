@@ -93,8 +93,8 @@
 		var ch =document.getElementById('checkId'+indexNo);
 		//隠している部分の情報を取得
 		var hide =document.getElementById('delId'+indexNo);
-		var hide3 =document.getElementById('delId3'+indexNo);
-		var hide4 =document.getElementById('delId4'+indexNo);
+		var hide3 =document.getElementById('del3Id'+indexNo);
+		var hide4 =document.getElementById('del4Id'+indexNo);
 		//私もボタン用のdelId
 		var hide2 =document.getElementById('del2Id'+indexNo);
 		//もし、チェックボックスにチェックがついたら

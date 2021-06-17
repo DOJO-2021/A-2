@@ -31,4 +31,11 @@
 		<input type="submit" name="regist" value="登録">
 	</form>
 </body>
+<script>
+function ceckForm() {
+	if() {
+		window.alert("そのIDは使われています。");
+	} else if()
+}
+</script>
 </html>
