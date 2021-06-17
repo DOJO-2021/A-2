@@ -22,13 +22,14 @@
 			<tr>
 				<td><c:out value="${value1.to}" /></td>
 				<td><c:if test="${sessionScope.user.type==1}">
-				<c:out value="${value1.q_name}"/>
-				</c:if> <c:if test="${sessionScope.user.type==0 && value.q_anonymity== 1}">
-				匿名
-				</c:if>
-				<c:if test="${sessionScope.user.type==0 && value.q_anonymity== 0 }">
-				<c:out value="${value1.q_name}"/>
-				</c:if></td>
+						<c:out value="${value1.q_name}"/>
+					</c:if>
+					 <c:if test="${sessionScope.user.type==0 && value.q_anonymity== 1}">
+						匿名
+					</c:if>
+					<c:if test="${sessionScope.user.type==0 && value.q_anonymity== 0 }">
+						<c:out value="${value1.q_name}"/>
+					</c:if></td>
 				<td><c:out value="${value1.title}" /></td>
 				<td><c:out value="${value1.b_category}" /></td>
 				<td><c:out value="${value1.s_category}" /></td>
@@ -50,25 +51,26 @@
 				<td class="del" id="delId${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><img src="${value1.q_images} }"></td>
 			</tr>
-			</c:if>
+		</c:if>
 			<c:remove var="data" />
 			<c:set var="data" value="${value1.q_id}" />
 			<tr class="del" id="delId${status.index}">
 			<!-- 解答を質問の下に表示 -->
 				<c:if test="${data == value1.q_id}" >
-				<td><c:if test="${sessionScope.user.type==1}">
-				<c:out value="${value1.a_name}"/>
-				</c:if> <c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
-				匿名
-				</c:if>
-				<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
-				<c:out value="${value1.a_name}"/>
-				</c:if></td>
-				<td><c:out value="${value1.a_date}"/></td>
-				<td><c:out value="${value1.answer}" /></td>
-				<td><img src="${value1.a_images} }"></td>
-				<td><input type="submit" class="button" name="SUBMIT" value="a_update"></td>
-				<td><input type="submit" class="button" name="SUBMIT" value="a_delete"></td>
+					<td><c:if test="${sessionScope.user.type==1}">
+							<c:out value="${value1.a_name}"/>
+						</c:if>
+						 <c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
+							匿名
+						</c:if>
+						<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
+							<c:out value="${value1.a_name}"/>
+						</c:if></td>
+					<td><c:out value="${value1.a_date}"/></td>
+					<td><c:out value="${value1.answer}" /></td>
+					<td><img src="${value1.a_images} }"></td>
+					<td><input type="submit" class="button" name="SUBMIT" value="a_update"></td>
+					<td><input type="submit" class="button" name="SUBMIT" value="a_delete"></td>
 				</c:if>
 			</tr>
 			</c:forEach>
