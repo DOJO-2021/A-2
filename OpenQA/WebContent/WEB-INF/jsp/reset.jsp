@@ -29,6 +29,7 @@
 	function checkForm(){
 			if(document.form.pw1.value != document.form.pw2.value && result == false){
 				window.alert("確認用PWが一致しません。IDとお名前が一致しません。");
+				return false;
 			}else{
 				if(document.form.pw1.value != document.form.pw2.value){
 		    		window.alert("確認用PWが一致しません。");
