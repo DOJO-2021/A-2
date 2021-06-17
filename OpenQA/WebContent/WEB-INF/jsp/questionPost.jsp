@@ -14,7 +14,7 @@
 <tr>
 	<th>
 		<!-- 回答者を指定する -->
-		<select name="to">
+		<select name="to" id="to">
 			<option value="">回答者を選択</option>
 			<option value="0">だれでも</option>
 			<option value="1">講師</option>
@@ -37,14 +37,14 @@
 		</select>
 
 		<!-- 二つ目のセレクトボックス（連動する） -->
-		<select name="s_category">
+		<select name="s_category" id="s_category">
 		</select>
 	</th>
 </tr>
 <tr>
 	<td>
-	<p>タイトル <input type="text" name="title"></p>
-	<p>内容<textarea name="content"></textarea></p>
+	<p>タイトル <input type="text" name="title" id="title"></p>
+	<p>内容<textarea name="content" id="content"></textarea></p>
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<label>
@@ -89,9 +89,56 @@
 
 	// 未入力アラート
 	function checkForm(){
+		// 各変数
+    	var to = document.getElementById('to');
+    	var b_cate = document.getElementById('b_category');
+      	var s_cate = document.getElementById('s_category');
+      	var title = document.getElementById('title');
+      	var content = document.getElementById('content');
+
+        //宛先(To)未入力アラート
+    	if(to.value == ""){
+        	window.alert("宛先を指定してください");
+        	 //カテゴリー未入力アラート
+        	if(b_cate.value == "" || s_cate.value == ""){
+            	window.alert("カテゴリーを選択してください");
+            	// タイトル及び内容未入力アラート
+              	if(title.value == "" || content.value == ""){
+                	window.alert("タイトルおよび内容を入力してください");
+            	}
+       		}
+   		} else{
+    		if(confirm('投稿してもよろしいですか？')) {
+    			alert("投稿しました");
+    			// windowを閉じる処理
+    			window.close();
+    			return true;
+    		}
+    		else{
+    			alert("キャンセルしました");
+    			return false;
+    		}
+   		}
+	}
+
+	// 未入力アラート
+	function checkForm(){
+	  	//宛先(To)未入力アラート
+    	var to = document.getElementById('to');
+    	if(to.value == ""){
+        	window.alert("宛先を指定してください");
+   		}
+
+        //カテゴリー未入力アラート
+    	var b_cate = document.getElementById('b_category');
+      	var s_cate = document.getElementById('s_category');
+    	if(b_cate.value == "" || s_cate.value == ""){
+        	window.alert("カテゴリーを選択してください");
+   		}
+
+
     	if(document.subBut.title.value == "" || document.subBut.content.value == ""){
         	window.alert("タイトルおよび内容を入力してください");
-			return false;
     	}else{
     		if(confirm('投稿してもよろしいですか？')) {
     			alert("投稿しました");
@@ -104,24 +151,7 @@
     			return false;
     		}
    		}
-
-        //カテゴリー未入力アラート
-    	var b_cate = document.getElementById('b_category');
-      	var s_cate = document.getElementById('s_category');
-    	if(b_cate == null || s_cate == null){
-        	window.alert("カテゴリーを選択してください");
-			return false;
-   		}
-
-    	//宛先(To)未入力アラート
-    	var to = document.getElementById('to');
-    	if(to == null){
-        	window.alert("宛先を指定してください");
-			return false;
-   		}
 	}
-
-
 
 </script>
 

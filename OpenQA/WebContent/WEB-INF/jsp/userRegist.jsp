@@ -10,13 +10,13 @@
 <form method="POST" action="/OpenQA/RegistServlet" id="form">
 
 		<p>
-			ID<input type="text" name="ID" placeholder="ID">
+			ID<input type="text" name="ID" id="id" placeholder="ID">
 		</p>
 		<p>
-			新しいPW<input type="text" name="pw" placeholder="新しいPW">
+			新しいPW<input type="text" name="pw" id="pw" placeholder="新しいPW">
 		</p>
 		<p>
-			確認用PW<input type="text" name="pw" placeholder="確認用PW">
+			確認用PW<input type="text" name="pw" id="pw2" placeholder="確認用PW">
 		</p>
 		<p>
 			お名前<input type="text" name="name" placeholder="お名前">
@@ -26,16 +26,28 @@
 			<input type="radio" name="type"  value="1" checked>講師
 		</p>
 		<p>
-			講師用PW<input type="text" name="ins_pw" placeholder="講師用PW">
+			講師用PW<input type="text" name="ins_pw" id="ins_pw" placeholder="講師用PW">
 		</p>
 		<input type="submit" name="regist" value="登録">
 	</form>
 </body>
 <script>
 function ceckForm() {
-	if() {
+	var id = document.getElementById("id");
+	var pw = document.getElementById("pw");
+	var ins_pw = document.getElementById("ins_pw");
+
+	if(id.value == ???) {
 		window.alert("そのIDは使われています。");
-	} else if()
+	}
+
+	if(pw.value != pw2.value) {
+		window.alert("確認用PWが一致しません。");
+	}
+
+	if(ins_pw != "HiguchiIsGod") {
+		window.alert("講師用PWが違います。")
+	}
 }
 </script>
 </html>
