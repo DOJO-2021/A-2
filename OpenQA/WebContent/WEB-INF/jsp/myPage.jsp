@@ -39,12 +39,12 @@
 	<div class="panel_area">
 		<!-- 質問タブ -->
 		<div id="panel1" class="tab_panel">
-		<table>
+		<table border="1">
 			<c:set var="data" value="0" />
-				<c:forEach items="${question}" var="value" varStatus="status">
-					<c:if test="${data != value.q_id}">
-						<!-- 「マイページ質問」の部分 -->
+			<c:forEach items="${question}" var="value" varStatus="status">
+				<c:if test="${data != value.q_id}">
 
+						<!-- 「マイページ質問」の部分 -->
 						<tr>
 							<!-- 各項目 -->
 							<td><c:out value="${value.to}" /></td>
@@ -54,12 +54,13 @@
 							<td><c:out value="${value.s_category}" /></td>
 							<td><c:out value="${value.q_date}" /></td>
 							<!-- 「わたしもボタン」 -->
-							<td class="" id="del2Id2${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
+							<td class="" id="delId7${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 							<!-- チェックボックス -->
-							<td><input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="checkId${status.index}"  >
-							<td class="" id="del2Id${status.index}">詳細</td>
+							<td><input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="checkId${status.index}"></td>
+							<td class="" id="delId6${status.index}">詳細</td>
 							<td class="del" id="delId2${status.index}">隠す</td>
 						</tr>
+
 						<!-- 詳細が押されたら以下が表示される -->
 						<tr class="del" id="delId${status.index}">
 							<!-- タイトルと内容 -->
@@ -75,41 +76,34 @@
 							<td><input type="checkbox" name="solution" value="0"></td>
 							<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
 						</tr>
-					</c:if>
-
-					<c:remove var="data" />
-					<c:set var="data" value="${value.q_id}" />
-
-						<tr class="del" id="delId3${status.index}">
+				</c:if>
+				<c:remove var="data" />
+				<c:set var="data" value="${value.q_id}" />
+					<c:if test="${data == value.q_id}">
+						<tr>
 							<!-- 回答を質問の下に表示 -->
-							<c:if test="${data == value.q_id}">
-									<!-- user typeが講師だった場合 -->
-									<td><c:if test="${sessionScope.user.type==1}">
-											<c:out value="${value.a_name}"/>
-										</c:if>
-									</td>
-									<!-- user typeが受講者かつ匿名希望の場合 -->
-
+							<!-- user typeが講師だった場合 -->
+							<td><c:if test="${sessionScope.user.type==1}">
+								<c:out value="${value.a_name}"/>
+								</c:if>
+							<!-- user typeが受講者かつ匿名希望の場合 -->
 								<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
-									<td>匿名</td>
+									匿名
 								</c:if>
-								<!-- user typeが受講者かつ匿名を希望しない場合 -->
+							<!-- user typeが受講者かつ匿名を希望しない場合 -->
 								<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
-									<td><c:out value="${value.a_name}"/></td>
-								</c:if>
-								<c:out value="${value.a_date}" />
-									<td><c:out value="${value.answer}" /></td>
-									<!-- 画像は保留 -->
-									<td><c:out value="${value.q_images}" /></td>
-							</c:if>
+									<c:out value="${value.a_name}"/>
+								</c:if></td>
+							<td><c:out value="${value.a_date}" /></td>
+							<td><c:out value="${value.answer}" /></td>
+							<!-- 画像は保留 -->
+							<td><c:out value="${value.q_images}" /></td>
 						</tr>
-			</c:forEach>
-			</table>
-		</div>
-
-		<!-- 回答タブ -->
-
-			</table>
+					</c:if>
+				</c:forEach>
+			<div  class="del" id="delId3${status.index}">
+			</div>
+		</table>
 		</div>
 	</div>
 </div>
@@ -128,8 +122,8 @@ function disp(indexNo){
 	var hide4 =document.getElementById('delId4'+indexNo);
 	var hide5 =document.getElementById('delId5'+indexNo);
 	//私もボタン用のdelId
-	var hidden =document.getElementById('del2Id'+indexNo);
-	var hidden2 =document.getElementById('del2Id2'+indexNo);
+	var hidden =document.getElementById('delId6'+indexNo);
+	var hidden2 =document.getElementById('delId7'+indexNo);
 	//もし、チェックボックスにチェックがついたら
 	if(ch.checked){
 		//隠している部分のクラス適用（隠す）を無くす
@@ -150,15 +144,7 @@ function disp(indexNo){
 		hidden.setAttribute('class','');
 		hidden2.setAttribute('class','');
 	}
- 	var check =document.getElementById('checkId'+indexNo);
-	var button = document.getElementById('buttonId'+indexNo);
-	if(check.checked){
-		//ボタンを活性化
-		button.disabled = false;
-	}else{
-		//ボタンを非活性
-		button.disabled = true;
-	}
+
 }
 
 // 削除確認アラート
