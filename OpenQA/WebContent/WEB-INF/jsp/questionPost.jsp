@@ -136,8 +136,9 @@
         	window.alert("カテゴリーを選択してください");
    		}
 
-
-    	if(document.subBut.title.value == "" || document.subBut.content.value == ""){
+    	var title = document.getElementById('title');
+      	var content = document.getElementById('content');
+    	if(title.value == "" || content.value == ""){
         	window.alert("タイトルおよび内容を入力してください");
     	}else{
     		if(confirm('投稿してもよろしいですか？')) {

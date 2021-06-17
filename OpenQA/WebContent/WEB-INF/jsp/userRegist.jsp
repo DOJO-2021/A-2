@@ -7,11 +7,12 @@
 <title>Open Q&A System</title>
 </head>
 <body>
-<form method="POST" action="/OpenQA/RegistServlet" id="form">
+<form method="POST" action="/OpenQA/registServlet?mode=userResist" id="form">
 
 		<p>
 			ID<input type="text" name="ID" id="id" placeholder="ID">
 		</p>
+
 		<p>
 			新しいPW<input type="text" name="pw" id="pw" placeholder="新しいPW">
 		</p>
