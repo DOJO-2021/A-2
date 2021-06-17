@@ -89,7 +89,7 @@
 
 	// 未入力アラート
 	function checkForm(){
-    	if(document.subBut.title.value == "" || document.subBut.content.value == ""){
+    	<!-- if(document.subBut.title.value == "" || document.subBut.content.value == ""){
         	window.alert("タイトルおよび内容を入力してください");
 			return false;
     	}else{
@@ -103,6 +103,16 @@
     			alert("キャンセルしました");
     			return false;
     		}
+   		}-->
+    //カテゴリー未入力アラート
+    	if(document.subBut.b_category.value == "" || document.subBut.s_category.value == ""){
+        	window.alert("カテゴリーを選択してください");
+			return false;
+   		}
+    //宛先(To)未入力アラート
+    	if(document.subBut.to.value == ""){
+        	window.alert("宛先を指定してください");
+			return false;
    		}
 	}
 

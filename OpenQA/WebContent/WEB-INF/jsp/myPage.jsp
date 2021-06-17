@@ -39,124 +39,71 @@
 	<div class="panel_area">
 		<!-- 質問タブ -->
 		<div id="panel1" class="tab_panel">
+		<table>
 			<c:set var="data" value="0" />
 				<c:forEach items="${question}" var="value" varStatus="status">
-				<c:if test="${data != value.q_id}">
-					<!-- 「マイページ質問」の部分 -->
-					<table>
-					<tr>
-						<!-- 各項目 -->
-						<td><c:out value="${value.to}" /></td>
-						<td><c:out value="${value.q_name}" /></td>
-						<td><c:out value="${value.title}" /></td>
-						<td><c:out value="${value.b_category}" /></td>
-						<td><c:out value="${value.s_category}" /></td>
-						<td><c:out value="${value.q_date}" /></td>
-						<!-- 「わたしもボタン」 -->
-						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
-						<!-- チェックボックス -->
-						<td><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')" id="checkId${status.index}">
-						<td class="del" id="del2Id${status.index}">詳細</td>
-						<td class="del" id="delId${status.index}">隠す</td>
-					</tr>
+					<c:if test="${data != value.q_id}">
+						<!-- 「マイページ質問」の部分 -->
 
-					<!-- 詳細が押されたら以下が表示される -->
-					<div class="del" id="delId${status.index}">
-					<tr>
-						<!-- タイトルと内容 -->
-						<td><c:out value="${value.title}" /></td>
-						<td><c:out value="${value.content}" /></td>
+						<tr>
+							<!-- 各項目 -->
+							<td><c:out value="${value.to}" /></td>
+							<td><c:out value="${value.q_name}" /></td>
+							<td><c:out value="${value.title}" /></td>
+							<td><c:out value="${value.b_category}" /></td>
+							<td><c:out value="${value.s_category}" /></td>
+							<td><c:out value="${value.q_date}" /></td>
+							<!-- 「わたしもボタン」 -->
+							<td class="" id="del2Id2${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
+							<!-- チェックボックス -->
+							<td><input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="checkId${status.index}"  >
+							<td class="" id="del2Id${status.index}">詳細</td>
+							<td class="del" id="delId2${status.index}">隠す</td>
+						</tr>
+						<!-- 詳細が押されたら以下が表示される -->
+						<tr class="del" id="delId${status.index}">
+							<!-- タイトルと内容 -->
+							<td><c:out value="${value.title}" /></td>
+							<td><c:out value="${value.content}" /></td>
 
-						<!-- 編集/削除ボタン・解決ボタン・わたしもボタン -->
-						<td><input type="submit" class="button" name="SUBMIT" value="編集"></td>
-						<td><input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();"></td>
-						<td><input type="checkbox" name="solution" value="0"></td>
-						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
-					</tr>
-					</div>
-				</c:if>
+							<!-- 編集/削除ボタン・解決ボタン・わたしもボタン -->
+							<td><input type="submit" class="button" name="SUBMIT" value="編集"></td>
+							<td><input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();"></td>
+							<td><input type="checkbox" name="solution" value="0"></td>
+							<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
+						</tr>
+					</c:if>
 
 					<c:remove var="data" />
 					<c:set var="data" value="${value.q_id}" />
-					<tr class="del" id="delId${status.index}">
-					<!-- 回答を質問の下に表示 -->
-					<c:if test="${data == value.q_id}">
-					<!-- user typeが講師だった場合 -->
-					<td><c:if test="${sessionScope.user.type==1}"></td>
-						<td><c:out value="${value.a_name}"/></td>
-					</c:if>
-					<!-- user typeが受講者かつ匿名希望の場合 -->
-					</c:if> <c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
-						<td>匿名</td>
-					</c:if>
-					<!-- user typeが受講者かつ匿名を希望しない場合 -->
-					<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
-						<td><c:out value="${value.a_name}"/></td>
-					</c:if>
-					<c:out value="${value.a_date}" />
-					<td><c:out value="${value.answer}" /></td>
-					<!-- 画像は保留 -->
-					<td><c:out value="${value.q_images}" /><br>
-					</table>
-			</c:forEach>
+					<tr class="del" id="delId3${status.index}">
+						<!-- 回答を質問の下に表示 -->
+						<c:if test="${data == value.q_id}">
+							<!-- user typeが講師だった場合 -->
+							<td><c:if test="${sessionScope.user.type==1}">
+									<c:out value="${value.a_name}"/>
+								</c:if>
+							</td>
+							<!-- user typeが受講者かつ匿名希望の場合 -->
+						</c:if>
+						<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
+							<td>匿名</td>
+						</c:if>
+						<!-- user typeが受講者かつ匿名を希望しない場合 -->
+						<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
+							<td><c:out value="${value.a_name}"/></td>
+						</c:if>
+						<c:out value="${value.a_date}" />
+							<td><c:out value="${value.answer}" /></td>
+							<!-- 画像は保留 -->
+							<td><c:out value="${value.q_images}" /></td>
 
+			</c:forEach>
+			</table>
 		</div>
 
 		<!-- 回答タブ -->
-		<div id="panel2" class="tab_panel">
-			<c:set var="data" value="0" />
-			<c:forEach items="${mypageQuestionList}" var="value" varStatus="status">
-				<c:if test="${data != value.q_id}">
-					<!-- 「マイページ回答」の部分 -->
-					<tr>
-						<!-- 各項目 -->
-						<td><c:out value="${value.to}" /></td>
-						<td><c:out value="${value.q_name}" /></td>
-						<td><c:out value="${value.title}" /></td>
-						<td><c:out value="${value.b_category}" /></td>
-						<td><c:out value="${value.s_category}" /></td>
-						<td><c:out value="${value.a_date}" /></td>
-						<!-- 「わたしもボタン」 -->
-						<td class="del" id="del2Id${status.index}"><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
-						<!-- チェックボックス -->
-						<td><input type="checkbox" name="ch" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}"></td>
-						<td class="del" id="del2Id${status.index}">詳細</td>
-						<td class="del" id="delId${status.index}">隠す</td> <!-- 場所ちがう？？113行目？？ -->
-					</tr>
 
-					<!-- 詳細が押されたら以下が表示される -->
-					<tr class="del" id="delId${status.index}"><br>
-						<!-- タイトルと内容 -->
-						<td><c:out value="${value.title}" /></td><br>
-						<td><c:out value="${value.content}" /></td><br>
-
-						<!-- わたしもボタン -->
-						<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" /></td>
-					</tr>
-				</c:if>
-
-					<c:remove var="data" />
-					<c:set var="data" value="${value.q_id}" />
-					<br>
-
-				<!-- 回答詳細 -->
-				<c:if test="${data == value.q_id}">
-					<!-- 回答各項目 -->
-					<tr>
-						<td><c:out value="${value.a_id}" /></td>
-						<td><c:out value="${value.a_name}" /></td>
-						<td><c:out value="${value.date}" /></td>
-					</tr>
-					<!-- 回答内容 -->
-					<tr>
-						<td><c:out value="${value.answer}" /></td>
-					</tr>
-					<!-- 編集/削除ボタン -->
-						<td><input type="submit" class="button" name="SUBMIT" value="編集"></td>
-						<td><input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();"></td>
-				</c:if>
-			</c:forEach>
-		</div>
 	</div>
 </div>
 </body>
@@ -165,22 +112,32 @@
 function disp(indexNo){
 	//ここは隠している項目を表示する部分-------------------
 	//チェックボックスの状態を取得
-	alert("aaaa");
 	var ch =document.getElementById('checkId'+indexNo);
 	//隠している部分の情報を取得
 	var hide =document.getElementById('delId'+indexNo);
+	var hide2 =document.getElementById('delId2'+indexNo);
+	var hide3 =document.getElementById('delId3'+indexNo);
 	//私もボタン用のdelId
 	var hidden =document.getElementById('del2Id'+indexNo);
+	var hidden2 =document.getElementById('del2Id2'+indexNo);
 	//もし、チェックボックスにチェックがついたら
 	if(ch.checked){
 		//隠している部分のクラス適用（隠す）を無くす
 		hide.setAttribute('class','');
+		hide2.setAttribute('class','');
+		hide3.setAttribute('class','');
 		hidden.setAttribute('class','del');
+		hidden2.setAttribute('class','del');
 	}else{
 		//隠している部分のクラス適用（隠す）をつける
 		hide.setAttribute('class','del');
+		hide2.setAttribute('class','del');
+		hide3.setAttribute('class','del');
 		hidden.setAttribute('class','');
+		hidden2.setAttribute('class','');
 	}
+	var check =document.getElementById('checkId'+indexNo);
+	var button = document.getElementById('buttonId'+indexNo);
 	if(check.checked){
 		//ボタンを活性化
 		button.disabled = false;
@@ -188,6 +145,7 @@ function disp(indexNo){
 		//ボタンを非活性
 		button.disabled = true;
 	}
+	alert("bb");
 }
 
 // 削除確認アラート
