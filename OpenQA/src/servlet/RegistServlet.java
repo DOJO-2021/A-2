@@ -37,20 +37,20 @@ public class RegistServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// セッションスコープを破棄する ★これ何？
-
+		String mode = request.getParameter("mode");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user") == null) {
-			response.sendRedirect("/OpenQA/LoginServlet");
-			return;
+		if(!mode.equals("userRegist")) {
+			if (session.getAttribute("user") == null) {
+				response.sendRedirect("/OpenQA/LoginServlet");
+				return;
+			}
 		}
-
 		// modeという変数にもらってきた値を代入する 「どこから来たか」の情報が入っている
-		String mode = request.getParameter("mode");
 
 		// if文でどのjspにフォワードするか分岐する
 		// userRegist.jspにフォワードする
-		if(mode.equals ("userResist")) {
+		if(mode.equals ("userRegist")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userRegist.jsp");
 			dispatcher.forward(request, response);
 		// questionPost.jspにフォワードする

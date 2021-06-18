@@ -7,7 +7,7 @@
 <title>Open Q&A System</title>
 </head>
 <body>
-<form method="POST" action="/OpenQA/registServlet?mode=userResist" id="form">
+<form method="POST" action="/OpenQA/registServlet?mode=userRegist" id="form">
 
 		<p>
 			ID<input type="text" name="ID" id="id" placeholder="ID">

@@ -93,10 +93,10 @@
 								<input type="submit" class="button" name="SUBMIT" value="編集">
 							</td>
 							<td>
-								<input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();">
+								<input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete1();" >
 							</td>
 							<td>
-								<input type="checkbox" name="solution" value="0">
+								<input type="checkbox" name="solution" value="0" onclick="unanswered();">
 							</td>
 							<td>
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
@@ -157,8 +157,9 @@
 			<table>
 				<!-- 自分が回答した質問を表示（詳細を押す前） -->
 				<c:forEach items="${answer}" var="value" varStatus="status">
-					<!-- a_idが一致する質問を取り出す -->
-					<c:if test="${data != value.a_id}">
+
+					<!-- q_idが一致する質問を取り出す -->
+					<c:if test="${data != value.q_id}">
 						<tr>
 							<td>
 								<c:out value="${value.to}" />
@@ -334,7 +335,7 @@ function disp(indexNo){
 }
 
 // 削除確認アラート
-function delete2() {
+function delete1() {
 	if(confirm("本当に削除してよろしいですか？")) {
 		alert("削除しました。");
 		return true;

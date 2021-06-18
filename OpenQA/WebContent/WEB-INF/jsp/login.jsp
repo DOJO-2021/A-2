@@ -23,7 +23,7 @@
 		</p>
 	</form>
 
-	<a href="/OpenQA/RegistServlet">新規会員登録はこちら</a>
+	<a href="/OpenQA/RegistServlet?mode=userRegist">新規会員登録はこちら</a>
 	<br>
 	<a href="/OpenQA/UpdateDeleteServlet">PW再設定はこちら</a>
 
