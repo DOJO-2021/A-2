@@ -185,7 +185,7 @@
 							</td>
 							<!--チェックボックス -->
 							<td>
-								<input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="a_checkId${status.index}">
+								<input type="checkbox" name="a_ch" value="0" onchange="disp('${status.index}')" id="a_checkId${status.index}">
 							</td>
 							<td class="open" id="a_detail${status.index}">詳細
 							</td>
@@ -331,7 +331,6 @@ function disp(indexNo){
 			a_good.setAttribute('class','open');
 			a_detail.setAttribute('class','open');
 		}
-
 }
 
 // 削除確認アラート
