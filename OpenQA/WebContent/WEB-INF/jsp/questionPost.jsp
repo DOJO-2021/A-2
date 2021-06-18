@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>質問登録</h2>
-<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=question"  enctype="multipart/form-data" id="form">
+<form method="POST" name = "subBut" action="/OpenQA/RegistServlet?mode=question"  enctype="multipart/form-data" id="form">
 <table>
 <tr>
 	<th>
@@ -111,7 +111,7 @@
     		if(confirm('投稿してもよろしいですか？')) {
     			alert("投稿しました");
     			// windowを閉じる処理
-    			window.close();
+    			//window.close();
     			return true;
     		}
     		else{
@@ -144,7 +144,7 @@
     		if(confirm('投稿してもよろしいですか？')) {
     			alert("投稿しました");
     			// windowを閉じる処理
-    			window.close();
+    			//window.close();
     			return true;
     		}
     		else{

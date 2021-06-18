@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import model.User;
  * Servlet implementation class RegistServlet
  */
 @WebServlet("/RegistServlet")
+@ MultipartConfig
 public class RegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -68,16 +70,23 @@ public class RegistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		System.out.println(request.getParameter("SUBMIT"));
+
+		String mode = request.getParameter("mode");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user") == null) {
-			response.sendRedirect("/OpenQA/LoginServlet");
-			return;
+		if(!mode.equals("userRegist")) {
+			if (session.getAttribute("user") == null) {
+				response.sendRedirect("/OpenQA/LoginServlet");
+				return;
+			}
 		}
 
-		String buttonID =request.getParameter("regist");
+		request.setCharacterEncoding("UTF-8");
+		System.out.println(request.getParameter("SUBMIT"));
  		// ①もしもuserRegistのregistボタンが押されたら以下の処理を行う
-		if(buttonID.equals("登録")) {
+		if(request.getParameter("SUBMIT").equals("登録")) {
 
 			// userRegist.jspのリクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
@@ -110,8 +119,8 @@ public class RegistServlet extends HttpServlet {
 		}
 
 		// ②もしもquestionPost.jspのボタンが押されたら以下の処理を行う
-		String questionButton =request.getParameter("SUBMIT"); // 確認
-		if(questionButton.equals("質問投稿")) {
+
+		else if(request.getParameter("SUBMIT").equals("質問投稿")) {
 
 
 
@@ -135,11 +144,12 @@ public class RegistServlet extends HttpServlet {
 
 			// 登録成功したら...
 			bDao.insert("", to, id, anonymity, b_category, s_category, timestamp, title, content, 0, 0, images, name);
+			System.out.println("aa");
 		}
 
 		// ③もしもanswerPost.jspのボタンが押されたら以下の処理を行う
-		String answerButton =request.getParameter("SUBMIT");
-		if(answerButton.equals("回答投稿")) {
+
+		else if(request.getParameter("SUBMIT").equals("回答投稿")) {
 
 			// answerPost.jspのリクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
