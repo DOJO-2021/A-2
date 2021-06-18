@@ -13,7 +13,7 @@
 	<hr>
 
 
-	<form method="POST" action="/OpenQA/UpdateDeleteServlet">
+	<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form1">
 		<table>
 		<c:set var="data" value="0" />
 		<c:forEach items="${unansweredQuestion}" var="value1" varStatus="status"><!-- joinした物の一覧 -->
@@ -47,8 +47,8 @@
 			<tr class="del" id="del3Id${status.index}">
 				<td><c:out value="${value1.title}" /></td>
 				<td><c:out value="${value1.content}" /></td>
-				<td><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
-				<td><input type="submit" class="button" name="SUBMIT" value="q_delete"></td>
+				<td><input type="button" class="button" name="SUBMIT" value="q_update" onclick="qup"></td>
+				<td><input type="button" class="button" name="SUBMIT" value="q_delete"></td>
 				<!-- solutionのjsの文章は後で考えよう tabunndekita -->
 				<td><input type="checkbox" name="solution" value="0" id="solution${status.index}" onchange="solution(${status.index})"></td>
 				<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
@@ -75,8 +75,8 @@
 					<td><c:out value="${value1.a_date}"/></td>
 					<td><c:out value="${value1.answer}" /></td>
 					<td><img src="${value1.a_images} }"></td>
-					<td><input type="submit" class="button" name="SUBMIT" value="a_update"></td>
-					<td><input type="submit" class="button" name="SUBMIT" value="a_delete"></td>
+					<td><input type="button" class="button" name="SUBMIT" value="a_update" onclick="aup"></td>
+					<td><input type="button" class="button" name="SUBMIT" value="a_delete"></td>
 
 				</c:if>
 			</tr>
@@ -90,6 +90,18 @@
 	}
 </style>
 <script>
+
+	//ページ遷移
+	const qup{
+		document.form1.action = "/OpenQA/UpdateDeleteServlet?mode=question";
+	      document.form1.submit();
+	}
+
+	const aup{
+		document.form1.action = "/OpenQA/UpdateDeleteServlet?mode=answer";
+	      document.form1.submit();
+	}
+
     //チェックボックスのチェックが動作したら動く
 	function disp(indexNo){
 		//ここは隠している項目を表示する部分-------------------
@@ -161,7 +173,7 @@
     		var q_id =document.getElementById('q_id');
 		$.ajax({
 			type:'post',
-			url: '/OpenQA/UpdateDeleteServlet?mode=meToo',
+			url: '/OpenQA/UpdateDeleteServlet',
 			data: {	"meToo": +1,
 					"q_id": q_id
 					"meto": "999"}
@@ -169,7 +181,7 @@
     	}else{
     		$.ajax({
     			type:'post',
-    			url: '/OpenQA/UpdateDeleteServlet?mode=meToo',
+    			url: '/OpenQA/UpdateDeleteServlet',
     			data: {	"meToo": -1,
     					"q_id": q_id
     					"meto": "999"}

@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.Timestamp;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +38,20 @@ public class UpdateDeleteServlet extends HttpServlet {
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/OpenQA/LoginServlet");
 			return;
+
+		}
+		//ページ遷移系
+		// modeという変数にもらってきた値を代入する 「どこから来たか」の情報が入っている
+		String mode = request.getParameter("mode");
+
+		if(mode.equals ("question")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/questionEdit.jsp");
+			dispatcher.forward(request, response);
+		// guide.jspにフォワードする
+		}
+		if(mode.equals("answer")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answerEdit.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
