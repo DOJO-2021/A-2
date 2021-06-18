@@ -9,14 +9,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Answer;
+import model.Almighty;
 
 public class AnswerDAO {
 
 	// ①マイページに自分の回答結果を一覧表示
-	public List<Answer> mypageAnswer(String id) { // ★保留！
+	public List<Almighty> mypageAnswer(String id) { // ★保留！
 		Connection conn = null;
-		List<Answer> mypageAnswerList = new ArrayList<Answer>();
+		List<Almighty> mypageAnswerList = new ArrayList<Almighty>();
 
 
 		try {
@@ -28,7 +28,7 @@ public class AnswerDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "select * from answer where ID = ?  ";
+			String sql = "Select * from answer left outer join question on question.q_id = answer.q_id where answer.id = ?; ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -39,16 +39,28 @@ public class AnswerDAO {
 
 			// 結果表をコレクションにコピーする(リスト)
 			while (rs.next()) {
-				Answer mypage = new Answer(
-						rs.getString("a_id"),
-						rs.getString("id"),
-						rs.getInt("anonymity"),
-						rs.getTimestamp("date"),
-						rs.getString("answer"),
-						rs.getString("images"),
-						rs.getString("q_id"),
-						rs.getString("name")
-						);
+				Almighty mypage = new Almighty();
+						mypage.setQ_id(rs.getString("question.q_id"));
+						mypage.setTo(rs.getInt("question.to"));
+						mypage.setQ_userId(rs.getString("question.id"));
+						mypage.setQ_name(rs.getString("question.name"));
+						mypage.setQ_anonymity(rs.getInt("question.anonymity"));
+						mypage.setB_category(rs.getString("question.b_category"));
+						mypage.setS_category(rs.getString("question.s_category"));
+						mypage.setQ_date(rs.getTimestamp("question.date"));
+						mypage.setTitle(rs.getString("question.title"));
+						mypage.setContent(rs.getString("question.content"));
+						mypage.setSolution(rs.getInt("question.solution"));
+						mypage.setMetoo(rs.getInt("question.metoo"));
+						mypage.setQ_images(rs.getString("question.images"));
+						mypage.setA_id(rs.getString("answer.a_id"));
+						mypage.setA_userId(rs.getString("answer.id"));
+						mypage.setA_name(rs.getString("answer.name"));
+						mypage.setA_anonymity(rs.getInt("answer.anonymity"));
+						mypage.setA_date(rs.getTimestamp("answer.date"));
+						mypage.setAnswer(rs.getString("answer.answer"));
+						mypage.setA_images(rs.getString("answer.images"));
+
 
 				// ArrayListに上記7つのデータを格納
 				mypageAnswerList.add(mypage);

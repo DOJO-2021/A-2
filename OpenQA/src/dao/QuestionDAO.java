@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Almighty;
-import model.Answer;
 import model.Question;
 
 public class QuestionDAO {
@@ -461,8 +460,8 @@ public class QuestionDAO {
 		try {
 
 			AnswerDAO ans = new AnswerDAO();
-			List<Answer> myAnswer = ans.mypageAnswer(id);
-			for (Answer value : myAnswer) {
+			List<Almighty> myAnswer = ans.mypageAnswer(id);
+			for (Almighty value : myAnswer) {
 
 				// JDBCドライバを読み込む
 				Class.forName("org.h2.Driver");

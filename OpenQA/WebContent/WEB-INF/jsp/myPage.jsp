@@ -157,8 +157,8 @@
 			<table>
 				<!-- 自分が回答した質問を表示（詳細を押す前） -->
 				<c:forEach items="${answer}" var="value" varStatus="status">
-					<!-- q_idが一致する質問を取り出す -->
-					<c:if test="${data != value.q_id}">
+					<!-- a_idが一致する質問を取り出す -->
+					<c:if test="${data != value.a_id}">
 						<tr>
 							<td>
 								<c:out value="${value.to}" />
@@ -184,7 +184,7 @@
 							</td>
 							<!--チェックボックス -->
 							<td>
-								<input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="checkId${status.index}">
+								<input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="a_checkId${status.index}">
 							</td>
 							<td class="open" id="a_detail${status.index}">詳細
 							</td>
@@ -280,6 +280,7 @@ function disp(indexNo){
 	//ここは隠している項目を表示する部分-------------------
 	//チェックボックスの状態を取得
 	var ch =document.getElementById('checkId'+indexNo);
+	var a_ch =document.getElementById('a_checkId'+indexNo);
 	//隠している部分の情報を取得
 		//質問タブ
 		var hide =document.getElementById('hide'+indexNo);
@@ -297,33 +298,38 @@ function disp(indexNo){
 		var a_good =document.getElementById('a_good'+indexNo);
 		var a_detail =document.getElementById('a_detail'+indexNo);
 	//もし、チェックボックスにチェックがついたら
-	if(ch.checked){
-		//closeを開く(質問タブ)
-		hide.setAttribute('class','open');
-		q_detail.setAttribute('class','open');
-		answer.setAttribute('class','open');
-		good.setAttribute('class','close');
-		detail.setAttribute('class','close');
-		//closeを開く(回答タブ)
-		a_hide.setAttribute('class','open');
-		a_q_detail.setAttribute('class','open');
-		a_answer.setAttribute('class','open');
-		a_good.setAttribute('class','close');
-		a_detail.setAttribute('class','close');
-	}else{
-		//openを閉じる(質問タブ)
-		hide.setAttribute('class','close');
-		q_detail.setAttribute('class','close');
-		answer.setAttribute('class','close');
-		good.setAttribute('class','open');
-		detail.setAttribute('class','open');
-		//openを閉じる(回答タブ)
-		a_hide.setAttribute('class','close');
-		a_q_detail.setAttribute('class','close');
-		a_answer.setAttribute('class','close');
-		a_good.setAttribute('class','open');
-		a_detail.setAttribute('class','open');
-	}
+		//質問タブ
+		if(ch.checked){
+			//closeを開く(質問タブ)
+			hide.setAttribute('class','open');
+			q_detail.setAttribute('class','open');
+			answer.setAttribute('class','open');
+			good.setAttribute('class','close');
+			detail.setAttribute('class','close');
+		}else{
+			//openを閉じる(質問タブ)
+			hide.setAttribute('class','close');
+			q_detail.setAttribute('class','close');
+			answer.setAttribute('class','close');
+			good.setAttribute('class','open');
+			detail.setAttribute('class','open');
+		}
+		//回答タブ
+		if(a_ch.checked){
+			//closeを開く(回答タブ)
+			a_hide.setAttribute('class','open');
+			a_q_detail.setAttribute('class','open');
+			a_answer.setAttribute('class','open');
+			a_good.setAttribute('class','close');
+			a_detail.setAttribute('class','close');
+		}else{
+			//openを閉じる(回答タブ)
+			a_hide.setAttribute('class','close');
+			a_q_detail.setAttribute('class','close');
+			a_answer.setAttribute('class','close');
+			a_good.setAttribute('class','open');
+			a_detail.setAttribute('class','open');
+		}
 
 }
 
