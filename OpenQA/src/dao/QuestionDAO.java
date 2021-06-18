@@ -72,7 +72,7 @@ public class QuestionDAO {
 	//編集のためのメソッド
 	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category,
 			Timestamp date,
-			String title, String content, int solution, int metoo, String images, String name) {
+			String title, String content, int solution, int metoo, String images) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -97,8 +97,7 @@ public class QuestionDAO {
 			pStmt.setInt(9, solution);
 			pStmt.setInt(10, metoo);
 			pStmt.setString(11, images);
-			pStmt.setString(12, name);
-			pStmt.setString(13, q_id);
+			pStmt.setString(12, q_id);
 
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
 			if (pStmt.executeUpdate() == 1) {
@@ -613,9 +612,10 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql = "update Question set solution=1 where q_id=?";
+			String sql = "update Question set solution=? where q_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, q_id);
+			pStmt.setInt(1, solution);
+			pStmt.setString(2, q_id);
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
@@ -652,9 +652,10 @@ public class QuestionDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/OpenQA", "sa", "");
 
 			// SQL文を準備する
-			String sql = "update Question set meToo+1 where q_id=?";
+			String sql = "update Question set meToo=? where q_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, q_id);
+			pStmt.setInt(1, meToo);
+			pStmt.setString(2, q_id);
 			// SQL文を実行するexecuteUpdateはupdateした数を返す
 			if (pStmt.executeUpdate() == 1) {
 				result = true;

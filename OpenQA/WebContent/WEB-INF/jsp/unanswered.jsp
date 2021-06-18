@@ -21,6 +21,7 @@
 		<!-- 持ってきたQuestion -->
 			<tr>
 				<td><c:out value="${value1.to}" /></td>
+				<td><input type="hidden" value="${value1.q_id }" id="q_id"/></td>
 				<td><c:if test="${sessionScope.user.type==1}">
 						<c:out value="${value1.q_name}"/>
 					</c:if>
@@ -37,7 +38,7 @@
 				<!-- 私もボタンはcheackbox! 押されたら画像を変えて(CSS)metooの値を1増やす(yatta)
 				　　チェックボックスが押されるまでは私もボタンを表示して
 				　　押されたら下のreplyボタンが出るようにする。yatta -->
-				<td class="" id="del2Id${status.index}"><input type="checkbox" name="meToo" value="0" id="meToo"/><c:out value="${value1.metoo}" /></td>
+				<td class="" id="del2Id${status.index}"><input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo(${status.index})"/><c:out value="${value1.metoo}" /></td>
 				<td class="del" id="delId${status.index}"><a href="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer"> <img
 				src="/OpenQA/images/reply.png"></a></td>
 				<!-- checkbox 押されたらcheckbox以下の内容が出る 上の私もボタンが消える。解決済 詳細の文字を隠すに変えなきゃ！ -->
@@ -49,7 +50,7 @@
 				<td><input type="submit" class="button" name="SUBMIT" value="q_update"></td>
 				<td><input type="submit" class="button" name="SUBMIT" value="q_delete"></td>
 				<!-- solutionのjsの文章は後で考えよう tabunndekita -->
-				<td><input type="checkbox" name="solution" value="0" id="solution"></td>
+				<td><input type="checkbox" name="solution" value="0" id="solution${status.index}" onchange="solution(${status.index})"></td>
 				<td><img src="/OpenQA/images/preMeToo.png"><c:out value="${value1.metoo}" /></td>
 				<td><img src="${value1.q_images} }"></td>
 			</tr>
@@ -57,8 +58,10 @@
 		</c:if>
 			<c:remove var="data" />
 			<c:set var="data" value="${value1.q_id}" />
+
 			<tr class="del" id="del4Id${status.index}">
 			<!-- 解答を質問の下に表示 -->
+
 				<c:if test="${data == value1.q_id}" >
 					<td><c:if test="${sessionScope.user.type==1}">
 							<c:out value="${value1.a_name}"/>
@@ -74,6 +77,7 @@
 					<td><img src="${value1.a_images} }"></td>
 					<td><input type="submit" class="button" name="SUBMIT" value="a_update"></td>
 					<td><input type="submit" class="button" name="SUBMIT" value="a_delete"></td>
+
 				</c:if>
 			</tr>
 			</c:forEach>
@@ -124,12 +128,26 @@
     }
 
 		//solution Ajax(kari)
-		function valueChange(event){
+		function solution(indexNo){
+			var solution =document.getElementById('meToo'+indexNo);
+			if(solution.checked){
+				var q_id =document.getElementById('q_id');
 			$.ajax({
 				type:'post',
-				url: '/OpenQA/UpdateDeleteServlet?mode=solution',
-				data: {	"solution": 1}
-			});
+				url: '/OpenQA/UpdateDeleteServlet',
+				data: {	"solution": 1,
+						"q_id": q_id,
+						"so":"123"}
+			});}
+			else{
+				$.ajax({
+					type:'post',
+					url: '/OpenQA/UpdateDeleteServlet',
+					data: {	"solution": 0,
+							"q_id": q_id,
+							"so":"123"}
+				});
+			}
 		}
 
 		let saveCheckbox = document.getElementById('solution');
@@ -137,12 +155,26 @@
 	}
 
     //meToo ajax(kari)
-	function valueChange(event){
+    function meToo(indexNo){
+    var meToo =document.getElementById('meToo'+indexNo);
+    	if(meToo.checked){
+    		var q_id =document.getElementById('q_id');
 		$.ajax({
 			type:'post',
 			url: '/OpenQA/UpdateDeleteServlet?mode=meToo',
-			data: {	"meToo": 1}
+			data: {	"meToo": +1,
+					"q_id": q_id
+					"meto": "999"}
 		});
+    	}else{
+    		$.ajax({
+    			type:'post',
+    			url: '/OpenQA/UpdateDeleteServlet?mode=meToo',
+    			data: {	"meToo": -1,
+    					"q_id": q_id
+    					"meto": "999"}
+    		});
+    	}
 	}
 
 	let saveCheckbox = document.getElementById('meToo');
