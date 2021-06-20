@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-さんのマイページ
+${sessionScope.user.name}さんのマイページ
 <h1>過去に登録した投稿</h1>
 <div class="tab_wrap">
 
@@ -185,7 +185,7 @@
 							</td>
 							<!--チェックボックス -->
 							<td>
-								<input type="checkbox" name="a_ch" value="0" onchange="disp('${status.index}')" id="a_checkId${status.index}">
+								<input type="checkbox" name="a_ch" value="0" onchange="a_disp('${status.index}')" id="a_checkId${status.index}">
 							</td>
 							<td class="open" id="a_detail${status.index}">詳細
 							</td>
@@ -208,10 +208,10 @@
 								<input type="submit" class="button" name="SUBMIT" value="編集">
 							</td>
 							<td>
-								<input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete();">
+								<input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete1();">
 							</td>
 							<td>
-								<input type="checkbox" name="solution" value="0">
+								<input type="checkbox" name="solution" value="0"  onclick="unanswered();">
 							</td>
 							<td>
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
@@ -275,62 +275,61 @@ good=私も(open)
 detail=(open)
 -->
 <script>
-//チェックボックスのチェックが動作したら動く
+//チェックボックスのチェックが動作したら動く（質問タブの詳細）
 function disp(indexNo){
-	//質問tab
-	//ここは隠している項目を表示する部分-------------------
 	//チェックボックスの状態を取得
 	var ch =document.getElementById('checkId'+indexNo);
-	var a_ch =document.getElementById('a_checkId'+indexNo);
 	//隠している部分の情報を取得
-		//質問タブ
 		var hide =document.getElementById('hide'+indexNo);
 		var q_detail =document.getElementById('q_detail'+indexNo);
 		var answer =document.getElementById('answer'+indexNo);
-		//回答タブ
-		var a_hide =document.getElementById('a_hide'+indexNo);
-		var a_q_detail =document.getElementById('a_q_detail'+indexNo);
-		var a_answer =document.getElementById('a_answer'+indexNo);
 	//開いている部分の情報を取得
-		//質問タブ
 		var good =document.getElementById('good'+indexNo);
 		var detail =document.getElementById('detail'+indexNo);
-		//回答タブ
-		var a_good =document.getElementById('a_good'+indexNo);
-		var a_detail =document.getElementById('a_detail'+indexNo);
 	//もし、チェックボックスにチェックがついたら
-		//質問タブ
 		if(ch.checked){
-			//closeを開く(質問タブ)
+			//closeを開く
 			hide.setAttribute('class','open');
 			q_detail.setAttribute('class','open');
 			answer.setAttribute('class','open');
 			good.setAttribute('class','close');
 			detail.setAttribute('class','close');
 		}else{
-			//openを閉じる(質問タブ)
+			//openを閉じる
 			hide.setAttribute('class','close');
 			q_detail.setAttribute('class','close');
 			answer.setAttribute('class','close');
 			good.setAttribute('class','open');
 			detail.setAttribute('class','open');
 		}
-		//回答タブ
-		if(a_ch.checked){
-			//closeを開く(回答タブ)
-			a_hide.setAttribute('class','open');
-			a_q_detail.setAttribute('class','open');
-			a_answer.setAttribute('class','open');
-			a_good.setAttribute('class','close');
-			a_detail.setAttribute('class','close');
-		}else{
-			//openを閉じる(回答タブ)
-			a_hide.setAttribute('class','close');
-			a_q_detail.setAttribute('class','close');
-			a_answer.setAttribute('class','close');
-			a_good.setAttribute('class','open');
-			a_detail.setAttribute('class','open');
-		}
+}
+//チェックボックスのチェックが動作したら動く（回答タブの詳細）
+function a_disp(indexNo){
+	//チェックボックスの状態を取得
+	var a_ch =document.getElementById('a_checkId'+indexNo);
+	//隠している部分の情報を取得
+	var a_hide =document.getElementById('a_hide'+indexNo);
+	var a_q_detail =document.getElementById('a_q_detail'+indexNo);
+	var a_answer =document.getElementById('a_answer'+indexNo);
+	//開いている部分の情報を取得
+	var a_good =document.getElementById('a_good'+indexNo);
+	var a_detail =document.getElementById('a_detail'+indexNo);
+	//もし、チェックボックスにチェックがついたら
+	if(a_ch.checked){
+		//closeを開く
+		a_hide.setAttribute('class','open');
+		a_q_detail.setAttribute('class','open');
+		a_answer.setAttribute('class','open');
+		a_good.setAttribute('class','close');
+		a_detail.setAttribute('class','close');
+	}else{
+		//openを閉じる
+		a_hide.setAttribute('class','close');
+		a_q_detail.setAttribute('class','close');
+		a_answer.setAttribute('class','close');
+		a_good.setAttribute('class','open');
+		a_detail.setAttribute('class','open');
+	}
 }
 
 // 削除確認アラート
