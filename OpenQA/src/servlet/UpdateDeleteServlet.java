@@ -35,6 +35,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/OpenQA/LoginServlet");
 			return;
@@ -60,6 +61,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/OpenQA/LoginServlet");
 			return;
@@ -74,7 +76,6 @@ public class UpdateDeleteServlet extends HttpServlet {
 		try {//質問　編集と削除
 			if(request.getParameter("SUBMIT")!=null) {
 				if(request.getParameter("SUBMIT").equals("q_update")) {
-					request.setCharacterEncoding("UTF-8");
 					int to = Integer.parseInt(request.getParameter("to"));
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					String b_category = request.getParameter("b_category");
