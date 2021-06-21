@@ -122,16 +122,17 @@ public class UpdateDeleteServlet extends HttpServlet {
 			}
 				//solutionが押されたら動く
 			if(so.equals("123")) {
-				System.out.print(solution);
+				System.out.println(q_id);
 
 				QuestionDAO qDao = new QuestionDAO();
 				qDao.solution(solution, q_id);
 
-				System.out.print(solution);
+				System.out.println(solution);
 
 			}
 			//metooが押されたら動く
 			if(meto.equals("999")) {
+				System.out.println(meToo);
 				QuestionDAO qDao = new QuestionDAO();
 				qDao.meToo(meToo, q_id);
 			}

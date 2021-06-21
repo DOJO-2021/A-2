@@ -127,8 +127,9 @@ ${sessionScope.user.name}さんのマイページ
 								<c:out value="タイトル：${value.title}" /><br>
 								<c:out value="内容：${value.content}" /><br>
 								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ"><br>
+								<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
-									<input type="hidden" name="mode" value="question">
+										<input type="hidden" name="mode" value="question">
 										<input type="hidden" name="q_id" value="${value.q_id}">
 										<input type="hidden" name="to" value="${value.to}">
 										<input type="hidden" name="anonymity" value="${value.q_anonymity}">
@@ -140,20 +141,23 @@ ${sessionScope.user.name}さんのマイページ
 										<input type="hidden" name="meToo" value="${value.metoo}">
 										<input type="hidden" name="solution" value="${value.solution}">
 										<input type="hidden" name="so" value="0">
-										<input type="hidden" name="meTo" value="0">
+										<input type="hidden" name="meto" value="0">
 										<input type="submit" class="button" name="SUBMIT" value="編集">
 									</form>
+								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form">
 									<input type="hidden" name="q_id" value="${value.q_id}">
 									<input type="hidden" name="meToo" value="${value.metoo}">
 									<input type="hidden" name="solution" value="${value.solution}">
 									<input type="hidden" name="so" value="0">
-									<input type="hidden" name="meTo" value="0">
+									<input type="hidden" name="meto" value="0">
 									<input type="hidden" name="mode" value="mypage">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
 								</form>
-
-								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}')">
+								<!-- 解決ボタン -->
+								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
+								<!-- 私もボタン-->
+								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
@@ -193,7 +197,7 @@ ${sessionScope.user.name}さんのマイページ
 															<td colspan="2">
 																<c:out value="内容：${answer.answer}" />
 															<br>
-																<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+																<img src="/OpenQA/images/${value.a_images}" alt="画像イメージ">
 															</td>
 													<c:remove var="count" />
 													<c:set var="count" value="1" />
@@ -334,7 +338,9 @@ good=私も(open)
 detail=(open)
 -->
 
+
 <script>
+'use strict'
 //チェックボックスのチェックが動作したら動く（質問タブの詳細）
 function disp(indexNo){
 	//チェックボックスの状態を取得
@@ -368,7 +374,6 @@ function disp(indexNo){
 }
 //チェックボックスのチェックが動作したら動く（回答タブの詳細）
 function a_disp(indexNo){
-	alert(disp);
 	//チェックボックスの状態を取得
 	var a_ch =document.getElementById('a_checkId'+indexNo);
 	//隠している部分の情報を取得
@@ -406,17 +411,21 @@ function delete1() {
 		return false;
 	}
 }
+
+
 //solution Ajax(kari)
-function solution(indexNo){
+function solution(indexNo,q_id){
 	var solution =document.getElementById('solution'+indexNo);
 	if(solution.checked){
-		var q_id =document.getElementById('q_id');
-	$.ajax({
+		//var q_id =document.getElementById('q_id');
+		$.ajax({
 		type:'post',
 		url: '/OpenQA/UpdateDeleteServlet',
 		data: {	"solution": 1,
 				"q_id": q_id,
-				"so":"123"}
+				"so":"123",
+				"meto":"0",
+				"meToo":"0"}
 	});
 	}else{
 		$.ajax({
@@ -424,41 +433,49 @@ function solution(indexNo){
 			url: '/OpenQA/UpdateDeleteServlet',
 			data: {	"solution": 0,
 					"q_id": q_id,
-					"so":"123"}
+					"so":"123",
+					"meto":"0",
+					"meToo":"0"}
 		});
 	}
 
-
-	let saveCheckbox = document.getElementById('solution');
-	saveCheckbox.addEventListener('change', valueChange);
 }
+	let saveCheckbox = document.getElementById('solution');
+	saveCheckbox.addEventListener('change', solution);
 
-//meToo ajax(kari)
-function meToo(indexNo){
-	var meToo =document.getElementById('meToo'+indexNo);
-	if(meToo.checked){
-		var q_id =document.getElementById('q_id');
-	$.ajax({
-		type:'post',
-		url: '/OpenQA/UpdateDeleteServlet',
-		data: {	"meToo": +1,
-				"q_id": q_id
-				"meto": "999"}
-	});
-	}else{
-		$.ajax({
+	//metooは1回押したら1増える
+	function meToo(indexNo,q_id,metoo){
+		var intMetoo = parseInt(metoo);
+		var meToo =document.getElementById('meToo'+indexNo);
+		if(meToo.checked){
+			intMetoo ++;
+			//var q_id =document.getElementById('q_id');
+			$.ajax({
 			type:'post',
 			url: '/OpenQA/UpdateDeleteServlet',
-			data: {	"meToo": -1,
-					"q_id": q_id
-					"meto": "999"}
+			data: {	"solution": 0,
+					"q_id": q_id,
+					"so":"0",
+					"meto":"999",
+					"meToo":intMetoo}
 		});
+		}/*
+		else{
+			intMetoo--;
+			$.ajax({
+				type:'post',
+				url: '/OpenQA/UpdateDeleteServlet',
+				data: {	"solution": 0,
+						"q_id": q_id,
+						"so":"0",
+						"meto":"999",
+						"meToo":intMetoo}
+			});
+		}*/
+
 	}
-
-
-	let saveCheckbox = document.getElementById('meToo');
-	saveCheckbox.addEventListener('change', valueChange);
-}
+		let saveCheckbox1 = document.getElementById('meToo');
+		saveCheckbox1.addEventListener('change', meToo);
 </script>
 
 </html>

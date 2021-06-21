@@ -150,7 +150,7 @@ public class RegistServlet extends HttpServlet {
 		// ③もしもanswerPost.jspのボタンが押されたら以下の処理を行う
 
 		else if(request.getParameter("SUBMIT").equals("回答投稿")) {
-
+			System.out.println("aaa");
 			// answerPost.jspのリクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
 			// userのidをセッションスコープから持ってくる
@@ -168,6 +168,7 @@ public class RegistServlet extends HttpServlet {
 
 			// 登録成功したら...
 			bDao.insert(id, anonymity,  timestamp, content, images, q_id, name);
+			System.out.println("aaa");
 		}
 
 	}

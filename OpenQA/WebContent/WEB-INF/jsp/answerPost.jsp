@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>回答登録</h2>
-<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=answer" enctype="multipart/form-data">
+<form method="POST" name = "subBut" action="/OpenQA/RegistServlet" enctype="multipart/form-data">
 <input type=hidden name="q_id" value=${param.q_id}>
 <table>
 <tr>

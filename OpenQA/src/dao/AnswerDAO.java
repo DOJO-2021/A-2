@@ -107,7 +107,7 @@ public class AnswerDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "insert into answer values(?, ?, ?, ?, ?, ?, ?,?) ";
+			String sql = "insert into answer values(null, ?, ?, ?, ?, ?, ?,?) ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, id);
@@ -125,6 +125,7 @@ public class AnswerDAO {
 			} else {
 				result = false;
 			}
+			System.out.println(result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
