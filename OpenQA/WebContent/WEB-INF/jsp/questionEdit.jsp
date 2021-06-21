@@ -11,34 +11,34 @@
 <body>
 <h2>質問編集</h2>
 <form method="POST" name = "subBut" action="/OpenQA/UpdateDeleteServlet"  enctype="multipart/form-data">
-<input type="hidden" name="p_id" value="${question.q_id} ">
+<input type="hidden" name="p_id" value="${param.q_id} ">
 <table>
 <tr>
 	<th>
 		<!-- 回答者を指定する -->
 		<select name="to">
 			<option value="" >回答者を選択</option>
-			<option value="0" <c:if test = "${question.to == 0}"> selected </c:if>>だれでも</option>
-			<option value="1" <c:if test = "${question.to == 1}"> selected </c:if>>講師</option>
-			<option value="2" <c:if test = "${question.to == 2}"> selected </c:if>>受講者</option>
+			<option value="0" <c:if test = "${param.to == 0}"> selected </c:if>>だれでも</option>
+			<option value="1" <c:if test = "${param.to == 1}"> selected </c:if>>講師</option>
+			<option value="2" <c:if test = "${param.to == 2}"> selected </c:if>>受講者</option>
 		</select>
 
 		from. ${question.name}
 
 		<input type="hidden" name="anonymity" value="0">
-		<input type="checkbox" name="anonymity" value="1" <c:if test = "${question.anonymity == 1}"> checked </c:if>>匿名
+		<input type="checkbox" name="anonymity" value="1" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
 
 		<!-- ひとつめのセレクトボックス -->
 		<!-- web開発コースは保留  -->
 		<select name="b_category" id="b_category" onchange="category()">
 			<option value="">カテゴリー</option>
-			<option  value="パーソナルスキル" <c:if test = "${question.b_category == パーソナルスキル}"> selected </c:if> >パーソナルスキル</option>
-			<option  value="IT基礎" <c:if test = "${question.b_category == IT基礎}"> selected </c:if>>IT基礎コース</option>
-			<option  value="java基礎" <c:if test = "${question.b_category == java基礎}"> selected </c:if>>java基礎コース</option>
-			<option  value="その他" <c:if test = "${question.b_category == その他}"> selected </c:if>>その他</option>
+			<option  value="パーソナルスキル" <c:if test = "${param.b_category == パーソナルスキル}"> selected </c:if> >パーソナルスキル</option>
+			<option  value="IT基礎" <c:if test = "${param.b_category == IT基礎}"> selected </c:if>>IT基礎コース</option>
+			<option  value="java基礎" <c:if test = "${param.b_category == java基礎}"> selected </c:if>>java基礎コース</option>
+			<option  value="その他" <c:if test = "${param.b_category == その他}"> selected </c:if>>その他</option>
 		</select>
 
-		<input type="hidden" id="s_category" value="${question.s_category}">
+		<input type="hidden" id="s_category" value="${param.s_category}">
 		<!-- 二つ目のセレクトボックス（連動する） -->
 		<select name="s_category">
 		</select>
@@ -46,12 +46,12 @@
 </tr>
 <tr>
 	<td>
-	<p>タイトル <input type="text" name="title" value="${question.title}"></p>
-	<p>内容<textarea name="content">${question.content}</textarea></p>
-	<c:if test = "${question.images != null}">
-		<img src="/OpenQA/images/${question.images}" alt = "ccc" id="p1">
+	<p>タイトル <input type="text" name="title" value="${param.title}"></p>
+	<p>内容<textarea name="content">${param.content}</textarea></p>
+	<c:if test = "${param.images != null}">
+		<img src="/OpenQA/images/${param.images}" alt = "ccc" id="p1">
 	</c:if>
-	<input type="hidden" value="${question.images}" id="preImage">
+	<input type="hidden" value="${param.images}" id="preImage">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<input type="button" id="btn1" value="画像削除" onclick="cls();">

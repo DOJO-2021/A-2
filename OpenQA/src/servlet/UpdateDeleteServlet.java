@@ -90,11 +90,17 @@ public class UpdateDeleteServlet extends HttpServlet {
 
 					qDao.update(q_id, to, id, anonymity, b_category, s_category, date, title, content, solution, meToo, images );
 				}
-				if(request.getParameter("SUBMIT").equals("q_delete")) {
-
+				if(request.getParameter("SUBMIT").equals("質問削除")) {
+					String mode = request.getParameter("mode");
 					QuestionDAO qDao = new QuestionDAO();
 
 					qDao.delete(q_id);
+
+					if(mode.equals("mypage")) {
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
+						dispatcher.forward(request, response);
+					}
+
 				}
 				//解答　編集と削除
 				if(request.getParameter("SUBMIT").equals("a_update")) {
@@ -108,21 +114,24 @@ public class UpdateDeleteServlet extends HttpServlet {
 
 					aDao.update(a_id, id, anonymity, date, answer, images, q_id);
 				}
-				if(request.getParameter("SUBMIT").equals("a_delete")) {
+				if(request.getParameter("SUBMIT").equals("回答削除")) {
 					String a_id = request.getParameter("a_id");
 					AnswerDAO aDao = new AnswerDAO();
 					aDao.delete(a_id);
 				}
 			}
 				//solutionが押されたら動く
-			if(so != null) {
+			if(so.equals("123")) {
+				System.out.print(solution);
 
 				QuestionDAO qDao = new QuestionDAO();
 				qDao.solution(solution, q_id);
 
+				System.out.print(solution);
+
 			}
 			//metooが押されたら動く
-			if(meto != null) {
+			if(meto.equals("999")) {
 				QuestionDAO qDao = new QuestionDAO();
 				qDao.meToo(meToo, q_id);
 			}
@@ -132,6 +141,8 @@ public class UpdateDeleteServlet extends HttpServlet {
 			}catch(Exception e){
 
 			}
+
 	}
+
 
 }

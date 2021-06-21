@@ -20,8 +20,11 @@
 	#tab1:checked ~ .panel_area #panel1{display:block;}
 	#tab2:checked ~ .tab_area .tab2_label{background:#fff; color:#000;}
 	#tab2:checked ~ .panel_area #panel2{display:block;}
-
+	table, td, th {
+	border: 2px #808080 solid;
+	}
 </style>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
 <body>
 ${sessionScope.user.name}さんのマイページ
@@ -42,64 +45,115 @@ ${sessionScope.user.name}さんのマイページ
 		<div id="panel1" class="tab_panel">
 			<c:set var="data" value="0" />
 			<table>
+			<tr>
+				<td>
+					宛先
+				</td>
+				<td>
+					質問者名
+				</td>
+				<td>
+					質問のタイトル
+				</td>
+				<td>
+					カテゴリー
+				</td>
+				<td>
+					日付
+				</td>
+			</tr>
 				<!-- 自分の質問を表示（詳細を押す前） -->
 				<c:forEach items="${question}" var="value" varStatus="status">
 					<!-- q_idが一致する質問を取り出す -->
 					<c:if test="${data != value.q_id }">
 						<tr>
 							<td>
-								<c:out value="${value.to}" />
+							<c:if test="${value.to == 0}">
+								<c:out value="To.全員" />
+							</c:if>
+							<c:if test="${value.to == 1}">
+								<c:out value="To.講師" />
+							</c:if>
+							<c:if test="${value.to == 2}">
+								<c:out value="To.受講者" />
+							</c:if>
 							</td>
 							<td>
-								<c:out value="${value.q_name}" />
+								<c:out value="From.${value.q_name}" />
 							</td>
 							<td>
 								<c:out value="${value.title}" />
 							</td>
 							<td>
 								<c:out value="${value.b_category}" />
-							</td>
-							<td>
-								<c:out value="${value.s_category}" />
+								<c:out value="ｰ${value.s_category}" />
 							</td>
 							<td>
 								<c:out value="${value.q_date}" />
 							</td>
-							<!-- status.index→毎ループごとにgoodボタンを隠す -->
-							<td class="open" id="good${status.index}">
-								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
-							</td>
 							<!--チェックボックス -->
 							<td>
 								<input type="checkbox" name="ch" value="0" onchange="disp('${status.index}')" id="checkId${status.index}">
+								<span class="open" id="detail${status.index}">
+								詳細
+								</span>
+								<span class="close" id="hide${status.index}">
+								隠す
+								</span>
 							</td>
-							<td class="open" id="detail${status.index}">詳細
+							<!-- status.index→毎ループごとにgoodボタンを隠す -->
+							<td>
+								<!-- 私もボタン -->
+								<div class="open" id="good${status.index}">
+									<img src="/OpenQA/images/preMeToo.png" alt="私も">
+									<c:out value="${value.metoo}" />
+								</div>
+								<!-- replyボタン -->
+								<div class="close" id="reply${status.index}">
+								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer">
+								  	<input type="hidden" name="mode" value="answer">
+								  	<input type="hidden" name="q_id" value="${value.q_id}">
+								  	<input type="SUBMIT" value=":ボールペン:">
+								  </form>
+								</div>
 							</td>
-							<td class="close" id="hide${status.index}">隠す
-							</td>
+
 						</tr>
 
 						<!-- 質問の詳細を表示 -->
 						<tr class="close" id="q_detail${status.index}">
-							<td>
-								<c:out value="${value.title}" />
-							</td>
-							<td>
-								<c:out value="${value.content}" />
-							</td>
-							<td>
-								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
-							</td>
-							<td>
-								<input type="submit" class="button" name="SUBMIT" value="編集">
-							</td>
-							<td>
-								<input type="submit" class="button" name="SUBMIT" value="削除" onclick="delete1();" >
-							</td>
-							<td>
-								<input type="checkbox" name="solution" value="0" onclick="unanswered();">
-							</td>
-							<td>
+
+							<td colspan="7">
+								<c:out value="タイトル：${value.title}" /><br>
+								<c:out value="内容：${value.content}" /><br>
+								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ"><br>
+								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
+									<input type="hidden" name="mode" value="question">
+										<input type="hidden" name="q_id" value="${value.q_id}">
+										<input type="hidden" name="to" value="${value.to}">
+										<input type="hidden" name="anonymity" value="${value.q_anonymity}">
+										<input type="hidden" name="b_category" value="${value.b_category}">
+										<input type="hidden" name="s_category" value="${value.s_category}">
+										<input type="hidden" name="title" value="${value.title}">
+										<input type="hidden" name="content" value="${value.content}">
+										<input type="hidden" name="images" value="${value.q_images}">
+										<input type="hidden" name="meToo" value="${value.metoo}">
+										<input type="hidden" name="solution" value="${value.solution}">
+										<input type="hidden" name="so" value="0">
+										<input type="hidden" name="meTo" value="0">
+										<input type="submit" class="button" name="SUBMIT" value="編集">
+									</form>
+								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form">
+									<input type="hidden" name="q_id" value="${value.q_id}">
+									<input type="hidden" name="meToo" value="${value.metoo}">
+									<input type="hidden" name="solution" value="${value.solution}">
+									<input type="hidden" name="so" value="0">
+									<input type="hidden" name="meTo" value="0">
+									<input type="hidden" name="mode" value="mypage">
+								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
+								</form>
+
+								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}')">
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
@@ -111,37 +165,40 @@ ${sessionScope.user.name}さんのマイページ
 					<c:if test="${data == value.q_id}">
 						<c:if test="${count == 0 }">
 							<tr class="close" id="answer${status.index}">
-								<td>
+								<td colspan="7">
 									<table>
 									<!-- 回答を取り出すfor文 -->
 										<c:forEach items="${question}" var="answer">
 											<c:if test="${data == answer.a_q_id }">
-												<!-- 回答を質問の下に表示 -->
-													<!-- user typeが講師だった場合 -->
-													<td><c:if test="${sessionScope.user.type==1}">
-														<c:out value="${answer.a_name}"/>
-														</c:if>
-													<!-- user typeが受講者かつ匿名希望の場合 -->
-														<c:if test="${sessionScope.user.type==0 && answer.a_anonymity== 1}">
-															匿名
-														</c:if>
-													<!-- user typeが受講者かつ匿名を希望しない場合 -->
-														<c:if test="${sessionScope.user.type==0 && answer.a_anonymity== 0 }">
-															<c:out value="${answer.a_name}"/>
-														</c:if>
-													</td>
-													<td>
-														<c:out value="${answer.a_date}" />
-													</td>
-													<td>
-														<c:out value="${answer.answer}" />
-													</td>
-													<td>
-														<c:out value="${answer.a_images}" />
-													</td>
+												<tr>
+														<!-- 回答を質問の下に表示 -->
+															<!-- user typeが講師だった場合 -->
+															<td><c:if test="${sessionScope.user.type==1}">
+																<c:out value="${answer.a_name}"/>
+																</c:if>
+															<!-- user typeが受講者かつ匿名希望の場合 -->
+																<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
+																	匿名
+																</c:if>
+															<!-- user typeが受講者かつ匿名を希望しない場合 -->
+																<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
+																	<c:out value="${answer.a_name}"/>
+																</c:if>
+															</td>
+															<td>
+																<c:out value="${answer.a_date}" />
+															</td>
+												</tr>
+												<tr>
+															<td colspan="2">
+																<c:out value="内容：${answer.answer}" />
+															<br>
+																<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+															</td>
+													<c:remove var="count" />
+													<c:set var="count" value="1" />
+												</tr>
 											</c:if>
-											<c:remove var="count" />
-											<c:set var="count" value="1" />
 										</c:forEach>
 									</table>
 								</td>
@@ -237,11 +294,11 @@ ${sessionScope.user.name}さんのマイページ
 														<c:out value="${answer.a_name}"/>
 														</c:if>
 													<!-- user typeが受講者かつ匿名希望の場合 -->
-														<c:if test="${sessionScope.user.type==0 && answer.a_anonymity== 1}">
+														<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
 															匿名
 														</c:if>
 													<!-- user typeが受講者かつ匿名を希望しない場合 -->
-														<c:if test="${sessionScope.user.type==0 && answer.a_anonymity== 0 }">
+														<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
 															<c:out value="${answer.a_name}"/>
 														</c:if>
 													</td>
@@ -269,12 +326,14 @@ ${sessionScope.user.name}さんのマイページ
 	</div>
 </div>
 </body>
-<!--  hide=隠す（close）
+<!--
+hide=隠す（close）
 q_detail=質問の詳細(close)
 answer=回答(close)
 good=私も(open)
 detail=(open)
 -->
+
 <script>
 //チェックボックスのチェックが動作したら動く（質問タブの詳細）
 function disp(indexNo){
@@ -287,6 +346,7 @@ function disp(indexNo){
 	//開いている部分の情報を取得
 		var good =document.getElementById('good'+indexNo);
 		var detail =document.getElementById('detail'+indexNo);
+		var reply =document.getElementById('reply'+indexNo);
 	//もし、チェックボックスにチェックがついたら
 		if(ch.checked){
 			//closeを開く
@@ -295,6 +355,7 @@ function disp(indexNo){
 			answer.setAttribute('class','open');
 			good.setAttribute('class','close');
 			detail.setAttribute('class','close');
+			reply.setAttribute('class','open');
 		}else{
 			//openを閉じる
 			hide.setAttribute('class','close');
@@ -302,10 +363,12 @@ function disp(indexNo){
 			answer.setAttribute('class','close');
 			good.setAttribute('class','open');
 			detail.setAttribute('class','open');
+			reply.setAttribute('class','close');
 		}
 }
 //チェックボックスのチェックが動作したら動く（回答タブの詳細）
 function a_disp(indexNo){
+	alert(disp);
 	//チェックボックスの状態を取得
 	var a_ch =document.getElementById('a_checkId'+indexNo);
 	//隠している部分の情報を取得
@@ -343,16 +406,58 @@ function delete1() {
 		return false;
 	}
 }
-
-// 未解決確認アラート
-function unanswered() {
-	if(confirm("質問を未解決に戻してよろしいですか？")) {
-		alert("未解決に戻しました。");
-		return true;
-	} else {
-		alert("キャンセルしました。");
-		return false;
+//solution Ajax(kari)
+function solution(indexNo){
+	var solution =document.getElementById('solution'+indexNo);
+	if(solution.checked){
+		var q_id =document.getElementById('q_id');
+	$.ajax({
+		type:'post',
+		url: '/OpenQA/UpdateDeleteServlet',
+		data: {	"solution": 1,
+				"q_id": q_id,
+				"so":"123"}
+	});
+	}else{
+		$.ajax({
+			type:'post',
+			url: '/OpenQA/UpdateDeleteServlet',
+			data: {	"solution": 0,
+					"q_id": q_id,
+					"so":"123"}
+		});
 	}
+
+
+	let saveCheckbox = document.getElementById('solution');
+	saveCheckbox.addEventListener('change', valueChange);
+}
+
+//meToo ajax(kari)
+function meToo(indexNo){
+	var meToo =document.getElementById('meToo'+indexNo);
+	if(meToo.checked){
+		var q_id =document.getElementById('q_id');
+	$.ajax({
+		type:'post',
+		url: '/OpenQA/UpdateDeleteServlet',
+		data: {	"meToo": +1,
+				"q_id": q_id
+				"meto": "999"}
+	});
+	}else{
+		$.ajax({
+			type:'post',
+			url: '/OpenQA/UpdateDeleteServlet',
+			data: {	"meToo": -1,
+					"q_id": q_id
+					"meto": "999"}
+		});
+	}
+
+
+	let saveCheckbox = document.getElementById('meToo');
+	saveCheckbox.addEventListener('change', valueChange);
 }
 </script>
 
