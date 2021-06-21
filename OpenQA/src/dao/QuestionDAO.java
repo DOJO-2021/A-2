@@ -210,6 +210,7 @@ public class QuestionDAO {
 				cate.setA_date(rs.getTimestamp("answer.date"));
 				cate.setAnswer(rs.getString("answer.answer"));
 				cate.setA_images(rs.getString("answer.images"));
+				cate.setA_q_id(rs.getString("answer.q_id"));
 				questionList.add(cate);
 			}
 		} catch (SQLException e) {
@@ -283,6 +284,7 @@ public class QuestionDAO {
 				mypage.setA_date(rs.getTimestamp("answer.date"));
 				mypage.setAnswer(rs.getString("answer.answer"));
 				mypage.setA_images(rs.getString("answer.images"));
+				mypage.setA_q_id(rs.getString("answer.q_id"));
 				// ArrayListに上記7つのデータを格納
 				questionList.add(mypage);
 			}
@@ -355,6 +357,7 @@ public class QuestionDAO {
 				mypage.setA_date(rs.getTimestamp("answer.date"));
 				mypage.setAnswer(rs.getString("answer.answer"));
 				mypage.setA_images(rs.getString("answer.images"));
+				mypage.setA_q_id(rs.getString("answer.q_id"));
 				// ArrayListに上記7つのデータを格納
 				mypageQuestionList.add(mypage);
 			}
@@ -425,6 +428,7 @@ public class QuestionDAO {
 				mypage.setA_date(rs.getTimestamp("answer.date"));
 				mypage.setAnswer(rs.getString("answer.answer"));
 				mypage.setA_images(rs.getString("answer.images"));
+				mypage.setA_q_id(rs.getString("answer.q_id"));
 				// ArrayListに上記7つのデータを格納
 				mypageQuestionList.add(mypage);
 			}
@@ -471,7 +475,7 @@ public class QuestionDAO {
 
 				// SELECT文を準備する
 				// idでDB検索
-				String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.id = ?; ";
+				String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.q_id = ?; ";
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -504,6 +508,7 @@ public class QuestionDAO {
 					mypage.setA_date(rs.getTimestamp("answer.date"));
 					mypage.setAnswer(rs.getString("answer.answer"));
 					mypage.setA_images(rs.getString("answer.images"));
+					mypage.setA_q_id(rs.getString("answer.q_id"));
 					// ArrayListに上記7つのデータを格納
 					mypageQuestionList.add(mypage);
 				}

@@ -26,6 +26,7 @@
 <body>
 ${sessionScope.user.name}さんのマイページ
 <h1>過去に登録した投稿</h1>
+
 <div class="tab_wrap">
 
 <input type="radio" id="tab1" name="tab_btn" checked>
@@ -114,7 +115,7 @@ ${sessionScope.user.name}さんのマイページ
 									<table>
 									<!-- 回答を取り出すfor文 -->
 										<c:forEach items="${question}" var="answer">
-											<c:if test="${data == answer.q_id }">
+											<c:if test="${data == answer.a_q_id }">
 												<!-- 回答を質問の下に表示 -->
 													<!-- user typeが講師だった場合 -->
 													<td><c:if test="${sessionScope.user.type==1}">
@@ -229,7 +230,7 @@ ${sessionScope.user.name}さんのマイページ
 									<table>
 									<!-- 回答を取り出すfor文 -->
 										<c:forEach items="${answer}" var="answer">
-											<c:if test="${data == answer.q_id }">
+											<c:if test="${data == answer.a_q_id }">
 												<!-- 回答を質問の下に表示 -->
 													<!-- user typeが講師だった場合 -->
 													<td><c:if test="${sessionScope.user.type==1}">

@@ -26,8 +26,15 @@ public class Almighty implements Serializable {
 	private Timestamp a_date;
 	private String answer;
 	private String a_images;
+	private String a_q_id;
 
 
+	public String getA_q_id() {
+		return a_q_id;
+	}
+	public void setA_q_id(String a_q_id) {
+		this.a_q_id = a_q_id;
+	}
 	public String getQ_id() {
 		return q_id;
 	}

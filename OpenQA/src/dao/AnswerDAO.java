@@ -60,8 +60,7 @@ public class AnswerDAO {
 						mypage.setA_date(rs.getTimestamp("answer.date"));
 						mypage.setAnswer(rs.getString("answer.answer"));
 						mypage.setA_images(rs.getString("answer.images"));
-
-
+						mypage.setA_q_id(rs.getString("answer.q_id"));
 				// ArrayListに上記7つのデータを格納
 				mypageAnswerList.add(mypage);
 			}
