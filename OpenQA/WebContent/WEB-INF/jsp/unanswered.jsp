@@ -25,10 +25,10 @@
 				<td><c:if test="${sessionScope.user.type==1}">
 						<c:out value="${value1.q_name}"/>
 					</c:if>
-					 <c:if test="${sessionScope.user.type==0 && value.q_anonymity== 1}">
+					 <c:if test="${sessionScope.user.type==0 and value.q_anonymity== 1}">
 						匿名
 					</c:if>
-					<c:if test="${sessionScope.user.type==0 && value.q_anonymity== 0 }">
+					<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 0 }">
 						<c:out value="${value1.q_name}"/>
 					</c:if></td>
 				<td><c:out value="${value1.title}" /></td>
@@ -66,10 +66,10 @@
 					<td><c:if test="${sessionScope.user.type==1}">
 							<c:out value="${value1.a_name}"/>
 						</c:if>
-						 <c:if test="${sessionScope.user.type==0 && value.a_anonymity== 1}">
+						 <c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1}">
 							匿名
 						</c:if>
-						<c:if test="${sessionScope.user.type==0 && value.a_anonymity== 0 }">
+						<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 0 }">
 							<c:out value="${value1.a_name}"/>
 						</c:if></td>
 					<td><c:out value="${value1.a_date}"/></td>
