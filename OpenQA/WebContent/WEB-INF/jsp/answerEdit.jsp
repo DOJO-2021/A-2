@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>回答編集</h2>
-<form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=answer" enctype="multipart/form-data">
+<form method="POST" name = "subBut" action="/OpenQA/UpdateDeleteServlet" enctype="multipart/form-data">
 <input type=hidden name="a_id" value=${answer.a_id}><!-- 保留 -->
 <table>
 	<th>
@@ -37,7 +37,7 @@
 		<input type="file" accept="image/*" onchange="previewImage(this);">
 	</label>
 
-	<input type="submit" name="SUBMIT" value="回答投稿">
+	<input type="submit" name="SUBMIT" value="回答編集">
 	</td>
 
 </table>

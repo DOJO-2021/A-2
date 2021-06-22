@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+* {
+  	margin-right: auto;
+  	margin-left: auto;
+  	text-align: center;
+}
+
 /*hanba-ga-*/
 .site-header{
     background: #fff;
