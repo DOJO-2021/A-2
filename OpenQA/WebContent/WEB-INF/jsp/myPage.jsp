@@ -153,14 +153,14 @@ ${sessionScope.user.name}さんのマイページ
 							</td>
 								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 							<td>
-								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form">
+								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()" >
 									<input type="hidden" name="q_id" value="${value.q_id}">
 									<input type="hidden" name="meToo" value="${value.metoo}">
 									<input type="hidden" name="solution" value="${value.solution}">
 									<input type="hidden" name="so" value="0">
 									<input type="hidden" name="meto" value="0">
 									<input type="hidden" name="mode" value="mypage">
-								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
+								<input type="submit" class="button" name="SUBMIT" value="質問削除">
 								</form>
 							</td>
 							<td>
@@ -212,9 +212,43 @@ ${sessionScope.user.name}さんのマイページ
 															<br>
 																<img src="/OpenQA/images/${value.a_images}" alt="画像イメージ">
 															</td>
+												</tr>
+												<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+												<c:if test="${sessionScope.user.id == answer.a_userId}">
+												<tr>
+															<td>
+															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
+																		<input type="hidden" name="mode" value="answer">
+																		<input type="hidden" name="a_id" value="${answer.a_id}">
+																		<input type="hidden" name="anonymity" value="${answer.a_anonymity}">
+																		<input type="hidden" name="content" value="${answer.answer}">
+																		<input type="hidden" name="images" value="${answer.a_images}">
+
+																		<input type="submit" class="button" name="SUBMIT" value="編集">
+
+																</form>
+															</td>
+
+
+															<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+															<td>
+																<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form"  onSubmit="return delete1()" >
+																		<input type="hidden" name="q_id" value="${answer.q_id}">
+																		<input type="hidden" name="meToo" value="${answer.metoo}">
+																		<input type="hidden" name="solution" value="${answer.solution}">
+																		<input type="hidden" name="so" value="0">
+																		<input type="hidden" name="meto" value="0">
+																		<input type="hidden" name="mode" value="mypage">
+																		<input type="hidden" name="a_id" value="${answer.a_id}">
+
+																		<input type="submit" class="button" name="SUBMIT" value="回答削除">
+
+																</form>
+															</td>
 													<c:remove var="count" />
 													<c:set var="count" value="1" />
 												</tr>
+												</c:if>
 											</c:if>
 										</c:forEach>
 									</table>
@@ -373,7 +407,7 @@ ${sessionScope.user.name}さんのマイページ
 														</td>
 														<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 														<td>
-															<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form">
+															<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()">
 																	<input type="hidden" name="q_id" value="${answer.q_id}">
 																	<input type="hidden" name="meToo" value="${answer.metoo}">
 																	<input type="hidden" name="solution" value="${answer.solution}">
@@ -382,7 +416,7 @@ ${sessionScope.user.name}さんのマイページ
 																	<input type="hidden" name="mode" value="mypage">
 																	<input type="hidden" name="a_id" value="${answer.a_id}">
 
-																	<input type="submit" class="button" name="SUBMIT" value="回答削除" onclick="delete1();" >
+																	<input type="submit" class="button" name="SUBMIT" value="回答削除">
 
 															</form>
 														</td>
@@ -483,11 +517,11 @@ function a_disp(indexNo){
 
 // 削除確認アラート
 function delete1() {
-	if(confirm("本当に削除してよろしいですか？")) {
-		alert("削除しました。");
+	if(window.confirm("本当に削除してよろしいですか？")) {
+		window.alert("削除しました。");
 		return true;
 	} else {
-		alert("キャンセルしました。");
+		window.alert("キャンセルしました。");
 		return false;
 	}
 }
