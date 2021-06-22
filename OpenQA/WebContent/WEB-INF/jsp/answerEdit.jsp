@@ -8,7 +8,7 @@
 <script type="text/javascript" src="/OpenQA/js/common.js"></script>
 </head>
 <body>
-<h2>回答登録</h2>
+<h2>回答編集</h2>
 <form method="POST" name = "subBut" action="/OpenQA/registServlet?mode=answer" enctype="multipart/form-data">
 <input type=hidden name="a_id" value=${answer.a_id}><!-- 保留 -->
 <table>
@@ -22,12 +22,12 @@
 	</th>
 
 	<td>
-	<p>回答<textarea name="content">${answer.answer}</textarea></p>
+	<p>回答<textarea name="content">${param.content}</textarea></p>
 
-	<c:if test = "${answer.images != null}">
-		<img src="/OpenQA/images/${answer.images}" alt = "ccc" id="p1">
+	<c:if test = "${param.images != null}">
+		<img src="/OpenQA/images/${param.images}" alt = "ccc" id="p1">
 	</c:if>
-	<input type="hidden" value="${answer.images}" id="preImage">
+	<input type="hidden" value="${param.images}" id="preImage">
 
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 

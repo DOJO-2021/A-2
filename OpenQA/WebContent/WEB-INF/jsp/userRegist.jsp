@@ -29,7 +29,7 @@
 		<p>
 			講師用PW<input type="text" name="ins_pw" id="ins_pw" placeholder="講師用PW">
 		</p>
-		<input type="submit" name="regist" value="登録">
+		<input type="submit" name="SUBMIT" value="登録">
 	</form>
 </body>
 <script>

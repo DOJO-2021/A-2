@@ -115,9 +115,15 @@ public class UpdateDeleteServlet extends HttpServlet {
 					aDao.update(a_id, id, anonymity, date, answer, images, q_id);
 				}
 				if(request.getParameter("SUBMIT").equals("回答削除")) {
+					System.out.println("aa");
+					String mode = request.getParameter("mode");
 					String a_id = request.getParameter("a_id");
 					AnswerDAO aDao = new AnswerDAO();
 					aDao.delete(a_id);
+					if(mode.equals("mypage2")) {
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
+						dispatcher.forward(request, response);
+					}
 				}
 			}
 				//solutionが押されたら動く

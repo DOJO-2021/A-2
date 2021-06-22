@@ -9,8 +9,8 @@
 </head>
 <body>
 <h2>回答登録</h2>
-<form method="POST" name = "subBut" action="/OpenQA/RegistServlet" enctype="multipart/form-data">
-<input type=hidden name="q_id" value=${param.q_id}>
+<form method="POST" name = "subBut" action="/OpenQA/RegistServlet?mode=answer" enctype="multipart/form-data">
+<input type=hidden name="q_id" value="${param.q_id}">
 <table>
 <tr>
 	<th>
@@ -75,8 +75,9 @@
     		if(confirm('投稿してもよろしいですか？')) {
     			alert("投稿しました");
     			// windowを閉じる処理
-    			window.close();
+    			//window.close();
     			return true;
+
     		}
     		else{
     			alert("キャンセルしました");

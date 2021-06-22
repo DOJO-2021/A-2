@@ -73,15 +73,15 @@ public class RegistServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		System.out.println(request.getParameter("SUBMIT"));
 
-		String mode = request.getParameter("mode");
+		//String mode = request.getParameter("mode");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if(!mode.equals("userRegist")) {
-			if (session.getAttribute("user") == null) {
-				response.sendRedirect("/OpenQA/LoginServlet");
-				return;
-			}
-		}
+//		//if(!mode.equals("userRegist")) {
+//			if (session.getAttribute("user") == null) {
+//				response.sendRedirect("/OpenQA/LoginServlet");
+//				return;
+//			}
+//		//}
 
 		request.setCharacterEncoding("UTF-8");
 		System.out.println(request.getParameter("SUBMIT"));
@@ -122,7 +122,10 @@ public class RegistServlet extends HttpServlet {
 
 		else if(request.getParameter("SUBMIT").equals("質問投稿")) {
 
-
+			if (session.getAttribute("user") == null) {
+				response.sendRedirect("/OpenQA/LoginServlet");
+				return;
+			}
 
 			// questionPost.jspのリクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
@@ -153,6 +156,11 @@ public class RegistServlet extends HttpServlet {
 			System.out.println("aaa");
 			// answerPost.jspのリクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
+
+			if (session.getAttribute("user") == null) {
+				response.sendRedirect("/OpenQA/LoginServlet");
+				return;
+			}
 			// userのidをセッションスコープから持ってくる
 			User user = (User)session.getAttribute("user");
 			String id = user.getId();
@@ -162,7 +170,7 @@ public class RegistServlet extends HttpServlet {
 			String images = request.getParameter("images");
 			String q_id = request.getParameter("q_id");
 			String name = user.getName();
-
+			System.out.println(content);
 			// 登録処理を行う
 			AnswerDAO bDao = new AnswerDAO();
 
