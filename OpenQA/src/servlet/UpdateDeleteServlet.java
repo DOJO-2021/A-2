@@ -82,7 +82,6 @@ public class UpdateDeleteServlet extends HttpServlet {
 		try {//質問　編集と削除
 			if(request.getParameter("SUBMIT")!=null) {
 				if(request.getParameter("SUBMIT").equals("質問編集")) {
-					System.out.println("aaa");
 					int to = Integer.parseInt(request.getParameter("to"));
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					String b_category = request.getParameter("b_category");
@@ -91,7 +90,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 					String title = request.getParameter("title");
 					String content = request.getParameter("content");
 					String images = request.getParameter("IMAGE");
-					String preImages = request.getParameter("preImage");
+					/*String preImages = request.getParameter("preImage");
 					if (images.equals("") && preImages.equals("")) {//画像なしの場合
 
 					} else if(!images.equals("") && !preImages.equals("")) {//画像を変更した場合
@@ -100,8 +99,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 						images = preImages;
 					} else if(images.equals("") && !preImages.equals("")) {//画像を追加した場合
 
-					}
-
+					}*/
 
 					QuestionDAO qDao = new QuestionDAO();
 

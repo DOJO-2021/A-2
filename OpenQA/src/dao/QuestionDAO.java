@@ -72,6 +72,7 @@ public class QuestionDAO {
 	public boolean update(String q_id, int to, String id, int anonymity, String b_category, String s_category,
 			Timestamp date,
 			String title, String content, int solution, int metoo, String images) {
+		System.out.println("bbb");
 		Connection conn = null;
 		boolean result = false;
 
@@ -102,7 +103,7 @@ public class QuestionDAO {
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
-
+			System.out.println("aaa");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

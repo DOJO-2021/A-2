@@ -46,8 +46,8 @@
 </tr>
 <tr>
 	<td>
-	<p>タイトル <input type="text" name="title" value="${param.title}"></p>
-	<p>内容<textarea name="content">${param.content}</textarea></p>
+	<p>タイトル <input type="text" name="title" value="${param.title}" id="title"></p>
+	<p>内容<textarea name="content" id="content">${param.content}</textarea></p>
 	<c:if test = "${param.images != null}">
 		<img src="/OpenQA/images/${param.images}" alt = "ccc" id="p1">
 	</c:if>
@@ -122,7 +122,7 @@
     		if(confirm('再投稿してもよろしいですか？')) {
     			alert("再投稿しました");
     			// windowを閉じる処理
-    			window.close();
+    			//window.close();
     			return true;
     		}
     		else{
