@@ -51,7 +51,7 @@
 	<c:if test = "${param.images != null}">
 		<img src="/OpenQA/images/${param.images}" alt = "ccc" id="p1">
 	</c:if>
-	<input type="hidden" value="${param.images}" id="preImage">
+	<input type="hidden" value="${param.images}" name="preImage" id="preImage">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<input type="button" id="btn1" value="画像削除" onclick="cls();">

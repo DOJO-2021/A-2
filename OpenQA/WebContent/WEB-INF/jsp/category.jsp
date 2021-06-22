@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OpenQA</title>
 <style>
 	..tab_wrap{width:500px; margin:80px auto;}
 	input[type="radio"]{display:none;}
@@ -40,6 +40,7 @@
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
 <body>
+
 	<form method="POST" action="/OpenQA/MenuServlet">
 		<!-- カテゴリーのプルダウン  -->
 		<select name="b_category" id="b_category">
@@ -127,11 +128,13 @@
 							<td colspan="7">
 								<c:out value="タイトル：${value.title}" /><br>
 								<c:out value="内容：${value.content}" /><br>
+								${value.q_images}
 								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
 							</td>
 						</tr>
-						<c:if test="${sessionScope.user.id == value.q_userId}">
+
 						<tr class="close" id="q_detail2${listSt.index}${status.index}">
+						<c:if test="${sessionScope.user.id == value.q_userId}">
 							<td>
 								<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
@@ -160,6 +163,7 @@
 									<input type="hidden" name="so" value="0">
 									<input type="hidden" name="meto" value="0">
 									<input type="hidden" name="mode" value="category">
+									<input type="hidden" name="bcategory" value="${param.b_category}">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
 								</form>
 							</td>
@@ -167,13 +171,14 @@
 								<!-- 解決ボタン -->
 								<input type="checkbox" name="solution" id="solution${listSt.index}${status.index}"  onchange="solution('${status.index}','${value.q_id}', '${listSt.index}')" <c:if test="${value.solution == 1}">checked</c:if>>
 							</td>
+						</c:if>
 							<td colspan="4">
 								<!-- 私もボタン-->
 								<input type="checkbox" name="meToo" value="0" id="meToo${listSt.index}${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}', '${listSt.index}')">
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
-						</c:if>
+
 						<c:set var="count" value="0" />
 					</c:if>
 					<c:remove var="data" />
@@ -184,7 +189,7 @@
 								<td colspan="7">
 									<table>
 										<!-- 回答を取り出すfor文 -->
-										<c:forEach items="${question}" var="answer">
+										<c:forEach items="${s_list}" var="answer">
 											<c:if test="${data == answer.a_q_id }">
 												<tr>
 													<!-- 回答を質問の下に表示 -->
@@ -197,16 +202,49 @@
 																</c:if> <!-- user typeが受講者かつ匿名を希望しない場合 --> <c:if
 															test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
 															<c:out value="${answer.a_name}" />
-														</c:if></td>
+														</c:if>
+													</td>
 													<td><c:out value="${answer.a_date}" /></td>
 												</tr>
 												<tr>
 													<td colspan="2"><c:out value="内容：${answer.answer}" />
-														<br> <img src="/OpenQA/images/${value.a_images}"
+														<br> <img src="/OpenQA/images/${answer.a_images}"
 														alt="画像イメージ"></td>
 													<c:remove var="count" />
 													<c:set var="count" value="1" />
 												</tr>
+												<c:if test="${sessionScope.user.id == answer.a_userId}">
+													<tr>
+														<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+														<td>
+															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
+																	<input type="hidden" name="mode" value="answer">
+																	<input type="hidden" name="a_id" value="${answer.a_id}">
+																	<input type="hidden" name="anonymity" value="${answer.a_anonymity}">
+																	<input type="hidden" name="content" value="${answer.answer}">
+																	<input type="hidden" name="images" value="${answer.a_images}">
+
+																	<input type="submit" class="button" name="SUBMIT" value="編集">
+
+															</form>
+														</td>
+														<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+														<td>
+															<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form">
+																	<input type="hidden" name="q_id" value="${answer.q_id}">
+																	<input type="hidden" name="meToo" value="${answer.metoo}">
+																	<input type="hidden" name="solution" value="${answer.solution}">
+																	<input type="hidden" name="so" value="0">
+																	<input type="hidden" name="meto" value="0">
+																	<input type="hidden" name="mode" value="category">
+																	<input type="hidden" name="a_id" value="${answer.a_id}">
+																	<input type="hidden" name="bcategory" value="${param.b_category}">
+																	<input type="submit" class="button" name="SUBMIT" value="回答削除" onclick="delete1();" >
+
+															</form>
+														</td>
+													</tr>
+													</c:if>
 											</c:if>
 										</c:forEach>
 									</table>

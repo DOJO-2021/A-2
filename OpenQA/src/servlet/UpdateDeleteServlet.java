@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.AnswerDAO;
 import dao.QuestionDAO;
+import model.Almighty;
 import model.User;
 
 /**
@@ -76,7 +78,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 
 		try {//質問　編集と削除
 			if(request.getParameter("SUBMIT")!=null) {
-				if(request.getParameter("SUBMIT").equals("q_update")) {
+				if(request.getParameter("SUBMIT").equals("質問編集")) {
 					int to = Integer.parseInt(request.getParameter("to"));
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					String b_category = request.getParameter("b_category");
@@ -84,7 +86,17 @@ public class UpdateDeleteServlet extends HttpServlet {
 					Timestamp date =  new Timestamp(System.currentTimeMillis());
 					String title = request.getParameter("title");
 					String content = request.getParameter("content");
-					String images = request.getParameter("images");
+					String images = request.getParameter("IMAGE");
+					String preImages = request.getParameter("preImage");
+					if (images.equals("") && preImages.equals("")) {//画像なしの場合
+
+					} else if(!images.equals("") && !preImages.equals("")) {//画像を変更した場合
+
+					} else if(!images.equals("") && preImages.equals("")) {//画像を変更しなかった場合
+						images = preImages;
+					} else if(images.equals("") && !preImages.equals("")) {//画像を追加した場合
+
+					}
 
 
 					QuestionDAO qDao = new QuestionDAO();
@@ -123,6 +135,57 @@ public class UpdateDeleteServlet extends HttpServlet {
 					aDao.delete(a_id);
 					if(mode.equals("mypage")) {
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
+						dispatcher.forward(request, response);
+					} else if (mode.equals("category")) {
+
+						//リクエストパラメータを取得
+						request.setCharacterEncoding("UTF-8");
+						String b_category = request.getParameter("bcategory");
+						System.out.println(b_category);
+						QuestionDAO qDAO = new QuestionDAO();
+						ArrayList<Almighty> questions = qDAO.cate_select(b_category);
+						ArrayList<ArrayList<Almighty>>list = new ArrayList<>();
+						ArrayList<Almighty>s_list = null;
+
+						for(Almighty a : questions) {
+							System.out.println(a.getS_category());
+						}
+
+						String cate = "";
+						int count = 0;
+						for (int i=0; i<questions.size(); i++) {
+							if (!questions.get(i).getS_category().equals(cate) && count!=0) {
+								list.add(s_list);
+								count = 0;
+							}
+
+							if (!questions.get(i).getS_category().equals(cate) && count==0) {
+								s_list = new ArrayList<>();
+								s_list.add(questions.get(i));
+								cate = questions.get(i).getS_category();
+								count++;
+
+							} else if  (questions.get(i).getS_category().equals(cate)) {
+								s_list.add(questions.get(i));
+							}
+
+							if (i == questions.size() - 1) {
+								list.add(s_list);
+							}
+
+						}
+
+						for (ArrayList<Almighty> a : list) {
+							System.out.println("から");
+							for (Almighty b : a) {
+								System.out.println(b.getS_category()+"から");
+							}
+						}
+
+						request.setAttribute("list", list);
+
+
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/category.jsp");
 						dispatcher.forward(request, response);
 					}
 				}
