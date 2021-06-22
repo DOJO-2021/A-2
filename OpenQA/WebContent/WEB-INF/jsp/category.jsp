@@ -121,6 +121,7 @@
 						</tr>
 
 						<!-- 質問の詳細を表示 -->
+						<c:if test="${sessionScope.user.id == value.q_userId}">
 						<tr class="close" id="q_detail${listSt.index}${status.index}">
 
 							<td colspan="7">
@@ -161,7 +162,7 @@
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
-
+						</c:if>
 						<c:set var="count" value="0" />
 					</c:if>
 					<c:remove var="data" />
