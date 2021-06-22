@@ -86,7 +86,7 @@
 		fileReader.readAsDataURL(obj.files[0]);
 		console.log(fileReader.result);
 	}
-
+/*
 	// 未入力アラート
 	function checkForm(){
 		// 各変数
@@ -121,26 +121,34 @@
     		}
    		}
 	}
-
-/*	// 未入力アラート
+*/
+	// 未入力アラート
 	function checkForm(){
+		var to = document.getElementById('to');
+		var b_cate = document.getElementById('b_category');
+      	var s_cate = document.getElementById('s_category');
+      	var title = document.getElementById('title');
+      	var content = document.getElementById('content');
+
 	  	//宛先(To)未入力アラート
-    	var to = document.getElementById('to');
+
     	if(to.value == ""){
         	window.alert("宛先を指定してください");
+        	return false;
    		}
 
         //カテゴリー未入力アラート
-    	var b_cate = document.getElementById('b_category');
-      	var s_cate = document.getElementById('s_category');
+
     	if(b_cate.value == "" || s_cate.value == ""){
         	window.alert("カテゴリーを選択してください");
+        	return false;
    		}
 
-    	var title = document.getElementById('title');
-      	var content = document.getElementById('content');
+
     	if(title.value == "" || content.value == ""){
         	window.alert("タイトルおよび内容を入力してください");
+        	return false;
+
     	}else{
     		if(confirm('投稿してもよろしいですか？')) {
     			alert("投稿しました");
@@ -154,7 +162,7 @@
     		}
    		}
 	}
-*/
+
 </script>
 
 </html>
