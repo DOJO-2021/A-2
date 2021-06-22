@@ -73,6 +73,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 		String meto = request.getParameter("meto");
 		User user = (User)session.getAttribute("user");
 		String id = user.getId();
+
 		try {//質問　編集と削除
 			if(request.getParameter("SUBMIT")!=null) {
 				if(request.getParameter("SUBMIT").equals("q_update")) {
@@ -115,12 +116,12 @@ public class UpdateDeleteServlet extends HttpServlet {
 					aDao.update(a_id, id, anonymity, date, answer, images, q_id);
 				}
 				if(request.getParameter("SUBMIT").equals("回答削除")) {
+					String a_id = request.getParameter("a_id");
 					System.out.println("aa");
 					String mode = request.getParameter("mode");
-					String a_id = request.getParameter("a_id");
 					AnswerDAO aDao = new AnswerDAO();
 					aDao.delete(a_id);
-					if(mode.equals("mypage2")) {
+					if(mode.equals("mypage")) {
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 						dispatcher.forward(request, response);
 					}
