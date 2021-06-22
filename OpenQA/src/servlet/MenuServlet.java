@@ -103,6 +103,10 @@ public class MenuServlet extends HttpServlet {
 				s_list.add(questions.get(i));
 			}
 
+			if (i == questions.size() - 1) {
+				list.add(s_list);
+			}
+
 		}
 
 		request.setAttribute("list", list);

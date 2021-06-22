@@ -40,7 +40,7 @@
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
 <body>
-	<form method="POST" action="/Test/MenuServlet">
+	<form method="POST" action="/OpenQA/MenuServlet">
 		<!-- カテゴリーのプルダウン  -->
 		<select name="b_category" id="b_category">
 			<option value="">カテゴリー</option>
@@ -155,9 +155,9 @@
 								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
 								</form>
 								<!-- 解決ボタン -->
-								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
+								<input type="checkbox" name="solution" id="solution${listSt.index}${status.index}"  onchange="solution('${status.index}','${value.q_id}', '${listSt.index}')" <c:if test="${value.solution == 1}">checked</c:if>>
 								<!-- 私もボタン-->
-								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+								<input type="checkbox" name="meToo" value="0" id="meToo${listSt.index}${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}', '${listSt.index}')">
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
@@ -259,8 +259,8 @@ function delete1() {
 
 
 //solution Ajax(kari)
-function solution(indexNo,q_id){
-	var solution =document.getElementById('solution'+indexNo);
+function solution(indexNo, q_id, stIndexNo){
+	var solution =document.getElementById('solution' + stIndexNo + indexNo);
 	if(solution.checked){
 		//var q_id =document.getElementById('q_id');
 		$.ajax({
@@ -285,13 +285,13 @@ function solution(indexNo,q_id){
 	}
 
 }
-	let saveCheckbox = document.getElementById('solution');
-	saveCheckbox.addEventListener('change', solution);
+//	let saveCheckbox = document.getElementById('solution');
+//	saveCheckbox.addEventListener('change', solution);
 
 	//metooは1回押したら1増える
-	function meToo(indexNo,q_id,metoo){
+	function meToo(indexNo, q_id, metoo, stIndexNo){
 		var intMetoo = parseInt(metoo);
-		var meToo =document.getElementById('meToo'+indexNo);
+		var meToo =document.getElementById('meToo' + stIndexNo + indexNo);
 		if(meToo.checked){
 			intMetoo ++;
 			//var q_id =document.getElementById('q_id');
@@ -319,8 +319,8 @@ function solution(indexNo,q_id){
 		}*/
 
 	}
-		let saveCheckbox1 = document.getElementById('meToo');
-		saveCheckbox1.addEventListener('change', meToo);
+//		let saveCheckbox1 = document.getElementById('meToo');
+//		saveCheckbox1.addEventListener('change', meToo);
 </script>
 
 
