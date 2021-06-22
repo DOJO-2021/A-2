@@ -141,8 +141,12 @@ public class RegistServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			Part part = request.getPart("IMAGE");
-			String images = this.getFileName(part);
-			part.write(images);
+			String images = null;
+			if (part.getSize() != 0) {
+				images = this.getFileName(part);
+				part.write(images);
+			}
+
 			String name = user.getName();
 
 			// 登録処理を行う

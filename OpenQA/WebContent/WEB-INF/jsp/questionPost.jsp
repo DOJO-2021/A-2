@@ -107,6 +107,7 @@
                 	window.alert("タイトルおよび内容を入力してください");
             	}
        		}
+        	 return false;
    		} else{
     		if(confirm('投稿してもよろしいですか？')) {
     			alert("投稿しました");
@@ -121,7 +122,7 @@
    		}
 	}
 
-	// 未入力アラート
+/*	// 未入力アラート
 	function checkForm(){
 	  	//宛先(To)未入力アラート
     	var to = document.getElementById('to');
@@ -153,7 +154,7 @@
     		}
    		}
 	}
-
+*/
 </script>
 
 </html>
