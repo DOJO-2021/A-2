@@ -37,6 +37,7 @@
 	border: 2px #808080 solid;
 	}
 </style>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
 <body>
 	<form method="POST" action="/Test/MenuServlet">
