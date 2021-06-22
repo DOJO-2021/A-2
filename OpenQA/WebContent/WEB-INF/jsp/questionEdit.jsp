@@ -60,6 +60,12 @@
 		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);">
 	</label>
 
+	<input type="hidden" name="q_id" value="${param.q_id}">
+	<input type="hidden" name="solution" value="${param.solution}">
+	<input type="hidden" name="meToo" value="${param.metoo}">
+	<input type="hidden" name="so" value="0">
+	<input type="hidden" name="meto" value="0">
+
 
 	<input type="submit" name="SUBMIT" value="質問編集">
 	</td>

@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -79,6 +80,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 		try {//質問　編集と削除
 			if(request.getParameter("SUBMIT")!=null) {
 				if(request.getParameter("SUBMIT").equals("質問編集")) {
+					System.out.println("aaa");
 					int to = Integer.parseInt(request.getParameter("to"));
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					String b_category = request.getParameter("b_category");
@@ -108,6 +110,12 @@ public class UpdateDeleteServlet extends HttpServlet {
 					QuestionDAO qDao = new QuestionDAO();
 
 					qDao.delete(q_id);
+					// データ格納
+					List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
+					List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
+
+					request.setAttribute("question", mypageQuestionList);
+					request.setAttribute("answer", mypageQanswerList);
 
 					if(mode.equals("mypage")) {
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
@@ -116,7 +124,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 
 				}
 				//解答　編集と削除
-				if(request.getParameter("SUBMIT").equals("a_update")) {
+				if(request.getParameter("SUBMIT").equals("回答編集")) {
 					String a_id = request.getParameter("a_id");
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					Timestamp date =  new Timestamp(System.currentTimeMillis());
@@ -129,10 +137,18 @@ public class UpdateDeleteServlet extends HttpServlet {
 				}
 				if(request.getParameter("SUBMIT").equals("回答削除")) {
 					String a_id = request.getParameter("a_id");
-					System.out.println("aa");
 					String mode = request.getParameter("mode");
 					AnswerDAO aDao = new AnswerDAO();
+					QuestionDAO qDao = new QuestionDAO();
 					aDao.delete(a_id);
+
+					// データ格納
+					List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
+					List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
+
+					request.setAttribute("question", mypageQuestionList);
+					request.setAttribute("answer", mypageQanswerList);
+
 					if(mode.equals("mypage")) {
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 						dispatcher.forward(request, response);
