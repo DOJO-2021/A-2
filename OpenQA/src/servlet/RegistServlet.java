@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import dao.AnswerDAO;
 import dao.QuestionDAO;
@@ -22,7 +23,7 @@ import model.User;
  * Servlet implementation class RegistServlet
  */
 @WebServlet("/RegistServlet")
-@ MultipartConfig
+@MultipartConfig(location = "C:\\pleiades\\workspace\\A-2\\OpenQA\\WebContent\\images") // アップロードファイルの一時的な保存先
 public class RegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -139,7 +140,9 @@ public class RegistServlet extends HttpServlet {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			String images = request.getParameter("images");
+			Part part = request.getPart("IMAGE");
+			String images = this.getFileName(part);
+			part.write(images);
 			String name = user.getName();
 
 			// 登録処理を行う
@@ -180,5 +183,18 @@ public class RegistServlet extends HttpServlet {
 		}
 
 	}
+
+	//ファイルの名前を取得してくる
+		private String getFileName(Part part) {
+	        String name = null;
+	        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+	            if (dispotion.trim().startsWith("filename")) {
+	                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+	                name = name.substring(name.lastIndexOf("\\") + 1);
+	                break;
+	            }
+	        }		// TODO 自動生成されたメソッド・スタブ
+			return name;
+		}
 
 }
