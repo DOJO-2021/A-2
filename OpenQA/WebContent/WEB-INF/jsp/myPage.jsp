@@ -493,7 +493,6 @@ detail=(open)
 'use strict'
 //チェックボックスのチェックが動作したら動く（質問タブの詳細）
 function disp(indexNo){
-	window.alert("aaa");
 	//チェックボックスの状態を取得
 	var ch =document.getElementById('checkId'+indexNo);
 	//隠している部分の情報を取得
@@ -528,7 +527,6 @@ function disp(indexNo){
 }
 //チェックボックスのチェックが動作したら動く（回答タブの詳細）
 function a_disp(indexNo){
-	window.alert("aaa");
 	//チェックボックスの状態を取得
 	var a_ch =document.getElementById('a_checkId'+indexNo);
 	//隠している部分の情報を取得
@@ -665,8 +663,8 @@ function solution(indexNo,q_id){
 			}
 
 		}
-		//let saveCheckbox = document.getElementById('a_solution');
-		//	saveCheckbox.addEventListener('change', a_solution);
+		//  let saveCheckbox = document.getElementById('a_solution');
+	    //  saveCheckbox.addEventListener('change', a_solution);
 
 		//metooは1回押したら1増える
 			function a_meToo(indexNo,q_id,metoo){
@@ -699,8 +697,8 @@ function solution(indexNo,q_id){
 				}*/
 
 			}
-			/*	let saveCheckbox1 = document.getElementById('a_meToo');
-				saveCheckbox1.addEventListener('change', a_meToo);*/
+			//	let saveCheckbox1 = document.getElementById('a_meToo');
+			//	saveCheckbox1.addEventListener('change', a_meToo);
 
 		function wopen(url){
 			window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
