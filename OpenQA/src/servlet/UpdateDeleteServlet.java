@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import model.User;
 /**
  * Servlet implementation class UpdateDeleteServlet
  */
+@MultipartConfig(location = "C:\\pleiades\\workspace\\A-2\\OpenQA\\WebContent\\images")
 @WebServlet("/UpdateDeleteServlet")
 public class UpdateDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

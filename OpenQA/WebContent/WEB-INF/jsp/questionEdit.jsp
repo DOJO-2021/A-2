@@ -62,7 +62,7 @@
 
 	<input type="hidden" name="q_id" value="${param.q_id}">
 	<input type="hidden" name="solution" value="${param.solution}">
-	<input type="hidden" name="meToo" value="${param.metoo}">
+	<input type="text" name="meToo" value="${param.meToo}">
 	<input type="hidden" name="so" value="0">
 	<input type="hidden" name="meto" value="0">
 
