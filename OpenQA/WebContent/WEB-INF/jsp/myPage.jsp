@@ -131,6 +131,7 @@ ${sessionScope.user.name}さんのマイページ
 						</tr>
 
 						<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+						<c:if test="${sessionScope.user.id == value.q_userId}">
 						<tr class="close" id="q_detail2${status.index}">
 							<td>
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
@@ -172,6 +173,7 @@ ${sessionScope.user.name}さんのマイページ
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
+						</c:if>
 					<c:set var="count" value="0" />
 					</c:if>
 
@@ -354,6 +356,7 @@ ${sessionScope.user.name}さんのマイページ
 															<br>
 													</tr>
 
+													<c:if test="${sessionScope.user.id == answer.a_userId}">
 													<tr>
 														<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 														<td>
@@ -363,7 +366,9 @@ ${sessionScope.user.name}さんのマイページ
 																	<input type="hidden" name="anonymity" value="${answer.a_anonymity}">
 																	<input type="hidden" name="content" value="${answer.answer}">
 																	<input type="hidden" name="images" value="${answer.a_images}">
+
 																	<input type="submit" class="button" name="SUBMIT" value="編集">
+
 															</form>
 														</td>
 														<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
@@ -376,10 +381,14 @@ ${sessionScope.user.name}さんのマイページ
 																	<input type="hidden" name="meto" value="0">
 																	<input type="hidden" name="mode" value="mypage">
 																	<input type="hidden" name="a_id" value="${answer.a_id}">
+
 																	<input type="submit" class="button" name="SUBMIT" value="回答削除" onclick="delete1();" >
+
 															</form>
 														</td>
 													</tr>
+													</c:if>
+
 											</c:if>
 											<c:remove var="count" />
 											<c:set var="count" value="1" />
