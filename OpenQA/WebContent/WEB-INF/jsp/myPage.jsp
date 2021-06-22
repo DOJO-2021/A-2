@@ -322,6 +322,7 @@ ${sessionScope.user.name}さんのマイページ
 								</span>
 							</td>
 							<!-- status.index→毎ループごとにgoodボタンを隠す -->
+
 							<td>
 								<!-- 私もボタン -->
 								<div class="open" id="a_good${status.index}">
@@ -345,11 +346,52 @@ ${sessionScope.user.name}さんのマイページ
 								<c:out value="タイトル：${value.title}" /><br>
 								<c:out value="内容：${value.content}" /><br>
 								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ"><br>
+						</tr>
+
+						<c:if test="${sessionScope.user.id == value.q_userId}">
+						<tr class="close" id="a_q_detail2${status.index}">
+							<td>
+								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
+										<input type="hidden" name="mode" value="question">
+										<input type="hidden" name="q_id" value="${value.q_id}">
+										<input type="hidden" name="to" value="${value.to}">
+										<input type="hidden" name="anonymity" value="${value.q_anonymity}">
+										<input type="hidden" name="b_category" value="${value.b_category}">
+										<input type="hidden" name="s_category" value="${value.s_category}">
+										<input type="hidden" name="title" value="${value.title}">
+										<input type="hidden" name="content" value="${value.content}">
+										<input type="hidden" name="images" value="${value.q_images}">
+										<input type="hidden" name="meToo" value="${value.metoo}">
+										<input type="hidden" name="solution" value="${value.solution}">
+										<input type="hidden" name="so" value="0">
+										<input type="hidden" name="meto" value="0">
+										<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
+									</form>
+							</td>
+								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+							<td>
+								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()" >
+									<input type="hidden" name="q_id" value="${value.q_id}">
+									<input type="hidden" name="meToo" value="${value.metoo}">
+									<input type="hidden" name="solution" value="${value.solution}">
+									<input type="hidden" name="so" value="0">
+									<input type="hidden" name="meto" value="0">
+									<input type="hidden" name="mode" value="mypage">
+								<input type="submit" class="button" name="SUBMIT" value="質問削除">
+								</form>
+							</td>
+							<td>
+								<!-- 解決ボタン -->
+								<input type="checkbox" name="solution" id="a_solution${status.index}"  onchange="a_solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
+							</td>
+							<td colspan="4">
 								<!-- 私もボタン-->
-								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+								<input type="checkbox" name="meToo" value="0" id="a_meToo${status.index}"  onchange="a_meToo('${status.index}','${value.q_id}','${value.metoo}')">
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 							</td>
 						</tr>
+						</c:if>
+
 					<c:set var="count" value="0" />
 					</c:if>
 
@@ -451,6 +493,7 @@ detail=(open)
 'use strict'
 //チェックボックスのチェックが動作したら動く（質問タブの詳細）
 function disp(indexNo){
+	window.alert("aaa");
 	//チェックボックスの状態を取得
 	var ch =document.getElementById('checkId'+indexNo);
 	//隠している部分の情報を取得
@@ -485,11 +528,13 @@ function disp(indexNo){
 }
 //チェックボックスのチェックが動作したら動く（回答タブの詳細）
 function a_disp(indexNo){
+	window.alert("aaa");
 	//チェックボックスの状態を取得
 	var a_ch =document.getElementById('a_checkId'+indexNo);
 	//隠している部分の情報を取得
 	var a_hide =document.getElementById('a_hide'+indexNo);
 	var a_q_detail =document.getElementById('a_q_detail'+indexNo);
+	var a_q_detail2 =document.getElementById('a_q_detail2'+indexNo);
 	var a_answer =document.getElementById('a_answer'+indexNo);
 	var a_reply =document.getElementById('a_reply'+indexNo);
 	//開いている部分の情報を取得
@@ -500,6 +545,7 @@ function a_disp(indexNo){
 		//closeを開く
 		a_hide.setAttribute('class','open');
 		a_q_detail.setAttribute('class','open');
+		a_q_detail2.setAttribute('class','open');
 		a_answer.setAttribute('class','open');
 		a_good.setAttribute('class','close');
 		a_detail.setAttribute('class','close');
@@ -508,6 +554,7 @@ function a_disp(indexNo){
 		//openを閉じる
 		a_hide.setAttribute('class','close');
 		a_q_detail.setAttribute('class','close');
+		a_q_detail2.setAttribute('class','close');
 		a_answer.setAttribute('class','close');
 		a_good.setAttribute('class','open');
 		a_detail.setAttribute('class','open');
@@ -527,7 +574,7 @@ function delete1() {
 }
 
 
-//solution Ajax(kari)
+//質問タブのsolution Ajax(kari)
 function solution(indexNo,q_id){
 	var solution =document.getElementById('solution'+indexNo);
 	if(solution.checked){
@@ -590,6 +637,71 @@ function solution(indexNo,q_id){
 	}
 		let saveCheckbox1 = document.getElementById('meToo');
 		saveCheckbox1.addEventListener('change', meToo);
+
+
+//回答タブのsolution Ajax(kari)
+		function a_solution(indexNo,q_id){
+			var a_solution =document.getElementById('a_solution'+indexNo);
+			if(a_solution.checked){
+				//var q_id =document.getElementById('q_id');
+				$.ajax({
+				type:'post',
+				url: '/OpenQA/UpdateDeleteServlet',
+				data: {	"solution": 1,
+						"q_id": q_id,
+						"so":"123",
+						"meto":"0",
+						"meToo":"0"}
+			});
+			}else{
+				$.ajax({
+					type:'post',
+					url: '/OpenQA/UpdateDeleteServlet',
+					data: {	"solution": 0,
+							"q_id": q_id,
+							"so":"123",
+							"meto":"0",
+							"meToo":"0"}
+				});
+			}
+
+		}
+			let saveCheckbox = document.getElementById('a_solution');
+			saveCheckbox.addEventListener('change', a_solution);
+
+		/*	//metooは1回押したら1増える
+			function a_meToo(indexNo,q_id,metoo){
+				var intMetoo = parseInt(metoo);
+				var a_meToo =document.getElementById('a_meToo'+indexNo);
+				if(a_meToo.checked){
+					intMetoo ++;
+					//var q_id =document.getElementById('q_id');
+					$.ajax({
+					type:'post',
+					url: '/OpenQA/UpdateDeleteServlet',
+					data: {	"a_solution": 0,
+							"q_id": q_id,
+							"so":"0",
+							"meto":"999",
+							"a_meToo":intMetoo}
+				});
+				}/*
+				else{
+					intMetoo--;
+					$.ajax({
+						type:'post',
+						url: '/OpenQA/UpdateDeleteServlet',
+						data: {	"solution": 0,
+								"q_id": q_id,
+								"so":"0",
+								"meto":"999",
+								"meToo":intMetoo}
+					});
+				}*/
+
+			/*}
+				let saveCheckbox1 = document.getElementById('a_meToo');
+				saveCheckbox1.addEventListener('change', a_meToo);*/
 
 		function wopen(url){
 			window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
