@@ -638,7 +638,6 @@ function solution(indexNo,q_id){
 		let saveCheckbox1 = document.getElementById('meToo');
 		saveCheckbox1.addEventListener('change', meToo);
 
-
 //回答タブのsolution Ajax(kari)
 		function a_solution(indexNo,q_id){
 			var a_solution =document.getElementById('a_solution'+indexNo);
@@ -666,10 +665,10 @@ function solution(indexNo,q_id){
 			}
 
 		}
-			let saveCheckbox = document.getElementById('a_solution');
-			saveCheckbox.addEventListener('change', a_solution);
+		//let saveCheckbox = document.getElementById('a_solution');
+		//	saveCheckbox.addEventListener('change', a_solution);
 
-		/*	//metooは1回押したら1増える
+		//metooは1回押したら1増える
 			function a_meToo(indexNo,q_id,metoo){
 				var intMetoo = parseInt(metoo);
 				var a_meToo =document.getElementById('a_meToo'+indexNo);
@@ -679,11 +678,11 @@ function solution(indexNo,q_id){
 					$.ajax({
 					type:'post',
 					url: '/OpenQA/UpdateDeleteServlet',
-					data: {	"a_solution": 0,
+					data: {	"solution": 0,
 							"q_id": q_id,
 							"so":"0",
 							"meto":"999",
-							"a_meToo":intMetoo}
+							"meToo":intMetoo}
 				});
 				}/*
 				else{
@@ -699,8 +698,8 @@ function solution(indexNo,q_id){
 					});
 				}*/
 
-			/*}
-				let saveCheckbox1 = document.getElementById('a_meToo');
+			}
+			/*	let saveCheckbox1 = document.getElementById('a_meToo');
 				saveCheckbox1.addEventListener('change', a_meToo);*/
 
 		function wopen(url){
