@@ -121,13 +121,18 @@
 						</tr>
 
 						<!-- 質問の詳細を表示 -->
-						<c:if test="${sessionScope.user.id == value.q_userId}">
+
 						<tr class="close" id="q_detail${listSt.index}${status.index}">
 
 							<td colspan="7">
 								<c:out value="タイトル：${value.title}" /><br>
 								<c:out value="内容：${value.content}" /><br>
-								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ"><br>
+								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+							</td>
+						</tr>
+						<c:if test="${sessionScope.user.id == value.q_userId}">
+						<tr class="close" id="q_detail2${listSt.index}${status.index}">
+							<td>
 								<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="question">
@@ -145,7 +150,9 @@
 										<input type="hidden" name="meto" value="0">
 										<input type="submit" class="button" name="SUBMIT" value="編集">
 									</form>
+							</td>
 								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+							<td>
 								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form">
 									<input type="hidden" name="q_id" value="${value.q_id}">
 									<input type="hidden" name="meToo" value="${value.metoo}">
@@ -155,8 +162,12 @@
 									<input type="hidden" name="mode" value="category">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
 								</form>
+							</td>
+							<td>
 								<!-- 解決ボタン -->
 								<input type="checkbox" name="solution" id="solution${listSt.index}${status.index}"  onchange="solution('${status.index}','${value.q_id}', '${listSt.index}')" <c:if test="${value.solution == 1}">checked</c:if>>
+							</td>
+							<td colspan="4">
 								<!-- 私もボタン-->
 								<input type="checkbox" name="meToo" value="0" id="meToo${listSt.index}${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}', '${listSt.index}')">
 								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
@@ -221,6 +232,7 @@ function disp(indexNo, stIndexNo){
 	//隠している部分の情報を取得
 		var hide =document.getElementById('hide'+ stIndexNo +indexNo);
 		var q_detail =document.getElementById('q_detail'+ stIndexNo +indexNo);
+		var q_detail2=document.getElementById('q_detail2'+ stIndexNo +indexNo);
 		var answer =document.getElementById('answer'+ stIndexNo +indexNo);
 	//開いている部分の情報を取得
 		var good =document.getElementById('good'+ stIndexNo +indexNo);
