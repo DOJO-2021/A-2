@@ -247,6 +247,7 @@ function disp(indexNo, stIndexNo){
 			good.setAttribute('class','close');
 			detail.setAttribute('class','close');
 			reply.setAttribute('class','open');
+			q_detail2.setAttribute('class','open');
 		}else{
 			//openを閉じる
 			hide.setAttribute('class','close');
@@ -255,6 +256,7 @@ function disp(indexNo, stIndexNo){
 			good.setAttribute('class','open');
 			detail.setAttribute('class','open');
 			reply.setAttribute('class','close');
+			q_detail2.setAttribute('class','close');
 		}
 }
 
