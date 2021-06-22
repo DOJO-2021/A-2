@@ -110,10 +110,10 @@ ${sessionScope.user.name}さんのマイページ
 								</div>
 								<!-- replyボタン -->
 								<div class="close" id="reply${status.index}">
-								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer">
+								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="window_name" rel="noopener noreferrer">
 								  	<input type="hidden" name="mode" value="answer">
 								  	<input type="hidden" name="q_id" value="${value.q_id}">
-								  	<input type="SUBMIT" value=":ボールペン:">
+								  	<input type="SUBMIT" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')">
 								  </form>
 								</div>
 							</td>
@@ -134,7 +134,7 @@ ${sessionScope.user.name}さんのマイページ
 						<c:if test="${sessionScope.user.id == value.q_userId}">
 						<tr class="close" id="q_detail2${status.index}">
 							<td>
-								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
+								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="question">
 										<input type="hidden" name="q_id" value="${value.q_id}">
 										<input type="hidden" name="to" value="${value.to}">
@@ -148,7 +148,7 @@ ${sessionScope.user.name}さんのマイページ
 										<input type="hidden" name="solution" value="${value.solution}">
 										<input type="hidden" name="so" value="0">
 										<input type="hidden" name="meto" value="0">
-										<input type="submit" class="button" name="SUBMIT" value="編集">
+										<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 									</form>
 							</td>
 								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
@@ -217,14 +217,14 @@ ${sessionScope.user.name}さんのマイページ
 												<c:if test="${sessionScope.user.id == answer.a_userId}">
 												<tr>
 															<td>
-															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
+															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 																		<input type="hidden" name="mode" value="answer">
 																		<input type="hidden" name="a_id" value="${answer.a_id}">
 																		<input type="hidden" name="anonymity" value="${answer.a_anonymity}">
 																		<input type="hidden" name="content" value="${answer.answer}">
 																		<input type="hidden" name="images" value="${answer.a_images}">
 
-																		<input type="submit" class="button" name="SUBMIT" value="編集">
+																		<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 
 																</form>
 															</td>
@@ -330,10 +330,10 @@ ${sessionScope.user.name}さんのマイページ
 								</div>
 								<!-- replyボタン -->
 								<div class="close" id="a_reply${status.index}">
-								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="_blank" rel="noopener noreferrer">
+								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="window_name" rel="noopener noreferrer">
 								  	<input type="hidden" name="mode" value="answer">
 								  	<input type="hidden" name="q_id" value="${value.q_id}">
-								  	<input type="SUBMIT" value=":ボールペン:">
+								  	<input type="SUBMIT" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')">
 								  </form>
 								</div>
 							</td>
@@ -394,14 +394,14 @@ ${sessionScope.user.name}さんのマイページ
 													<tr>
 														<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 														<td>
-															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="_blank" rel="noopener noreferrer">
+															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 																	<input type="hidden" name="mode" value="answer">
 																	<input type="hidden" name="a_id" value="${answer.a_id}">
 																	<input type="hidden" name="anonymity" value="${answer.a_anonymity}">
 																	<input type="hidden" name="content" value="${answer.answer}">
 																	<input type="hidden" name="images" value="${answer.a_images}">
 
-																	<input type="submit" class="button" name="SUBMIT" value="編集">
+																	<input type="submit" class="button" name="SUBMIT" value="編集"  onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 
 															</form>
 														</td>
@@ -590,6 +590,11 @@ function solution(indexNo,q_id){
 	}
 		let saveCheckbox1 = document.getElementById('meToo');
 		saveCheckbox1.addEventListener('change', meToo);
+
+		function wopen(url){
+			window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
+		}
+
 </script>
 
 </html>

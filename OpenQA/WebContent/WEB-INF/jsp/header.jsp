@@ -19,7 +19,7 @@
 			<h1>Open Q&amp;A System</h1>
 
 			<!-- regist and mypage -->
-			<a href="/OpenQA/RegistServlet?mode=question" target="_blank" rel="noopener noreferrer"> <img
+			<a href="/OpenQA/RegistServlet?mode=question" target="window_name" rel="noopener noreferrer"  onClick="wopen('/OpenQA/RegistServlet?mode=question')"> <img
 				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
 				src="/OpenQA/images/myPage.png"></a>
 
@@ -80,4 +80,9 @@
 	</div>
 	>
 </body>
+<script>
+function wopen(url){
+	window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
+}
+</script>
 </html>
