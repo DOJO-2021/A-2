@@ -26,7 +26,8 @@
 		<input type="checkbox" name="anonymity" value="1"  id="anonymity" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
 
 	</th>
-
+  </tr>
+  <tr>
 	<td>
 	<p>回答<textarea name="content">${param.content}</textarea></p>
 

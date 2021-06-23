@@ -30,7 +30,6 @@
 
 		<input type="checkbox" name="anonymity" value="1"  id="anonymity" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
 
-		${param.b_category}
 		<!-- ひとつめのセレクトボックス -->
 		<!-- web開発コースは保留  -->
 		<select name="b_category" id="b_category" onchange="category()">
@@ -51,7 +50,7 @@
 <tr>
 
 	<td>
-	<input type="text" value="${param.images}">
+
 	<p>タイトル <input type="text" name="title" value="${param.title}" id="title"></p>
 	<p>内容<textarea name="content" id="content">${param.content}</textarea></p>
 		<img src="/OpenQA/images/${param.images}" alt = "" id="p1">

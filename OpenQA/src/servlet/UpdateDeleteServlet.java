@@ -138,7 +138,6 @@ public class UpdateDeleteServlet extends HttpServlet {
 					} else {
 						images = preImages;
 					}
-					System.out.println(images + "←画像の名前");
 
 					AnswerDAO aDao = new AnswerDAO();
 
