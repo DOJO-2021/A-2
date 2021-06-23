@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.QuestionDAO;
 import dao.UserDAO;
+import model.Almighty;
 import model.User;
 
 
@@ -55,7 +58,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 
-			//unanswered.jspにリダイレクトする
+			//unanswered.jspにフォワードする
+			QuestionDAO qDao = new QuestionDAO();
+			List<Almighty> mypageQuestionList = qDao.unansweredQuestion();
+			request.setAttribute("question", mypageQuestionList);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/unanswered.jsp");
 			dispatcher.forward(request, response);
 		}
