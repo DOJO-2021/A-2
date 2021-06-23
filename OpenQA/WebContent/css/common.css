@@ -7,6 +7,7 @@
 }
 .gazo {
 	float:right;
+	margin:2em 0 0 0;
 
 }
 .body{
@@ -29,12 +30,17 @@ a:link {
  a:active {
 	color: #696969;
  }
-.h1{
-	margin: 0;
+h1{
+	margin: 0 5em 0 0;
 	float:left;
+	text-align:left;
 }
 header{
 	border:1px solid #696969;
+}
+.headsearch{
+	margin:2.9em 0 0 4.5em;
+
 }
 
 /*hanba-ga-*/
@@ -49,6 +55,7 @@ header{
 img.sitelogo{
     height: 70px;
     width: auto;
+    padding:0.7em 1em 0 0;
 }
 img.loginlogo{
     height: 150px;

@@ -19,26 +19,27 @@
 
 			Open Q&amp;A System</h1>
 
-
+			<div class="headsearch">
 			<!-- serch -->
 			<form method="POST" action="/OpenQA/SearchServlet">
 				<input type="text" style="width: 300px; margin: 50;" name="word"><input
 					type="image" src="/OpenQA/images/search.png" alt="送信する"
 					name="submit" value="word" style="width:30px">
 			</form>
+			</div>
 
 			<!-- regist and mypage -->
 			<div class="gazo">
 			<a href="/OpenQA/RegistServlet?mode=question" target="window_name" rel="noopener noreferrer"  onClick="wopen('/OpenQA/RegistServlet?mode=question')"> <img
-				src="/OpenQA/images/post.png" style="width:70px"></a> <a href="/OpenQA/MyPageServlet"><img
-				src="/OpenQA/images/myPage.png" style="width:70px"></a>
+				src="/OpenQA/images/post.png" style="width:80px"></a> <a href="/OpenQA/MyPageServlet"><img
+				src="/OpenQA/images/myPage.png" style="width:80px"></a>
 				</div>
 
 			<!-- serch -->
 
 
 			<!-- drawer menu -->
-			<div class="zdo_drawer_menu">
+			<div class="zdo_drawer_menu" style="margin:2em;">
 				<div class="zdo_drawer_bg"></div>
 				<button type="button" class="zdo_drawer_button">
 					<span class="zdo_drawer_bar zdo_drawer_bar1"></span> <span
@@ -64,7 +65,7 @@
 							href="/OpenQA/MenuServlet?mode=logout">ログアウト</a></li>
 
 						<li class="gnav__menu__item"><img
-							src="/OpenQA/images/subLogo.png"></li>
+							src="/OpenQA/images/subLogo.png" style="width:270px;"></li>
 
 					</ul>
 				</nav>
