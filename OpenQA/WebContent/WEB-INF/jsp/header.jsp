@@ -14,10 +14,12 @@
 	<div class="header">
 		<!-- logo and title -->
 		<header class="site-header">
+		<div class="logos">
 			<h1>
 				<img src="/OpenQA/images/mainLogo.png" class="sitelogo">
 
 			Open Q&amp;A System</h1>
+			</div>
 
 			<div class="headsearch">
 			<!-- serch -->
