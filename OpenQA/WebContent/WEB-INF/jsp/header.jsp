@@ -74,7 +74,6 @@
 			</div>
 		</header>
 	</div>
-	<hr>
 </body>
 <script>
 function wopen(url){

@@ -49,7 +49,16 @@
 							</c:if>
 							</td>
 							<td   class="border">
+							<c:if test="${sessionScope.user.type==1}">
 								<c:out value="From.${value.q_name}" />
+								</c:if>
+								<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 1}">
+																	From:匿名
+																</c:if>
+															<!-- user typeが受講者かつ匿名を希望しない場合 -->
+																<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 0 }">
+																	<c:out value="From:${value.q_name}"/>
+																</c:if>
 							</td>
 							<td class="testOverflowTest1">
 								<c:out value="${value.title}" />
