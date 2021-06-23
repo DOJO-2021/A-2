@@ -174,10 +174,16 @@ public class RegistServlet extends HttpServlet {
 			int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String content = request.getParameter("content");
-			String images = request.getParameter("images");
 			String q_id = request.getParameter("q_id");
 			String name = user.getName();
 			System.out.println(content);
+			Part part = request.getPart("IMAGE");
+			String images = null;
+			if (part.getSize() != 0) {
+				images = this.getFileName(part);
+				part.write(images);
+			}
+
 			// 登録処理を行う
 			AnswerDAO bDao = new AnswerDAO();
 

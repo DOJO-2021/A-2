@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Open Q&A System</title>
+<style>
+.close{display:none}
+</style>
 <script type="text/javascript" src="/OpenQA/js/common.js"></script>
 </head>
 <body>
@@ -25,7 +28,7 @@
 
 		from. ${question.name}
 
-		<input type="checkbox" name="anonymity" value="1" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
+		<input type="checkbox" name="anonymity" value="1"  id="anonymity" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
 
 		${param.b_category}
 		<!-- ひとつめのセレクトボックス -->
@@ -44,12 +47,17 @@
 		</select>
 	</th>
 </tr>
+
 <tr>
+
 	<td>
+	<input type="text" value="${param.images}">
 	<p>タイトル <input type="text" name="title" value="${param.title}" id="title"></p>
 	<p>内容<textarea name="content" id="content">${param.content}</textarea></p>
-	<c:if test = "${param.images != null}">
-		<img src="/OpenQA/images/${param.images}" alt = "ccc" id="p1">
+	<c:if test = "${param.images != ''}">
+	  <span  class="open" id="preimg">
+		<img src="/OpenQA/images/${param.images}" alt = "cc" id="p1">
+	  </span>
 	</c:if>
 	<input type="hidden" value="${param.images}" name="preImage" id="preImage">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
@@ -62,7 +70,7 @@
 
 	<input type="hidden" name="q_id" value="${param.q_id}">
 	<input type="hidden" name="solution" value="${param.solution}">
-	<input type="text" name="meToo" value="${param.meToo}">
+	<input type="hidden" name="meToo" value="${param.meToo}">
 	<input type="hidden" name="so" value="0">
 	<input type="hidden" name="meto" value="0">
 
@@ -84,6 +92,9 @@
 
 		// 読み込み後に実行する処理
 		fileReader.onload = (function() {
+
+			var preimg = document.getElementById('preimg');
+			preimg.setAttribute('class', 'close');
 
 			// canvas にプレビュー画像を表示
 			var canvas = document.getElementById('preview');
@@ -107,6 +118,8 @@
 		var image = document.getElementById('preImage');
 		image.value = "";
 		var canvas = document.getElementById('preview');
+		var preimg = document.getElementById('preimg');
+		preimg.setAttribute('class', 'close');
 		var ctx = canvas.getContext('2d');
 		//キャンバスの(0,0)～(200,200)の範囲をクリアする
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -116,6 +129,12 @@
 
 	// 未入力アラート
 	function checkForm(){
+		var ch = document.getElementById('anonymity');
+		if (ch.checked) {
+			ch.value = "1";
+		} else {
+			ch.value = "0";
+		}
     	if(document.subBut.title.value == "" || document.subBut.content.value == ""){
         	window.alert("タイトルおよび内容を入力してください");
 			return false;

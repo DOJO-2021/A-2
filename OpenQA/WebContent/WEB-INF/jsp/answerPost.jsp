@@ -17,8 +17,8 @@
 
 		from. ${user.name}
 
-		<input type="hidden" name="anonymity" value="0">
-		<input type="checkbox" name="anonymity" value="1">匿名
+
+		<input type="checkbox" name="anonymity" value="1" id="anonymity">匿名
 
 	</th>
 
@@ -29,7 +29,7 @@
 
 	<label>
 		<img src="images/insert.jpeg" alt="画像添付">
-		<input type="file" accept="image/*" onchange="previewImage(this);">
+		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);">
 	</label>
 
 	<input type="submit" name="SUBMIT" value="回答投稿" onclick="return checkForm();">
@@ -68,6 +68,12 @@
 
 	// 未入力アラート
 	function checkForm(){
+		var ch = document.getElementById('anonymity');
+		if (ch.checked) {
+			ch.value = "1";
+		} else {
+			ch.value = "0";
+		}
     	if(document.subBut.content.value == ""){
         	window.alert("内容を入力してください");
 			return false;

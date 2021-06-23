@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import dao.AnswerDAO;
 import dao.QuestionDAO;
@@ -89,17 +90,15 @@ public class UpdateDeleteServlet extends HttpServlet {
 					Timestamp date =  new Timestamp(System.currentTimeMillis());
 					String title = request.getParameter("title");
 					String content = request.getParameter("content");
-					String images = request.getParameter("IMAGE");
-					/*String preImages = request.getParameter("preImage");
-					if (images.equals("") && preImages.equals("")) {//画像なしの場合
-
-					} else if(!images.equals("") && !preImages.equals("")) {//画像を変更した場合
-
-					} else if(!images.equals("") && preImages.equals("")) {//画像を変更しなかった場合
+					String preImages = request.getParameter("preImage");
+					Part part = request.getPart("IMAGE");
+					String images = null;
+					if (part.getSize() != 0) {
+						images = this.getFileName(part);
+						part.write(images);
+					} else {
 						images = preImages;
-					} else if(images.equals("") && !preImages.equals("")) {//画像を追加した場合
-
-					}*/
+					}
 
 					QuestionDAO qDao = new QuestionDAO();
 
@@ -129,7 +128,15 @@ public class UpdateDeleteServlet extends HttpServlet {
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					Timestamp date =  new Timestamp(System.currentTimeMillis());
 					String answer = request.getParameter("answer");
-					String images = request.getParameter("images");
+					String preImages = request.getParameter("preImage");
+					Part part = request.getPart("IMAGE");
+					String images = null;
+					if (part.getSize() != 0) {
+						images = this.getFileName(part);
+						part.write(images);
+					} else {
+						images = preImages;
+					}
 
 					AnswerDAO aDao = new AnswerDAO();
 
@@ -230,6 +237,19 @@ public class UpdateDeleteServlet extends HttpServlet {
 			}
 
 	}
+
+	//ファイルの名前を取得してくる
+			private String getFileName(Part part) {
+		        String name = null;
+		        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+		            if (dispotion.trim().startsWith("filename")) {
+		                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+		                name = name.substring(name.lastIndexOf("\\") + 1);
+		                break;
+		            }
+		        }		// TODO 自動生成されたメソッド・スタブ
+				return name;
+			}
 
 
 }
