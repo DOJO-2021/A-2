@@ -21,9 +21,6 @@
 	#tab2:checked ~ .tab_area .tab2_label{background:#fff; color:#000;}
 	#tab2:checked ~ .panel_area #panel2{display:block;}
 
-	/*.border {
-		border: 2px #808080 solid;
-	}*/
 	.table {
 		table-layout: fixed;
 		width: 1000px;
@@ -95,7 +92,7 @@ ID:${sessionScope.user.id}
 					<!-- q_idが一致する質問を取り出す -->
 					<c:if test="${data != value.q_id }">
 						<tr>
-							<td   class="border">
+							<td>
 							<c:if test="${value.to == 0}">
 								<c:out value="To.全員" />
 							</c:if>
@@ -106,7 +103,7 @@ ID:${sessionScope.user.id}
 								<c:out value="To.受講者" />
 							</c:if>
 							</td>
-							<td   class="border">
+							<td>
 								<c:out value="From.${value.q_name}" />
 							</td>
 							<td class="testOverflowTest1">
@@ -174,8 +171,8 @@ ID:${sessionScope.user.id}
 						<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 						<c:if test="${sessionScope.user.id == value.q_userId}">
 						<tr class="close" id="q_detail2${status.index}">
-							<td>
-							<div class="border">
+							<td style="display: flex;">
+
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="question">
 										<input type="hidden" name="q_id" value="${value.q_id}">
@@ -192,11 +189,10 @@ ID:${sessionScope.user.id}
 										<input type="hidden" name="meto" value="0">
 										<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 									</form>
-							</div>
-							</td>
+
 								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
-							<td>
-							<div class="border">
+
+
 								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()" >
 									<input type="hidden" name="q_id" value="${value.q_id}">
 									<input type="hidden" name="meToo" value="${value.metoo}">
@@ -206,20 +202,21 @@ ID:${sessionScope.user.id}
 									<input type="hidden" name="mode" value="mypage">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除">
 								</form>
-							</div>
+
 							</td>
 							<td>
-							<div class="border">
+
 								<!-- 解決ボタン -->
 								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
-							</div>
+
 							</td>
 							<td colspan="4">
-							<div class="border">
+
 								<!-- 私もボタン-->
-								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
-								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
-							</div>
+								<div style="text-align: right;">
+									<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+								</div>
 							</td>
 						</tr>
 						</c:if>
@@ -234,7 +231,7 @@ ID:${sessionScope.user.id}
 								<td colspan="7">
 									<table class="a_table" width="900">
 									<!-- 回答を取り出すfor文 -->
-										<c:forEach items="${question}" var="answer">
+										<c:forEach items="${question}" var="answer" varStatus="status">
 											<c:if test="${data == answer.a_q_id }">
 												<tr>
 														<!-- 回答を質問の下に表示 -->
@@ -325,7 +322,7 @@ ID:${sessionScope.user.id}
 		<!-- 回答タブ -->
 		<div id="panel2" class="tab_panel">
 			<c:set var="data" value="0" />
-			<table>
+			<table class="table">
 			<!-- 各項目 -->
 				<tr>
 					<td>
@@ -350,6 +347,7 @@ ID:${sessionScope.user.id}
 					<!-- q_idが一致する質問を取り出す -->
 					<c:if test="${data != value.q_id}">
 
+
 						<tr>
 							<td>
 							<c:if test="${value.to == 0}">
@@ -365,7 +363,7 @@ ID:${sessionScope.user.id}
 							<td>
 								<c:out value="From.${value.q_name}" />
 							</td>
-							<td>
+							<td class="testOverflowTest1">
 								<c:out value="${value.title}" />
 							</td>
 							<td>
@@ -404,15 +402,26 @@ ID:${sessionScope.user.id}
 
 						<!-- 自分が回答した質問の詳細を表示 -->
 						<tr class="close" id="a_q_detail${status.index}">
+
 							<td colspan="7">
-								<c:out value="タイトル：${value.title}" /><br>
-								<c:out value="内容：${value.content}" /><br>
-								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ"><br>
+								タイトル：
+								<div style="padding: 10px; border: 1px solid #333333; border-radius: 10px;">
+									${value.title}<br>
+								</div>
+								<br>
+								内容：
+								<div style="padding: 10px; border: 1px solid #333333; border-radius: 10px;">
+									${value.content}<br>
+
+								</div>
+								<br>
+								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+							</td>
 						</tr>
 
 						<c:if test="${sessionScope.user.id == value.q_userId}">
 						<tr class="close" id="a_q_detail2${status.index}">
-							<td>
+							<td style="display: flex;">
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="question">
 										<input type="hidden" name="q_id" value="${value.q_id}">
@@ -429,9 +438,9 @@ ID:${sessionScope.user.id}
 										<input type="hidden" name="meto" value="0">
 										<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 									</form>
-							</td>
+
 								<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
-							<td>
+
 								<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()" >
 									<input type="hidden" name="q_id" value="${value.q_id}">
 									<input type="hidden" name="meToo" value="${value.metoo}">
@@ -448,8 +457,10 @@ ID:${sessionScope.user.id}
 							</td>
 							<td colspan="4">
 								<!-- 私もボタン-->
-								<input type="checkbox" name="meToo" value="0" id="a_meToo${status.index}"  onchange="a_meToo('${status.index}','${value.q_id}','${value.metoo}')">
-								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+								 <div style="text-align: right;">
+									<input type="checkbox" name="meToo" value="0" id="a_meToo${status.index}"  onchange="a_meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+								</div>
 							</td>
 						</tr>
 						</c:if>
@@ -460,18 +471,21 @@ ID:${sessionScope.user.id}
 					<c:remove var="data" />
 					<c:set var="data" value="${value.q_id}" />
 					<c:if test="${data == value.q_id}">
-						<c:if test="${count == 0 }">
+						<c:if test="${status.count == 1 }">
 							<tr class="close" id="a_answer${status.index}">
 								<td colspan="7">
-									<table>
+									<table class="a_table" width="900">
 									<!-- 回答を取り出すfor文 -->
 										<c:forEach items="${answer}" var="answer">
 											<c:if test="${data == answer.a_q_id }">
 												<!-- 回答を質問の下に表示 -->
 													<!-- user typeが講師だった場合 -->
 													<tr>
-														<td><c:if test="${sessionScope.user.type==1}">
-															<c:out value="${answer.a_name}"/>
+														<td colspan="8">
+														<h4 style="margin: 0;">回答 ${status.count}</h4>
+														<hr width="987" align="left" style="margin: 0;">
+															<c:if test="${sessionScope.user.type==1}">
+															<c:out value="From:${answer.a_name}"/>
 															</c:if>
 														<!-- user typeが受講者かつ匿名希望の場合 -->
 															<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
@@ -481,23 +495,26 @@ ID:${sessionScope.user.id}
 															<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
 																<c:out value="${answer.a_name}"/>
 															</c:if>
-														</td>
-														<td>
+
 															<c:out value="${answer.a_date}" />
 														</td>
 													</tr>
 													<tr>
-														<td colspan="2">
-																<c:out value="内容：${answer.answer}" />
+														<td colspan="8">
+															内容：
+															<div style="padding: 10px; border: 1px solid #333333; border-radius: 10px;">
+																${answer.answer}
+
 															<br>
+															</div>
 																<img src="/OpenQA/images/${answer.a_images}" alt="画像イメージ">
-															<br>
+														</td>
 													</tr>
 
 													<c:if test="${sessionScope.user.id == answer.a_userId}">
 													<tr>
 														<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
-														<td>
+														<td style="width:30px; display: flex;">
 															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 																	<input type="hidden" name="mode" value="answer">
 																	<input type="hidden" name="a_id" value="${answer.a_id}">
@@ -508,9 +525,9 @@ ID:${sessionScope.user.id}
 																	<input type="submit" class="button" name="SUBMIT" value="編集"  onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 
 															</form>
-														</td>
+
 														<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
-														<td>
+
 															<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()">
 																	<input type="hidden" name="q_id" value="${answer.q_id}">
 																	<input type="hidden" name="meToo" value="${answer.metoo}">
@@ -524,12 +541,16 @@ ID:${sessionScope.user.id}
 
 															</form>
 														</td>
-													</tr>
-													</c:if>
 
+													</tr>
+
+
+
+													</c:if>
 											</c:if>
 											<c:remove var="count" />
 											<c:set var="count" value="1" />
+
 										</c:forEach>
 									</table>
 								</td>
