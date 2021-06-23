@@ -55,17 +55,15 @@
 	<p>タイトル <input type="text" name="title" value="${param.title}" id="title"></p>
 	<p>内容<textarea name="content" id="content">${param.content}</textarea></p>
 	<c:if test = "${param.images != ''}">
-	  <span  class="open" id="preimg">
 		<img src="/OpenQA/images/${param.images}" alt = "cc" id="p1">
-	  </span>
-	</c:if>
+	 </c:if>
 	<input type="hidden" value="${param.images}" name="preImage" id="preImage">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<input type="button" id="btn1" value="画像削除" onclick="cls();">
 	<label>
 		<img src="images/insert.jpeg" alt="画像添付">
-		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);">
+		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);" id="image">
 	</label>
 
 	<input type="hidden" name="q_id" value="${param.q_id}">
@@ -88,13 +86,12 @@
 
 	function previewImage(obj){
 
+		document.getElementById("p1").style.display ="none";
+
 		var fileReader = new FileReader();
 
 		// 読み込み後に実行する処理
 		fileReader.onload = (function() {
-
-			var preimg = document.getElementById('preimg');
-			preimg.setAttribute('class', 'close');
 
 			// canvas にプレビュー画像を表示
 			var canvas = document.getElementById('preview');
@@ -112,14 +109,16 @@
 		// 画像読み込み
 		fileReader.readAsDataURL(obj.files[0]);
 		console.log(fileReader.result);
+
+
+
 	}
 
 	function cls(){
 		var image = document.getElementById('preImage');
 		image.value = "";
 		var canvas = document.getElementById('preview');
-		var preimg = document.getElementById('preimg');
-		preimg.setAttribute('class', 'close');
+		document.getElementById("p1").style.display ="none";
 		var ctx = canvas.getContext('2d');
 		//キャンバスの(0,0)～(200,200)の範囲をクリアする
 		ctx.clearRect(0, 0, canvas.width, canvas.height);

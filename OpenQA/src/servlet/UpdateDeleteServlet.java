@@ -128,7 +128,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 					String a_id = request.getParameter("a_id");
 					int anonymity = Integer.parseInt(request.getParameter("anonymity"));
 					Timestamp date =  new Timestamp(System.currentTimeMillis());
-					String answer = request.getParameter("answer");
+					String answer = request.getParameter("content");
 					String preImages = request.getParameter("preImage");
 					Part part = request.getPart("IMAGE");
 					String images = null;

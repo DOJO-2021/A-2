@@ -171,6 +171,7 @@ public class AnswerDAO {
 			pStmt.setTimestamp(2, date);
 			pStmt.setString(3, answer);
 			pStmt.setString(4, images);
+			pStmt.setString(5, a_id);
 
 			// 登録できたら1でtrue
 			int num = pStmt.executeUpdate();
