@@ -3,7 +3,6 @@
 * {
   	margin-right: auto;
   	margin-left: auto;
-  	text-align: center;
 }
 h1{
 	text-align:left;
@@ -51,6 +50,40 @@ header{
 	overflow: scroll;
     height: calc( 100% - 158px );
 }
+
+.table {
+		table-layout: fixed;
+		width: 1000px;
+		border: 2px #808080 solid;
+		border-collapse:collapse;
+		text-align:left;
+	}
+	.table tr {
+		border: 2px #808080 solid;
+	}
+
+	.a_table {
+		border-collapse:collapse;
+		text-align:left;
+	}
+
+	.a_table close {
+		border-bottom: 2px #808080 solid;
+	}
+	.title {
+		width: 30px;
+	}
+
+	.testOverflowTest1 {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis; /*非表示のあふれた内容をどのようにユーザーに知らせるのかを設定*/
+	}
+	.button{
+	text-align:left;
+	background:#B0E0E6;
+	 border-radius: 20px 20px 20px 20px;
+	}
 
 /*hanba-ga-*/
 .site-header{
