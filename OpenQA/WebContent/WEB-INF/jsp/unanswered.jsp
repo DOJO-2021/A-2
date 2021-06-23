@@ -9,8 +9,9 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
+<div class="content">
 <h1>未解決質問一覧</h1>
-	<hr>
+
 
 <c:set var="data" value="0" />
 			<table>
@@ -228,6 +229,7 @@
 					</c:if>
 				</c:forEach>
 			</table>
+</div>
 
 </body>
 <style>

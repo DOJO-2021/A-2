@@ -5,13 +5,18 @@
   	margin-left: auto;
   	text-align: center;
 }
+h1{
+	text-align:left;
+}
 .gazo {
 	float:right;
 	margin:2em 0 0 0;
 
 }
-.body{
+body{
 	text-align: center;
+	height: 100vh;
+    overflow: hidden;
 }
 .loginbotan{
 	background:#B0E0E6;
@@ -30,7 +35,7 @@ a:link {
  a:active {
 	color: #696969;
  }
-h1{
+.logos{
 	margin: 0 5em 0 0;
 	float:left;
 	text-align:left;
@@ -42,13 +47,17 @@ header{
 	margin:2.9em 0 0 4.5em;
 
 }
+.content{
+	overflow: scroll;
+    height: calc( 100% - 158px );
+}
 
 /*hanba-ga-*/
 .site-header{
     background: #fff;
     display: flex;
     padding: 0px 0px;
-    position: fixed;
+    /*position: fixed;*/
     justify-content: space-between;
     width: 100%;
 }
