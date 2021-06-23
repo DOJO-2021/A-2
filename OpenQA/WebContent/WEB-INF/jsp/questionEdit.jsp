@@ -54,9 +54,7 @@
 	<input type="text" value="${param.images}">
 	<p>タイトル <input type="text" name="title" value="${param.title}" id="title"></p>
 	<p>内容<textarea name="content" id="content">${param.content}</textarea></p>
-	<c:if test = "${param.images != ''}">
-		<img src="/OpenQA/images/${param.images}" alt = "cc" id="p1">
-	 </c:if>
+		<img src="/OpenQA/images/${param.images}" alt = "" id="p1">
 	<input type="hidden" value="${param.images}" name="preImage" id="preImage">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 

@@ -30,11 +30,7 @@
 	<td>
 	<p>回答<textarea name="content">${param.content}</textarea></p>
 
-	<c:if test = "${param.images != ''}">
-	  <span  class="open" id="preimg">
-		<img src="/OpenQA/images/${param.images}" alt = "cc" id="p1">
-	  </span>
-	</c:if>
+		<img src="/OpenQA/images/${param.images}" alt = "" id="p1">
 
 	<input type="hidden" name="preImage" value="${param.images}" id="preImage">
 
@@ -69,8 +65,7 @@
 		// 読み込み後に実行する処理
 		fileReader.onload = (function() {
 
-			var preimg = document.getElementById('preimg');
-			preimg.setAttribute('class', 'close');
+			document.getElementById("p1").style.display ="none";
 
 			// canvas にプレビュー画像を表示
 			var canvas = document.getElementById('preview');
@@ -95,8 +90,7 @@
 		image.value = "";
 		var canvas = document.getElementById('preview');
 		var ctx = canvas.getContext('2d');
-		var preimg = document.getElementById('preimg');
-		preimg.setAttribute('class', 'close');
+		document.getElementById("p1").style.display ="none";
 		//キャンバスの(0,0)～(200,200)の範囲をクリアする
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		 var obj = document.getElementById("image");
