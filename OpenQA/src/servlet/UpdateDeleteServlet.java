@@ -50,6 +50,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 		//ページ遷移系
 		// modeという変数にもらってきた値を代入する 「どこから来たか」の情報が入っている
 		String mode = request.getParameter("mode");
+		System.out.println(mode);
 
 		if(mode.equals ("question")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/questionEdit.jsp");
@@ -137,6 +138,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 					} else {
 						images = preImages;
 					}
+					System.out.println(images + "←画像の名前");
 
 					AnswerDAO aDao = new AnswerDAO();
 

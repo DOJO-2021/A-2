@@ -14,14 +14,16 @@
 <body>
 <h2>回答編集</h2>
 <form method="POST" name = "subBut" action="/OpenQA/UpdateDeleteServlet" enctype="multipart/form-data">
-<input type=hidden name="a_id" value=${answer.a_id}><!-- 保留 -->
+	<input type="hidden" name="a_id" value="${param.a_id}">
+	<input type="hidden" name="q_id" value="${param.q_id}">
+	<input type="hidden" name="mode" value="aa">
 <table>
   <tr>
 	<th>
 
 		from. ${user.name}
 
-		<input type="checkbox" name="anonymity" value="1"  id="anonymity" <c:if test = "${question.anonymity == 1}"> checked </c:if>>匿名
+		<input type="checkbox" name="anonymity" value="1"  id="anonymity" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
 
 	</th>
 
@@ -34,15 +36,21 @@
 	  </span>
 	</c:if>
 
-	<input type="hidden" value="${param.images}" id="preImage">
+	<input type="hidden" name="preImage" value="${param.images}" id="preImage">
 
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<input type="button" id="btn1" value="画像削除" onclick="cls();">
 	<label>
 		<img src="images/insert.jpeg" alt="画像添付">
-		<input type="file" accept="image/*" onchange="previewImage(this);">
+		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);">
 	</label>
+
+
+	<input type="hidden" name="solution" value="0">
+	<input type="hidden" name="meToo" value="0">
+	<input type="hidden" name="so" value="0">
+	<input type="hidden" name="meto" value="0">
 
 	<input type="submit" name="SUBMIT" value="回答編集">
 	</td>
@@ -53,6 +61,7 @@
 </body>
 
 <script>
+  'use strict'
 	function previewImage(obj){
 
 		var fileReader = new FileReader();
@@ -109,7 +118,7 @@
     		if(confirm('再投稿してもよろしいですか？')) {
     			alert("再投稿しました");
     			// windowを閉じる処理
-    			window.close();
+    			//window.close();
     			return true;
     		}
     		else{
