@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Header</title>
 <link rel="stylesheet" href="/OpenQA/css/common.css">
+<link rel="stylesheet" href="/OpenQA/css/mitame.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/OpenQA/js/zdo_drawer_menu.js"></script>
 </head>
@@ -13,21 +14,23 @@
 	<div class="header">
 		<!-- logo and title -->
 		<header class="site-header">
-			<h1 class="site-logo">
+			<h1 class="sitelogo">
 				<img src="/OpenQA/images/mainLogo.png">
 			</h1>
 			<h1>Open Q&amp;A System</h1>
 
 			<!-- regist and mypage -->
+			<div class="gazo">
 			<a href="/OpenQA/RegistServlet?mode=question" target="window_name" rel="noopener noreferrer"  onClick="wopen('/OpenQA/RegistServlet?mode=question')"> <img
 				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
 				src="/OpenQA/images/myPage.png"></a>
+				</div>
 
 			<!-- serch -->
 			<form method="POST" action="/OpenQA/SearchServlet">
-				<input type="text" style="width: 150px;" name="word"><input
+				<input type="text" style="width: 200px;" name="word"><input
 					type="image" src="/OpenQA/images/search.png" alt="送信する"
-					name="submit" value="word">
+					name="submit" value="word" class="gazo">
 			</form>
 
 
