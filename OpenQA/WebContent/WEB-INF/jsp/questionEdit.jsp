@@ -25,17 +25,17 @@
 
 		from. ${question.name}
 
-		<input type="hidden" name="anonymity" value="0">
 		<input type="checkbox" name="anonymity" value="1" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
 
+		${param.b_category}
 		<!-- ひとつめのセレクトボックス -->
 		<!-- web開発コースは保留  -->
 		<select name="b_category" id="b_category" onchange="category()">
 			<option value="">カテゴリー</option>
-			<option  value="パーソナルスキル" <c:if test = "${param.b_category == パーソナルスキル}"> selected </c:if> >パーソナルスキル</option>
-			<option  value="IT基礎" <c:if test = "${param.b_category == IT基礎}"> selected </c:if>>IT基礎コース</option>
-			<option  value="java基礎" <c:if test = "${param.b_category == java基礎}"> selected </c:if>>java基礎コース</option>
-			<option  value="その他" <c:if test = "${param.b_category == その他}"> selected </c:if>>その他</option>
+			<option  value="パーソナルスキル" <c:if test = "${param.b_category == 'パーソナルスキル'}"> selected </c:if> >パーソナルスキル</option>
+			<option  value="IT基礎" <c:if test = "${param.b_category == 'IT基礎'}"> selected </c:if>>IT基礎コース</option>
+			<option  value="java基礎" <c:if test = "${param.b_category == 'java基礎'}"> selected </c:if>>java基礎コース</option>
+			<option  value="その他" <c:if test = "${param.b_category == 'その他'}"> selected </c:if>>その他</option>
 		</select>
 
 		<input type="hidden" id="s_category" value="${param.s_category}">
@@ -76,6 +76,7 @@
 </body>
 <script>
 'use strict'
+	window.onload = category();
 
 	function previewImage(obj){
 

@@ -23,8 +23,8 @@
 
 		from. ${user.name}
 
-		<input type="hidden" name="anonymity" value="0">
-		<input type="checkbox" name="anonymity" value="1">匿名
+
+		<input type="checkbox" name="anonymity" value="1" id="anonymity">匿名
 
 		<!-- ひとつめのセレクトボックス -->
 		<!-- web開発コースは保留  -->
@@ -124,6 +124,13 @@
 */
 	// 未入力アラート
 	function checkForm(){
+		var ch = document.getElementById('anonymity');
+		if (ch.checked) {
+			ch.value = "1";
+		} else {
+			ch.value = "0";
+		}
+
 		var to = document.getElementById('to');
 		var b_cate = document.getElementById('b_category');
       	var s_cate = document.getElementById('s_category');
