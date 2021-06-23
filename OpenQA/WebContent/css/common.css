@@ -5,18 +5,53 @@
   	margin-left: auto;
   	text-align: center;
 }
+.gazo {
+	float:right;
+
+}
+.body{
+	text-align: center;
+}
+.loginbotan{
+	background:#B0E0E6;
+	 border-radius: 25px 25px 25px 25px;
+	  padding: 0.7em 6em;
+}
+a:link {
+	color: #60EEEE;
+ }
+ a:visited {
+	color:#60EEEE;
+ }
+ a:hover {
+	color: #696969;
+ }
+ a:active {
+	color: #696969;
+ }
+.h1{
+	margin: 0;
+	float:left;
+}
+header{
+	border:1px solid #696969;
+}
 
 /*hanba-ga-*/
 .site-header{
     background: #fff;
     display: flex;
-    padding: 60px 20px;
+    padding: 0px 0px;
     position: fixed;
     justify-content: space-between;
     width: 100%;
 }
-.site-logo img{
-    height: 20px;
+img.sitelogo{
+    height: 70px;
+    width: auto;
+}
+img.loginlogo{
+    height: 150px;
     width: auto;
 }
 .zdo_drawer_button * {

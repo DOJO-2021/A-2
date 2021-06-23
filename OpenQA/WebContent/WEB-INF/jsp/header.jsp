@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Header</title>
 <link rel="stylesheet" href="/OpenQA/css/common.css">
-<link rel="stylesheet" href="/OpenQA/css/mitame.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/OpenQA/js/zdo_drawer_menu.js"></script>
 </head>
@@ -14,24 +14,27 @@
 	<div class="header">
 		<!-- logo and title -->
 		<header class="site-header">
-			<h1 class="sitelogo">
-				<img src="/OpenQA/images/mainLogo.png">
-			</h1>
-			<h1>Open Q&amp;A System</h1>
+			<h1>
+				<img src="/OpenQA/images/mainLogo.png" class="sitelogo">
+
+			Open Q&amp;A System</h1>
+
+
+			<!-- serch -->
+			<form method="POST" action="/OpenQA/SearchServlet">
+				<input type="text" style="width: 300px; margin: 50;" name="word"><input
+					type="image" src="/OpenQA/images/search.png" alt="送信する"
+					name="submit" value="word" style="width:30px">
+			</form>
 
 			<!-- regist and mypage -->
 			<div class="gazo">
 			<a href="/OpenQA/RegistServlet?mode=question" target="window_name" rel="noopener noreferrer"  onClick="wopen('/OpenQA/RegistServlet?mode=question')"> <img
-				src="/OpenQA/images/post.png"></a> <a href="/OpenQA/MyPageServlet"><img
-				src="/OpenQA/images/myPage.png"></a>
+				src="/OpenQA/images/post.png" style="width:70px"></a> <a href="/OpenQA/MyPageServlet"><img
+				src="/OpenQA/images/myPage.png" style="width:70px"></a>
 				</div>
 
 			<!-- serch -->
-			<form method="POST" action="/OpenQA/SearchServlet">
-				<input type="text" style="width: 200px;" name="word"><input
-					type="image" src="/OpenQA/images/search.png" alt="送信する"
-					name="submit" value="word" class="gazo">
-			</form>
 
 
 			<!-- drawer menu -->
@@ -66,22 +69,9 @@
 					</ul>
 				</nav>
 			</div>
-			<!--  <div class="hamburger"id="open_nav">
-			<img src="/OpenQA/images/hamManu.png">
-			</div>
-
-			<nav class="gnav">
-	  		<ul class="gnav__menu">
-	   		 <li class="gnav__menu__item"><a href="/OpenQA/MenuServlet?mode=unanswered">未解決質問一覧</a></li>
-	    		<li class="gnav__menu__item"><a href="/OpenQA/MenuServlet?mode=category">カテゴリー</a></li>
-	    <li class="gnav__menu__item"><a href="/OpenQA/MenuServlet?mode=guide">使用ガイド</a></li>
-	    <li class="gnav__menu__item"><a href="/OpenQA/MenuServlet?mode=logout">ログアウト</a></li>
-	    <li class="gnav__menu__item"><img src="/OpenQA/images/subLogo.png"></li>
-	  </ul>
-	</nav>-->
 		</header>
 	</div>
-	>
+	<hr>
 </body>
 <script>
 function wopen(url){

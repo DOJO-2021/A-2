@@ -6,22 +6,22 @@
 <meta charset="UTF-8">
 <title>Open Q&A System</title>
 <link rel="stylesheet" href="/OpenQA/css/common.css">
-<link rel="stylesheet" href="/OpenQA/css/mitame.css">
+
 </head>
 <body>
-	<img src="images/mainLogo.png" alt="" class="sitelogo">
+	<img src="images/mainLogo.png" alt="" class="loginlogo">
 
 	<form method="POST" action="/OpenQA/LoginServlet" id="form">
 		<p>
 		    <!-- IDとPWは外に表記？それともプレイスホルダーのみ？ -->
-			<input type="text" name="ID" placeholder="ID">
+			<input type="text" name="ID" placeholder="ID" style="font-size:1.7em">
 		</p>
 		<p>
-			<input type="password" name="PW" placeholder="PW">
+			<input type="password" name="PW" placeholder="PW" style="font-size:1.7em">
 		</p>
 		${errMsg}<!-- 「※IDかPWが間違えています。」のエラーをここで出す。 -->
 		<p>
-			<input type="submit" name="LOGIN" value="ログイン">
+			<input type="submit" name="LOGIN" value="ログイン" class="loginbotan">
 		</p>
 	</form>
 
