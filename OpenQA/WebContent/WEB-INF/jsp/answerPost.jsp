@@ -18,8 +18,8 @@
 		from. ${user.name}
 
 
-		<input type="checkbox" name="anonymity" value="1" id="anonymity">匿名
-
+		<input type="checkbox" name="anonymity" id="ch">匿名
+		<input type="hidden" value="0" name="anonymity" id="anonymity">
 	</th>
 
 	<td>
@@ -68,11 +68,12 @@
 
 	// 未入力アラート
 	function checkForm(){
-		var ch = document.getElementById('anonymity');
+		var ch = document.getElementById('ch');
+		var anonymity = document.getElementById('anonymity');
 		if (ch.checked) {
-			ch.value = "1";
+			anonymity.value = "1";
 		} else {
-			ch.value = "0";
+			anonymity.value = "0";
 		}
     	if(document.subBut.content.value == ""){
         	window.alert("内容を入力してください");
