@@ -342,7 +342,7 @@ ID:${sessionScope.user.id}
 					</td>
 				</tr>
 				<!-- 自分が回答した質問を表示（詳細を押す前） -->
-				<c:forEach items="${answer}" var="value" varStatus="qStatus">
+				<c:forEach items="${answer}" var="value" varStatus="status">
 
 					<!-- q_idが一致する質問を取り出す -->
 					<c:if test="${data != value.q_id}">
@@ -471,56 +471,56 @@ ID:${sessionScope.user.id}
 					<c:remove var="data" />
 					<c:set var="data" value="${value.q_id}" />
 					<c:if test="${data == value.q_id}">
-						<c:if test="${qStatus.count == 1 }">
+						<c:if test="${status.count == 1 }">
 							<tr class="close" id="a_answer${status.index}">
 								<td colspan="7">
 									<table class="a_table" width="900">
 									<!-- 回答を取り出すfor文 -->
-										<c:forEach items="${answer}" var="answerItem">
-											<c:if test="${data == answerItem.a_q_id }">
+										<c:forEach items="${answer}" var="answer">
+											<c:if test="${data == answer.a_q_id }">
 												<!-- 回答を質問の下に表示 -->
 													<!-- user typeが講師だった場合 -->
 													<tr>
 														<td colspan="8">
-														<h4 style="margin: 0;">回答 ${qStatus.count}</h4>
+														<h4 style="margin: 0;">回答 ${status.count}</h4>
 														<hr width="987" align="left" style="margin: 0;">
 															<c:if test="${sessionScope.user.type==1}">
-															<c:out value="From:${answerItem.a_name}"/>
+															<c:out value="From:${answer.a_name}"/>
 															</c:if>
 														<!-- user typeが受講者かつ匿名希望の場合 -->
-															<c:if test="${sessionScope.user.type==0 and answerItem.a_anonymity== 1}">
+															<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
 																匿名
 															</c:if>
 														<!-- user typeが受講者かつ匿名を希望しない場合 -->
-															<c:if test="${sessionScope.user.type==0 and answerItem.a_anonymity== 0 }">
-																<c:out value="${answerItem.a_name}"/>
+															<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
+																<c:out value="${answer.a_name}"/>
 															</c:if>
 
-															<c:out value="${answerItem.a_date}" />
+															<c:out value="${answer.a_date}" />
 														</td>
 													</tr>
 													<tr>
 														<td colspan="8">
 															内容：
 															<div style="padding: 10px; border: 1px solid #333333; border-radius: 10px;">
-																${answerItem.answer}
+																${answer.answer}
 
 															<br>
 															</div>
-																<img src="/OpenQA/images/${answerItem.a_images}" alt="画像イメージ">
+																<img src="/OpenQA/images/${answer.a_images}" alt="画像イメージ">
 														</td>
 													</tr>
 
-													<c:if test="${sessionScope.user.id == answerItem.a_userId}">
+													<c:if test="${sessionScope.user.id == answer.a_userId}">
 													<tr>
 														<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 														<td style="width:30px; display: flex;">
 															<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 																	<input type="hidden" name="mode" value="answer">
-																	<input type="hidden" name="a_id" value="${answerItem.a_id}">
-																	<input type="hidden" name="anonymity" value="${answerItem.a_anonymity}">
-																	<input type="hidden" name="content" value="${answerItem.answer}">
-																	<input type="hidden" name="images" value="${answerItem.a_images}">
+																	<input type="hidden" name="a_id" value="${answer.a_id}">
+																	<input type="hidden" name="anonymity" value="${answer.a_anonymity}">
+																	<input type="hidden" name="content" value="${answer.answer}">
+																	<input type="hidden" name="images" value="${answer.a_images}">
 
 																	<input type="submit" class="button" name="SUBMIT" value="編集"  onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 
@@ -529,13 +529,13 @@ ID:${sessionScope.user.id}
 														<!-- 削除ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 
 															<form method="POST" action="/OpenQA/UpdateDeleteServlet" name="form" onSubmit="return delete1()">
-																	<input type="hidden" name="q_id" value="${answerItem.q_id}">
-																	<input type="hidden" name="meToo" value="${answerItem.metoo}">
-																	<input type="hidden" name="solution" value="${answerItem.solution}">
+																	<input type="hidden" name="q_id" value="${answer.q_id}">
+																	<input type="hidden" name="meToo" value="${answer.metoo}">
+																	<input type="hidden" name="solution" value="${answer.solution}">
 																	<input type="hidden" name="so" value="0">
 																	<input type="hidden" name="meto" value="0">
 																	<input type="hidden" name="mode" value="mypage">
-																	<input type="hidden" name="a_id" value="${answerItem.a_id}">
+																	<input type="hidden" name="a_id" value="${answer.a_id}">
 
 																	<input type="submit" class="button" name="SUBMIT" value="回答削除">
 
