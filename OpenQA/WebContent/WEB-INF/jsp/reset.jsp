@@ -7,7 +7,7 @@
 <title>Open Q&A System</title>
 </head>
 <body>
-	<form method="POST" name="form" action="/OpenQA/UpdateDeleteServlet" id="form">
+<form method="POST" action="/OpenQA/RegistServlet?mode=reset" id="form">
 
 		<p>
 			ID<input type="text" name="ID" placeholder="ID">

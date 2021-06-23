@@ -43,7 +43,7 @@ public class RegistServlet extends HttpServlet {
 		String mode = request.getParameter("mode");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if(!mode.equals("userRegist")) {
+		if(!mode.equals("userRegist") && !mode.equals("reset")) {
 			if (session.getAttribute("user") == null) {
 				response.sendRedirect("/OpenQA/LoginServlet");
 				return;
@@ -56,6 +56,10 @@ public class RegistServlet extends HttpServlet {
 		if(mode.equals ("userRegist")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userRegist.jsp");
 			dispatcher.forward(request, response);
+		// reset.jspにフォワードする
+		} else if(mode.equals ("reset")) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/reset.jsp");
+				dispatcher.forward(request, response);
 		// questionPost.jspにフォワードする
 		} else if(mode.equals("question")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/questionPost.jsp");

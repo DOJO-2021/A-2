@@ -27,7 +27,7 @@
 
 	<a href="/OpenQA/RegistServlet?mode=userRegist">新規会員登録はこちら</a>
 	<br>
-	<a href="/OpenQA/UpdateDeleteServlet">PW再設定はこちら</a>
+	<a href="/OpenQA/RegistServlet?mode=reset">PW再設定はこちら</a>
 
 </body>
 </html>
