@@ -18,7 +18,7 @@ body{
     overflow: hidden;
 }
 .loginbotan{
-	background:#B0E0E6;
+	background:#BBDDFF;;
 	 border-radius: 25px 25px 25px 25px;
 	  padding: 0.7em 6em;
 }
@@ -81,8 +81,8 @@ header{
 	}
 	.button{
 	text-align:left;
-	background:#B0E0E6;
-	 border-radius: 20px 20px 20px 20px;
+	background:#BBDDFF;
+	 border-radius: 5px 5px 5px 5px;
 	}
 
 /*hanba-ga-*/

@@ -24,9 +24,9 @@
 			<div class="headsearch">
 			<!-- serch -->
 			<form method="POST" action="/OpenQA/SearchServlet">
-				<input type="text" style="width: 300px; margin: 50;" name="word"><input
+				<input type="text" style="width: 300px; margin: 50;" name="word" placeholder="キーワード検索"><input
 					type="image" src="/OpenQA/images/search.png" alt="送信する"
-					name="submit" value="word" style="width:30px">
+										name="submit" value="word" style="width:30px">
 			</form>
 			</div>
 
