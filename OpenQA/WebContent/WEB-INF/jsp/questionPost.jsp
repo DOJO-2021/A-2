@@ -24,7 +24,7 @@
 		from. ${user.name}
 
 
-		<input type="checkbox" name="anonymity" id="ch">匿名
+		<input type="checkbox" name="ch" id="ch">匿名
 		<input type="hidden" value="0" name="anonymity" id="anonymity">
 
 		<!-- ひとつめのセレクトボックス -->
@@ -129,8 +129,10 @@
 	var anonymity = document.getElementById('anonymity');
 	if (ch.checked) {
 		anonymity.value = "1";
+
 	} else {
 		anonymity.value = "0";
+
 	}
 
 		var to = document.getElementById('to');
