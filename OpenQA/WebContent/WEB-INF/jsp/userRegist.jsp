@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Open Q&A System</title>
+<link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
 <form method="POST" action="/OpenQA/RegistServlet?mode=userRegist" id="form">
@@ -14,7 +15,7 @@
 		</p>
 
 		<p>
-			新しいPW<input type="text" name="pw" id="pw" placeholder="新しいPW">
+			PW<input type="text" name="pw" id="pw" placeholder="新しいPW">
 		</p>
 		<p>
 			確認用PW<input type="text" name="pw" id="pw2" placeholder="確認用PW">
