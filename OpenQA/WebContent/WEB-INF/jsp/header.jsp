@@ -77,7 +77,7 @@
 </body>
 <script>
 function wopen(url){
-	window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
+	window.open(url, "window_name", "width=500,height=500,scrollbars=yes");
 }
 </script>
 </html>

@@ -129,7 +129,7 @@
 										target="_blank" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="answer"> <input
 											type="hidden" name="q_id" value="${value.q_id}"> <input
-											type="SUBMIT" value=":ボールペン:">
+											type="SUBMIT" value=":ボールペン:"  onClick="wopen('/OpenQA/RegistServlet?mode=answer')">
 									</form>
 								</div>
 							</td>
@@ -170,7 +170,7 @@
 										<input type="hidden" name="solution" value="${value.solution}">
 										<input type="hidden" name="so" value="0">
 										<input type="hidden" name="meto" value="0">
-										<input type="submit" class="button" name="SUBMIT" value="編集">
+										<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 									</form>
 									</div>
 							</td>
@@ -258,7 +258,7 @@
 																	<input type="hidden" name="content" value="${answer.answer}">
 																	<input type="hidden" name="images" value="${answer.a_images}">
 
-																	<input type="submit" class="button" name="SUBMIT" value="編集">
+																	<input type="submit" class="button" name="SUBMIT" value="編集" onClick="wopen('/OpenQA/UpdateDeleteServlet')">
 
 															</form>
 														</td>
@@ -409,6 +409,10 @@ function solution(indexNo, q_id, stIndexNo){
 	}
 //		let saveCheckbox1 = document.getElementById('meToo');
 //		saveCheckbox1.addEventListener('change', meToo);
+
+function wopen(url){
+			window.open(url, "window_name", "width=500,height=500,scrollbars=yes");
+		}
 </script>
 
 

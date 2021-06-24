@@ -397,7 +397,7 @@ function solution(indexNo,q_id){
 		saveCheckbox1.addEventListener('change', meToo);
 
 		function wopen(url){
-			window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
+			window.open(url, "window_name", "width=500,height=500,scrollbars=yes");
 		}
 
 </script>
