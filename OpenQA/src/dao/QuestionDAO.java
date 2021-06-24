@@ -325,7 +325,7 @@ public class QuestionDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.id = ?; ";
+			String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.id = ? ";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -399,7 +399,7 @@ public class QuestionDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.solution = 0; ";
+			String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.solution = 0 ";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -465,8 +465,8 @@ public class QuestionDAO {
 		try {
 
 			AnswerDAO ans = new AnswerDAO();
-			List<Almighty> myAnswer = ans.mypageAnswer(id);
-			for (Almighty value : myAnswer) {
+			List<String> myAnswer = ans.mypageAnswer(id);
+			for (String value : myAnswer) {
 
 				// JDBCドライバを読み込む
 				Class.forName("org.h2.Driver");
@@ -476,12 +476,12 @@ public class QuestionDAO {
 
 				// SELECT文を準備する
 				// idでDB検索
-				String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.q_id = ?; ";
+				String sql = "Select * from question left outer join answer on question.q_id = answer.q_id where question.q_id = ? order by answer.q_id asc";
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				pStmt.setString(1, value.getQ_id());
+				pStmt.setString(1, value);
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();

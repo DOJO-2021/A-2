@@ -471,7 +471,7 @@ ID:${sessionScope.user.id}
 					<c:remove var="data" />
 					<c:set var="data" value="${value.q_id}" />
 					<c:if test="${data == value.q_id}">
-						<c:if test="${status.count == 1 }">
+						<c:if test="${count == 0 }">
 							<tr class="close" id="a_answer${status.index}">
 								<td colspan="7">
 									<table class="a_table" width="900">
@@ -482,7 +482,7 @@ ID:${sessionScope.user.id}
 													<!-- user typeが講師だった場合 -->
 													<tr>
 														<td colspan="8">
-														<h4 style="margin: 0;">回答 ${status.count}</h4>
+														<h4 style="margin: 0;">回答</h4>
 														<hr width="987" align="left" style="margin: 0;">
 															<c:if test="${sessionScope.user.type==1}">
 															<c:out value="From:${answer.a_name}"/>
@@ -541,16 +541,11 @@ ID:${sessionScope.user.id}
 
 															</form>
 														</td>
-
+														<c:remove var="count" />
+														<c:set var="count" value="1" />
 													</tr>
-
-
-
 													</c:if>
 											</c:if>
-											<c:remove var="count" />
-											<c:set var="count" value="1" />
-
 										</c:forEach>
 									</table>
 								</td>

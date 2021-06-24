@@ -14,9 +14,10 @@ import model.Almighty;
 public class AnswerDAO {
 
 	// ①マイページに自分の回答結果を一覧表示
-	public List<Almighty> mypageAnswer(String id) { // ★保留！
+	public List<String> mypageAnswer(String id) { // ★保留！
 		Connection conn = null;
 		List<Almighty> mypageAnswerList = new ArrayList<Almighty>();
+		List<String> mypageQ_id = new ArrayList<String>();
 
 
 		try {
@@ -28,7 +29,7 @@ public class AnswerDAO {
 
 			// SELECT文を準備する
 			// idでDB検索
-			String sql = "Select * from answer left outer join question on question.q_id = answer.q_id where answer.id = ?; ";
+			String sql = "Select distinct answer.q_id from answer left outer join question on question.q_id = answer.q_id where answer.id = ?; ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -38,7 +39,8 @@ public class AnswerDAO {
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする(リスト)
-			while (rs.next()) {
+			/*
+			  while (rs.next()) {
 				Almighty mypage = new Almighty();
 						mypage.setQ_id(rs.getString("question.q_id"));
 						mypage.setTo(rs.getInt("question.to"));
@@ -64,6 +66,11 @@ public class AnswerDAO {
 				// ArrayListに上記7つのデータを格納
 				mypageAnswerList.add(mypage);
 			}
+			*/
+			while(rs.next()) {
+				 mypageQ_id.add(rs.getString("answer.q_id"));
+
+			}
 		}
 
 		catch (SQLException e) {
@@ -88,7 +95,7 @@ public class AnswerDAO {
 			}
 		}
 		// 結果を返す
-		return mypageAnswerList;
+		return mypageQ_id;
 	}
 
 	// ②回答投稿（登録）
