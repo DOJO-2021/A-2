@@ -62,7 +62,7 @@ public class SearchServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/searchResult.jsp");
 			dispatcher.forward(request, response);
 		}else {
-			request.setAttribute("QuestionList",list);
+			request.setAttribute("question",list);
 			//遷移
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/searchResult.jsp");
 			dispatcher.forward(request, response);

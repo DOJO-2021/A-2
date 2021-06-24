@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>検索結果一覧</title>
+<title>Open Q&amp;A System</title>
+<link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
 <div class="content">
-<h1>未解決質問一覧</h1>
+<h1>検索結果</h1>
 
+<h1 style="text-align: center; margin-top: 5em;">${msg}</h1>
 
+<c:if test="${question != null}">
 <c:set var="data" value="0" />
 			<table class="table">
 			<tr>
@@ -49,7 +52,19 @@
 							</c:if>
 							</td>
 							<td   class="border">
+							<c:if test="${sessionScope.user.type==1}">
 								<c:out value="From.${value.q_name}" />
+								</c:if>
+								<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 1 and sessionScope.user.id != value.q_userId}">
+																	From:匿名
+																</c:if>
+								<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 1 and sessionScope.user.id == value.q_userId}">
+									<c:out value="From:${value.q_name}"/>
+																</c:if>
+															<!-- user typeが受講者かつ匿名を希望しない場合 -->
+																<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 0 }">
+																	<c:out value="From:${value.q_name}"/>
+																</c:if>
 							</td>
 							<td class="testOverflowTest1">
 								<c:out value="${value.title}" />
@@ -83,7 +98,7 @@
 								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="window_name" rel="noopener noreferrer">
 								  	<input type="hidden" name="mode" value="answer">
 								  	<input type="hidden" name="q_id" value="${value.q_id}">
-								  	<input type="SUBMIT" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')">
+								  	<input type="image" src="/OpenQA/images/reply.png" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')" width="50" height="50">
 								  </form>
 								</div>
 							</td>
@@ -106,7 +121,7 @@
 								${value.content}
 								</div>
 								<br>
-								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+								<img src="/OpenQA/images/${value.q_images}" alt="">
 
 							</td>
 
@@ -114,8 +129,9 @@
 
 
 						<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+
+						<tr class="close" id="tq_detail${status.index}">
 						<c:if test="${sessionScope.user.id == value.q_userId}">
-						<tr class="close" id="q_detail2${status.index}">
 							<td>
 							<div class="border">
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
@@ -145,7 +161,7 @@
 									<input type="hidden" name="solution" value="${value.solution}">
 									<input type="hidden" name="so" value="0">
 									<input type="hidden" name="meto" value="0">
-									<input type="hidden" name="mode" value="mypage">
+									<input type="hidden" name="mode" value="unans">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除">
 								</form>
 							</div>
@@ -156,6 +172,7 @@
 								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
 							</div>
 							</td>
+							</c:if>
 							<td colspan="4">
 							<div class="border">
 								<!-- 私もボタン-->
@@ -164,7 +181,7 @@
 							</div>
 							</td>
 						</tr>
-						</c:if>
+
 					<c:set var="count" value="0" />
 					</c:if>
 
@@ -190,8 +207,11 @@
 																<c:out value="From:${answer.a_name}"/>
 																</c:if>
 															<!-- user typeが受講者かつ匿名希望の場合 -->
-																<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
+																<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1 and sessionScope.user.id != value.a_userId}">
 																	From:匿名
+																</c:if>
+																<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1 and sessionScope.user.id == value.a_userId}">
+																		<c:out value="From:${value.a_name}"/>
 																</c:if>
 															<!-- user typeが受講者かつ匿名を希望しない場合 -->
 																<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
@@ -264,6 +284,7 @@
 					</c:if>
 				</c:forEach>
 			</table>
+		  </c:if>
 		</div>
 
 
@@ -284,7 +305,7 @@ function disp(indexNo){
 	//隠している部分の情報を取得
 		var hide =document.getElementById('hide'+indexNo);
 		var q_detail =document.getElementById('q_detail'+indexNo);
-		var q_detail2 =document.getElementById('q_detail2'+indexNo);
+		var tq_detail =document.getElementById('tq_detail'+indexNo);
 		var answer =document.getElementById('answer'+indexNo);
 		var reply =document.getElementById('reply'+indexNo);
 	//開いている部分の情報を取得
@@ -295,7 +316,7 @@ function disp(indexNo){
 			//closeを開く
 			hide.setAttribute('class','open');
 			q_detail.setAttribute('class','open');
-			q_detail2.setAttribute('class','open');
+			tq_detail.setAttribute('class','open');
 			answer.setAttribute('class','open');
 			good.setAttribute('class','close');
 			detail.setAttribute('class','close');
@@ -304,7 +325,7 @@ function disp(indexNo){
 			//openを閉じる
 			hide.setAttribute('class','close');
 			q_detail.setAttribute('class','close');
-			q_detail2.setAttribute('class','close');
+			tq_detail.setAttribute('class','close');
 			answer.setAttribute('class','close');
 			good.setAttribute('class','open');
 			detail.setAttribute('class','open');
@@ -387,7 +408,7 @@ function solution(indexNo,q_id){
 		saveCheckbox1.addEventListener('change', meToo);
 
 		function wopen(url){
-			window.open(url, "window_name", "width=300,height=300,scrollbars=yes");
+			window.open(url, "window_name", "width=700,height=500,scrollbars=yes");
 		}
 
 </script>
