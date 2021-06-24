@@ -172,8 +172,9 @@ ID:${sessionScope.user.id}</h5>
 
 
 						<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
-						<c:if test="${sessionScope.user.id == value.q_userId}">
+
 						<tr class="close" id="q_detail2${status.index}">
+						<c:if test="${sessionScope.user.id == value.q_userId}">
 							<td style="display: flex;">
 
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
@@ -213,6 +214,9 @@ ID:${sessionScope.user.id}</h5>
 								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
 
 							</td>
+
+							</c:if>
+
 							<td colspan="4">
 
 								<!-- 私もボタン-->
@@ -221,8 +225,9 @@ ID:${sessionScope.user.id}</h5>
 									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 								</div>
 							</td>
+
 						</tr>
-						</c:if>
+
 					<c:set var="count" value="0" />
 					</c:if>
 
@@ -422,8 +427,9 @@ ID:${sessionScope.user.id}</h5>
 							</td>
 						</tr>
 
-						<c:if test="${sessionScope.user.id == value.q_userId}">
+
 						<tr class="close" id="a_q_detail2${status.index}">
+						<c:if test="${sessionScope.user.id == value.q_userId}">
 							<td style="display: flex;">
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="question">
@@ -458,6 +464,7 @@ ID:${sessionScope.user.id}</h5>
 								<!-- 解決ボタン -->
 								<input type="checkbox" name="solution" id="a_solution${status.index}"  onchange="a_solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
 							</td>
+						</c:if>
 							<td colspan="4">
 								<!-- 私もボタン-->
 								 <div style="text-align: right;">
@@ -465,8 +472,9 @@ ID:${sessionScope.user.id}</h5>
 									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 								</div>
 							</td>
+
 						</tr>
-						</c:if>
+
 
 					<c:set var="count" value="0" />
 					</c:if>
