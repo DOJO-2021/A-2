@@ -119,7 +119,7 @@
 								${value.content}
 								</div>
 								<br>
-								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+								<img src="/OpenQA/images/${value.q_images}" alt="">
 
 							</td>
 
@@ -127,8 +127,9 @@
 
 
 						<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
+
+						<tr class="close" id="tq_detail${status.index}">
 						<c:if test="${sessionScope.user.id == value.q_userId}">
-						<tr class="close" id="2q_detail${status.index}">
 							<td>
 							<div class="border">
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
@@ -169,6 +170,7 @@
 								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
 							</div>
 							</td>
+							</c:if>
 							<td colspan="4">
 							<div class="border">
 								<!-- 私もボタン-->
@@ -177,7 +179,7 @@
 							</div>
 							</td>
 						</tr>
-						</c:if>
+
 					<c:set var="count" value="0" />
 					</c:if>
 
@@ -300,7 +302,7 @@ function disp(indexNo){
 	//隠している部分の情報を取得
 		var hide =document.getElementById('hide'+indexNo);
 		var q_detail =document.getElementById('q_detail'+indexNo);
-		var q_detail2 =document.getElementById('2q_detail'+indexNo);
+		var tq_detail =document.getElementById('tq_detail'+indexNo);
 		var answer =document.getElementById('answer'+indexNo);
 		var reply =document.getElementById('reply'+indexNo);
 	//開いている部分の情報を取得
@@ -311,7 +313,7 @@ function disp(indexNo){
 			//closeを開く
 			hide.setAttribute('class','open');
 			q_detail.setAttribute('class','open');
-			q_detail2.setAttribute('class','open');
+			tq_detail.setAttribute('class','open');
 			answer.setAttribute('class','open');
 			good.setAttribute('class','close');
 			detail.setAttribute('class','close');
@@ -320,7 +322,7 @@ function disp(indexNo){
 			//openを閉じる
 			hide.setAttribute('class','close');
 			q_detail.setAttribute('class','close');
-			q_detail2.setAttribute('class','close');
+			tq_detail.setAttribute('class','close');
 			answer.setAttribute('class','close');
 			good.setAttribute('class','open');
 			detail.setAttribute('class','open');
