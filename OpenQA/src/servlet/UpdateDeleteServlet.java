@@ -109,17 +109,73 @@ public class UpdateDeleteServlet extends HttpServlet {
 					String mode = request.getParameter("mode");
 					QuestionDAO qDao = new QuestionDAO();
 
-					qDao.delete(q_id);
-					// データ格納
-					List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
-					List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
 
-					request.setAttribute("question", mypageQuestionList);
-					request.setAttribute("answer", mypageQanswerList);
 
 					if(mode.equals("mypage")) {
+						qDao.delete(q_id);
+						// データ格納
+						List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
+						List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
+
+						request.setAttribute("question", mypageQuestionList);
+						request.setAttribute("answer", mypageQanswerList);
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 						dispatcher.forward(request, response);
+					} else if (mode.equals("category")) {
+						qDao.delete(q_id);
+
+						String b_category = request.getParameter("bcategory");
+						System.out.println(b_category);
+						QuestionDAO qDAO = new QuestionDAO();
+						ArrayList<Almighty> questions = qDAO.cate_select(b_category);
+						ArrayList<ArrayList<Almighty>>list = new ArrayList<>();
+						ArrayList<Almighty>s_list = null;
+
+						for(Almighty a : questions) {
+							System.out.println(a.getS_category());
+						}
+
+						String cate = "";
+						int count = 0;
+						for (int i=0; i<questions.size(); i++) {
+							if (!questions.get(i).getS_category().equals(cate) && count!=0) {
+								list.add(s_list);
+								count = 0;
+							}
+
+							if (!questions.get(i).getS_category().equals(cate) && count==0) {
+								s_list = new ArrayList<>();
+								s_list.add(questions.get(i));
+								cate = questions.get(i).getS_category();
+								count++;
+
+							} else if  (questions.get(i).getS_category().equals(cate)) {
+								s_list.add(questions.get(i));
+							}
+
+							if (i == questions.size() - 1) {
+								list.add(s_list);
+							}
+
+						}
+
+
+						request.setAttribute("list", list);
+
+
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/category.jsp");
+						dispatcher.forward(request, response);
+
+					} else if (mode.equals("unans")) {
+						qDao.delete(q_id);
+
+						QuestionDAO unqDao = new QuestionDAO();
+						List<Almighty> unanswer = unqDao.unansweredQuestion();
+						request.setAttribute("question", unanswer);
+
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/unanswered.jsp");
+						dispatcher.forward(request, response);
+
 					}
 
 				}
@@ -148,19 +204,23 @@ public class UpdateDeleteServlet extends HttpServlet {
 					String mode = request.getParameter("mode");
 					AnswerDAO aDao = new AnswerDAO();
 					QuestionDAO qDao = new QuestionDAO();
-					aDao.delete(a_id);
 
-					// データ格納
-					List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
-					List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
 
-					request.setAttribute("question", mypageQuestionList);
-					request.setAttribute("answer", mypageQanswerList);
+
 
 					if(mode.equals("mypage")) {
+						aDao.delete(a_id);
+
+						// データ格納
+						List<Almighty> mypageQuestionList = qDao.mypageQuestion(user.getId());
+						List<Almighty> mypageQanswerList = qDao.mypageQanswer(user.getId());
+
+						request.setAttribute("question", mypageQuestionList);
+						request.setAttribute("answer", mypageQanswerList);
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp");
 						dispatcher.forward(request, response);
 					} else if (mode.equals("category")) {
+						aDao.delete(a_id);
 
 						//リクエストパラメータを取得
 						request.setCharacterEncoding("UTF-8");
@@ -213,6 +273,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 						dispatcher.forward(request, response);
 
 					} else if (mode.equals("unans")) {
+						aDao.delete(a_id);
 						QuestionDAO unqDao = new QuestionDAO();
 						List<Almighty> unanswer = unqDao.unansweredQuestion();
 						request.setAttribute("question", unanswer);
