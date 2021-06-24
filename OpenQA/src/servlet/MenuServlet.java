@@ -57,7 +57,7 @@ public class MenuServlet extends HttpServlet {
 			QuestionDAO qDAO = new QuestionDAO();
 			List<Almighty> list = qDAO.unansweredQuestion();
 
-			request.setAttribute("unans",list);
+			request.setAttribute("question",list);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/unanswered.jsp");
 			dispatcher.forward(request, response);

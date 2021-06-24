@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OpenQA</title>
+<link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
