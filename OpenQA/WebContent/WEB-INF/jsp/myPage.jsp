@@ -253,8 +253,11 @@ ID:${sessionScope.user.id}</h5>
 																<c:out value="From:${answer.a_name}"/>
 																</c:if>
 															<!-- user typeが受講者かつ匿名希望の場合 -->
-																<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
+																<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1 and sessionScope.user.id != value.a_userId}">
 																	From:匿名
+																</c:if>
+																<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1 and sessionScope.user.id == value.a_userId}">
+																		<c:out value="From:${value.a_name}"/>
 																</c:if>
 															<!-- user typeが受講者かつ匿名を希望しない場合 -->
 																<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
@@ -369,7 +372,19 @@ ID:${sessionScope.user.id}</h5>
 							</c:if>
 							</td>
 							<td>
+							<c:if test="${sessionScope.user.type==1}">
 								<c:out value="From.${value.q_name}" />
+								</c:if>
+								<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 1 and sessionScope.user.id != value.q_userId}">
+																	From:匿名
+																</c:if>
+								<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 1 and sessionScope.user.id == value.q_userId}">
+									<c:out value="From:${value.q_name}"/>
+																</c:if>
+															<!-- user typeが受講者かつ匿名を希望しない場合 -->
+																<c:if test="${sessionScope.user.type==0 and value.q_anonymity== 0 }">
+																	<c:out value="From:${value.q_name}"/>
+																</c:if>
 							</td>
 							<td class="testOverflowTest1">
 								<c:out value="${value.title}" />
@@ -499,9 +514,12 @@ ID:${sessionScope.user.id}</h5>
 															<c:out value="From:${answer.a_name}"/>
 															</c:if>
 														<!-- user typeが受講者かつ匿名希望の場合 -->
-															<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 1}">
-																匿名
-															</c:if>
+															<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1 and sessionScope.user.id != value.a_userId}">
+																	From:匿名
+																</c:if>
+																<c:if test="${sessionScope.user.type==0 and value.a_anonymity== 1 and sessionScope.user.id == value.a_userId}">
+																		<c:out value="From:${value.a_name}"/>
+																</c:if>
 														<!-- user typeが受講者かつ匿名を希望しない場合 -->
 															<c:if test="${sessionScope.user.type==0 and answer.a_anonymity== 0 }">
 																<c:out value="${answer.a_name}"/>
