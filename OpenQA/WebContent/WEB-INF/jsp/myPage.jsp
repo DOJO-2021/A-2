@@ -173,7 +173,7 @@ ID:${sessionScope.user.id}</h5>
 
 						<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
 
-						<tr class="close" id="q_detail2${status.index}">
+						<tr class="close" id="2q_detail${status.index}">
 						<c:if test="${sessionScope.user.id == value.q_userId}">
 							<td style="display: flex;">
 
@@ -443,7 +443,7 @@ ID:${sessionScope.user.id}</h5>
 						</tr>
 
 
-						<tr class="close" id="a_q_detail2${status.index}">
+						<tr class="close" id="2a_q_detail${status.index}">
 						<c:if test="${sessionScope.user.id == value.q_userId}">
 							<td style="display: flex;">
 								<form style="display: inline" method="GET" action="/OpenQA/UpdateDeleteServlet" target="window_name" rel="noopener noreferrer">
@@ -598,7 +598,7 @@ function disp(indexNo){
 	//隠している部分の情報を取得
 		var hide =document.getElementById('hide'+indexNo);
 		var q_detail =document.getElementById('q_detail'+indexNo);
-		var q_detail2 =document.getElementById('q_detail2'+indexNo);
+		var q_detail2 =document.getElementById('2q_detail'+indexNo);
 		var answer =document.getElementById('answer'+indexNo);
 		var reply =document.getElementById('reply'+indexNo);
 	//開いている部分の情報を取得
@@ -632,7 +632,7 @@ function a_disp(indexNo){
 	//隠している部分の情報を取得
 	var a_hide =document.getElementById('a_hide'+indexNo);
 	var a_q_detail =document.getElementById('a_q_detail'+indexNo);
-	var a_q_detail2 =document.getElementById('a_q_detail2'+indexNo);
+	var a_q_detail2 =document.getElementById('2a_q_detail'+indexNo);
 	var a_answer =document.getElementById('a_answer'+indexNo);
 	var a_reply =document.getElementById('a_reply'+indexNo);
 	//開いている部分の情報を取得
