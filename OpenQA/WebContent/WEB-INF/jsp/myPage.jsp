@@ -143,7 +143,7 @@ ID:${sessionScope.user.id}</h5>
 								  <form method="GET" action="/OpenQA/RegistServlet?mode=answer" target="window_name" rel="noopener noreferrer">
 								  	<input type="hidden" name="mode" value="answer">
 								  	<input type="hidden" name="q_id" value="${value.q_id}">
-								  	<input type="SUBMIT" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')">
+								  	<input type="image" src="/OpenQA/images/reply.png" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')" width="50" height="50">
 								  </form>
 								</div>
 							</td>
