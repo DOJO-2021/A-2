@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>OpenQA</title>
+<title>Open Q&amp;A System</title>
 <link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>

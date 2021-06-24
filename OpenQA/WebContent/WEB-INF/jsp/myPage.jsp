@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Open Q&A System</title>
+<title>Open Q&amp;A System</title>
+<link rel="stylesheet" href="/OpenQA/css/common.css">
 <style>
 	..tab_wrap{width:500px; margin:80px auto;}
 	input[type="radio"]{display:none;}
@@ -51,8 +52,10 @@
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
 <body>
-${sessionScope.user.name}さんのマイページ
-ID:${sessionScope.user.id}
+<jsp:include page="/WEB-INF/jsp/header.jsp"/>
+<div class="content">
+<h5 style="text-align:left;">${sessionScope.user.name}さんのマイページ
+ID:${sessionScope.user.id}</h5>
 <h1>過去に登録した投稿</h1>
 
 <div class="tab_wrap">
@@ -556,6 +559,7 @@ ID:${sessionScope.user.id}
 			</table>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 
