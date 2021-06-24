@@ -159,7 +159,7 @@
 									<input type="hidden" name="solution" value="${value.solution}">
 									<input type="hidden" name="so" value="0">
 									<input type="hidden" name="meto" value="0">
-									<input type="hidden" name="mode" value="mypage">
+									<input type="hidden" name="mode" value="unans">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除">
 								</form>
 							</div>

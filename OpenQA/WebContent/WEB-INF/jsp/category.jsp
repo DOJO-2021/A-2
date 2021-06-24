@@ -187,7 +187,7 @@
 									<input type="hidden" name="so" value="0">
 									<input type="hidden" name="meto" value="0">
 									<input type="hidden" name="mode" value="category">
-									<input type="hidden" name="bcategory" value="${param.b_category}">
+									<input type="hidden" name="bcategory" value="${value.b_category}">
 								<input type="submit" class="button" name="SUBMIT" value="質問削除" onclick="delete1();" >
 								</form>
 								</div>

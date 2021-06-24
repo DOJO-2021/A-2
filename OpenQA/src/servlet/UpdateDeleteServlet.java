@@ -211,6 +211,15 @@ public class UpdateDeleteServlet extends HttpServlet {
 
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/category.jsp");
 						dispatcher.forward(request, response);
+
+					} else if (mode.equals("unans")) {
+						QuestionDAO unqDao = new QuestionDAO();
+						List<Almighty> unanswer = unqDao.unansweredQuestion();
+						request.setAttribute("question", unanswer);
+
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/unanswered.jsp");
+						dispatcher.forward(request, response);
+
 					}
 				}
 			}
