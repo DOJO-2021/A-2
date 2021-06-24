@@ -133,6 +133,8 @@ ID:${sessionScope.user.id}</h5>
 							<td>
 								<!-- 私もボタン -->
 								<div class="open" id="good${status.index}">
+								<input type="checkbox" class="memento" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<label for="meToo${status.index}" class="formmemento"></label>
 									<img src="/OpenQA/images/preMeToo.png" alt="私も">
 									<c:out value="${value.metoo}" />
 								</div>
@@ -221,7 +223,8 @@ ID:${sessionScope.user.id}</h5>
 
 								<!-- 私もボタン-->
 								<div style="text-align: right;">
-									<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<input type="checkbox" class="memento" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<label for="meToo${status.index}" class="formmemento"></label>
 									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 								</div>
 							</td>
@@ -483,7 +486,7 @@ ID:${sessionScope.user.id}</h5>
 							<td colspan="4">
 								<!-- 私もボタン-->
 								 <div style="text-align: right;">
-									<input type="checkbox" name="meToo" value="0" id="a_meToo${status.index}"  onchange="a_meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<input type="checkbox" class="memento" name="meToo" value="0" id="a_meToo${status.index}"  onchange="a_meToo('${status.index}','${value.q_id}','${value.metoo}')">
 									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
 								</div>
 							</td>
