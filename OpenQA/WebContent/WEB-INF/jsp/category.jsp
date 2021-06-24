@@ -131,8 +131,8 @@
 									<form method="GET" action="/OpenQA/RegistServlet?mode=answer"
 										target="_blank" rel="noopener noreferrer">
 										<input type="hidden" name="mode" value="answer"> <input
-											type="hidden" name="q_id" value="${value.q_id}"> <input
-											type="SUBMIT" value=":ボールペン:"  onClick="wopen('/OpenQA/RegistServlet?mode=answer')">
+											type="hidden" name="q_id" value="${value.q_id}">
+											<input type="image" src="/OpenQA/images/reply.png" value=":ボールペン:" onClick="wopen('/OpenQA/RegistServlet?mode=answer')" width="50" height="50">
 									</form>
 								</div>
 							</td>
@@ -418,7 +418,7 @@ function solution(indexNo, q_id, stIndexNo){
 //		saveCheckbox1.addEventListener('change', meToo);
 
 function wopen(url){
-			window.open(url, "window_name", "width=500,height=500,scrollbars=yes");
+			window.open(url, "window_name", "width=700,height=500,scrollbars=yes");
 		}
 </script>
 
