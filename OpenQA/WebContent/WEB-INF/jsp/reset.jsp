@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Open Q&A System</title>
+<link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
 <form method="POST" action="/OpenQA/RegistServlet?mode=reset" id="form">
