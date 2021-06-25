@@ -16,7 +16,7 @@
 		</p>
 
 		<p>
-			PW<input type="text" name="pw" id="pw" placeholder="新しいPW">
+			PW<input type="text" name="pw" id="pw" placeholder="PW">
 			<div class="tooltip">半角英字と数字を組み合わせた６桁以上で入力してください。</div>
 		</p>
 		<p>
