@@ -7,6 +7,25 @@
 <meta charset="UTF-8">
 <title>Open Q&amp;A System</title>
 <link rel="stylesheet" href="/OpenQA/css/common.css">
+<style>
+.check-box input + .text:before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: 0.25em;
+  margin: 0 5px 0 0;
+  background-image: none, url("/OpenQA/images/preMeToo.jpg");
+  background-size: 68% auto, 100%;
+  background-position: top 55% left 50%, 0 0;
+  background-repeat: no-repeat, no-repeat;
+  width: 19px;
+  height: 18px;
+}
+
+.check-box input:checked + .text:before {
+  background-image: url("/OpenQA/images/meToo.png");
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
@@ -90,7 +109,7 @@
 							<td>
 								<!-- 私もボタン -->
 								<div class="open" id="good${status.index}">
-									<img src="/OpenQA/images/preMeToo.png" alt="私も">
+									<img src="/OpenQA/images/preMeToo.jpg" alt="私も">
 									<c:out value="${value.metoo}" />
 								</div>
 								<!-- replyボタン -->
@@ -169,15 +188,29 @@
 							<td>
 							<div class="border">
 								<!-- 解決ボタン -->
-								<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
+
+
+
+									<input type="checkbox" name="solution" id="solution${status.index}"  onchange="solution('${status.index}','${value.q_id}')" <c:if test="${value.solution == 1}">checked</c:if>>
+
+
+
+
 							</div>
 							</td>
 							</c:if>
 							<td colspan="4">
 							<div class="border">
 								<!-- 私もボタン-->
+
+
+								<label class="check-box" for="meToo${status.index}">
 								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
-								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+								<span class="text">私も</span>
+								<img src="/OpenQA/images/preMeToo.jpg"><c:out value="${value.metoo}" />
+								</label>
+
+
 							</div>
 							</td>
 						</tr>
