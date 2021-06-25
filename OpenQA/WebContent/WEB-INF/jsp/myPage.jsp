@@ -11,15 +11,15 @@
 	..tab_wrap{width:500px; margin:80px auto;}
 	input[type="radio"]{display:none;}
 	.tab_area{font-size:0; margin:0 10px;}
-	.tab_area label{width:150px; display:inline-block; padding:12px 0; color:#000; background:#32995f; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
+	.tab_area label{width:150px; display:inline-block; padding:12px 0; color:#000; background:#ddd;; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
 	.tab_area label:hover{opacity:0.5;}
 	.panel_area{background:#fff;}
 	.tab_panel{width:100%; display:none;}
 	.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
 	.close{display:none}
-	#tab1:checked ~ .tab_area .tab1_label{background:#ddd; color:#000;}
+	#tab1:checked ~ .tab_area .tab1_label{background:#32995f; color:#fff;}
 	#tab1:checked ~ .panel_area #panel1{display:block;}
-	#tab2:checked ~ .tab_area .tab2_label{background:#ddd; color:#000;}
+	#tab2:checked ~ .tab_area .tab2_label{background:#32995f; color:#fff;}
 	#tab2:checked ~ .panel_area #panel2{display:block;}
 
 	.table {
