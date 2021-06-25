@@ -9,15 +9,15 @@
 </head>
 <body>
 <form method="POST" action="/OpenQA/RegistServlet?mode=reset" id="form">
-
 		<p>
-			ID<input type="text" name="ID" placeholder="ID">
+			ID<input type="text" name="ID" id="id" placeholder="ID">
 		</p>
 		<p>
 			お名前<input type="text" name="name" placeholder="お名前">
 		</p>
 		<p>
-			新しいPW<input type="text" name="pw1" placeholder="新しいPW">
+			新しいPW<input type="text" name="pw" id="pw" placeholder="PW">
+
 		</p>
 		<p>
 			確認用PW<input type="text" name="pw2" placeholder="確認用PW">
