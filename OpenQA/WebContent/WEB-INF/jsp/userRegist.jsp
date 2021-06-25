@@ -10,28 +10,33 @@
 <body>
 <form method="POST" action="/OpenQA/RegistServlet?mode=userRegist" id="form">
 
-		<p>
+		<div>
 			ID<input type="text" name="ID" id="id" placeholder="ID">
 			<div class="tooltip">半角英数字で入力してください。</div>
-		</p>
-
-		<p>
+			<p></p>
+		</div>
+		<div>
 			PW<input type="text" name="pw" id="pw" placeholder="PW">
 			<div class="tooltip">半角英字と数字を組み合わせた６桁以上で入力してください。</div>
-		</p>
-		<p>
+			<p></p>
+		</div>
+		<div>
 			確認用PW<input type="text" name="pw" id="pw2" placeholder="確認用PW">
-		</p>
-		<p>
+			<p></p>
+		</div>
+		<div>
 			お名前<input type="text" name="name" placeholder="お名前">
-		</p>
-		<p>
+			<p></p>
+			</div>
+		<div>
 			<input type="radio" name="type"  value="0" checked>受講生
 			<input type="radio" name="type"  value="1" checked>講師
-		</p>
-		<p>
+			<p></p>
+		</div>
+		<div>
 			講師用PW<input type="text" name="ins_pw" id="ins_pw" placeholder="講師用PW">
-		</p>
+			<p></p>
+		</div>
 		<input type="submit" name="SUBMIT" value="登録" onclick="return checkForm();">
 	</form>
 </body>
@@ -41,8 +46,12 @@ function checkForm() {
 	var pw = document.getElementById('pw');
 	var ins_pw = document.getElementById('ins_pw');
 
-	if(id.value == ???) {
-		window.alert("そのIDは使われています。");
+	if(id.value == "") {
+		window.alert("IDを入力してください。");
+		return false;
+	}
+	if(name.value == "") {
+		window.alert("名前を入力してください。");
 		return false;
 	}
 
@@ -57,7 +66,7 @@ function checkForm() {
 	}
 }
 
-let elms = document.querySelectorAll('form input[type=text]');
+let elms = document.querySelectorAll('form input[type=text],form textarea');
 for (let i = 0; i < elms.length; i++) {
 	elms[i].onfocus = function () {
 		let = tooltip = this.parentNode.querySelector('.tooltip');
@@ -71,7 +80,7 @@ for (let i = 0; i < elms.length; i++) {
 </script>
 
 <style>
-form.p {
+form.div {
 	position:relative;
 }
 .tooltip:before {
@@ -80,11 +89,11 @@ form.p {
 	top:10px;
 	left:-20px;
 	border:12px solid transparent;
-	border-right:12px solid #808080;
+	border-right:12px solid #60EEEE;
 }
 .tooltip {
 	position:absolute;
-	background-color:#808080;
+	background-color:#60EEEE;
 	color:white;
 	font-size:0.8em;
 	border-radius:0.5em;
@@ -92,7 +101,7 @@ form.p {
 	margin:-0.8em 0.5em 0 1em;
 	display:none;
 }
-input[type="text"] {
+input[type="text"],textarea {
 	width:10em;
 }
 </style>
