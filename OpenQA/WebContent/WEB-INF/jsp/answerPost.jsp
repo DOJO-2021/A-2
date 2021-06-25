@@ -21,7 +21,8 @@
 		<input type="checkbox" name="ch" id="ch">匿名
 		<input type="hidden" value="0" name="anonymity" id="anonymity">
 	</th>
-
+</tr>
+<tr>
 	<td>
 	<p>回答<textarea name="content"></textarea></p>
 
