@@ -229,7 +229,7 @@
 
 															<br>
 															</div>
-																<img src="/OpenQA/images/${value.a_images}" alt="画像イメージ">
+																<img src="/OpenQA/images/${value.a_images}" alt="">
 															</td>
 												</tr>
 												<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->

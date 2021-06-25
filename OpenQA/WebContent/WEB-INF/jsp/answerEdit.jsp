@@ -23,8 +23,8 @@
 
 		from. ${user.name}
 
-		<input type="checkbox" name="anonymity" value="1"  id="anonymity" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
-
+		<input type="checkbox" name="ch" id="ch" <c:if test = "${param.anonymity == 1}"> checked </c:if>>匿名
+		<input type="hidden" value="0" name="anonymity" id="anonymity">
 	</th>
   </tr>
   <tr>

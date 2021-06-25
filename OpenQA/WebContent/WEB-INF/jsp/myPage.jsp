@@ -166,7 +166,7 @@ ID:${sessionScope.user.id}</h5>
 								${value.content}
 								</div>
 								<br>
-								<img src="/OpenQA/images/${value.q_images}" alt="画像イメージ">
+								<img src="/OpenQA/images/${value.q_images}" alt="">
 
 							</td>
 
@@ -280,7 +280,7 @@ ID:${sessionScope.user.id}</h5>
 
 															<br>
 															</div>
-																<img src="/OpenQA/images/${value.a_images}" alt="画像イメージ">
+																<img src="/OpenQA/images/${value.a_images}" alt="">
 															</td>
 												</tr>
 												<!-- 編集ボタンを押したら以下のデータをUpdateDeleteServletに送る -->
