@@ -104,6 +104,10 @@ public class UpdateDeleteServlet extends HttpServlet {
 					QuestionDAO qDao = new QuestionDAO();
 
 					qDao.update(q_id, to, id, anonymity, b_category, s_category, date, title, content, solution, meToo, images );
+
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/close.jsp");
+					dispatcher.forward(request, response);
+
 				}
 				if(request.getParameter("SUBMIT").equals("質問削除")) {
 					String mode = request.getParameter("mode");
@@ -198,6 +202,9 @@ public class UpdateDeleteServlet extends HttpServlet {
 					AnswerDAO aDao = new AnswerDAO();
 
 					aDao.update(a_id, id, anonymity, date, answer, images, q_id);
+
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/close.jsp");
+					dispatcher.forward(request, response);
 				}
 				if(request.getParameter("SUBMIT").equals("回答削除")) {
 					String a_id = request.getParameter("a_id");

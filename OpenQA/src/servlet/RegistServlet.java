@@ -196,6 +196,9 @@ public class RegistServlet extends HttpServlet {
 			System.out.println("aaa");
 		}
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/close.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 	//ファイルの名前を取得してくる
