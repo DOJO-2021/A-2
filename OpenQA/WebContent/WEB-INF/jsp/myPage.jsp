@@ -48,6 +48,7 @@
 		white-space: nowrap;
 		text-overflow: ellipsis; /*非表示のあふれた内容をどのようにユーザーに知らせるのかを設定*/
 	}
+
 </style>
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
@@ -73,7 +74,7 @@ ID:${sessionScope.user.id}</h5>
 		<div id="panel1" class="tab_panel">
 			<c:set var="data" value="0" />
 			<table class="table">
-			<tr>
+			<tr >
 				<td>
 					宛先
 				</td>
@@ -771,7 +772,6 @@ function solution(indexNo,q_id){
 		function wopen(url){
 			window.open(url, "window_name", "width=700,height=500,scrollbars=yes");
 		}
-
 </script>
 
 </html>
