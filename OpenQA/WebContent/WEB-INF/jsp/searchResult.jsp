@@ -14,17 +14,18 @@
   position: relative;
   top: 0.25em;
   margin: 0 5px 0 0;
-  background-image: none, url("/OpenQA/images/preMeToo.jpg");
-  background-size: 68% auto, 100%;
-  background-position: top 55% left 50%, 0 0;
+  background-image: none, url("/OpenQA/images/preMeToo.png");
+  background-size: 125% auto, 100%;
+  background-position: top 100% left 100%, 0 0;
   background-repeat: no-repeat, no-repeat;
-  width: 19px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
 }
 
 .check-box input:checked + .text:before {
   background-image: url("/OpenQA/images/meToo.png");
 }
+
 </style>
 </head>
 <body>
@@ -109,7 +110,7 @@
 							<td>
 								<!-- 私もボタン -->
 								<div class="open" id="good${status.index}">
-									<img src="/OpenQA/images/preMeToo.jpg" alt="私も">
+									<img src="/OpenQA/images/preMeToo.jpg" alt="私も"  width="30" height="30">
 									<c:out value="${value.metoo}" />
 								</div>
 								<!-- replyボタン -->
@@ -199,15 +200,14 @@
 							</div>
 							</td>
 							</c:if>
-							<td colspan="4">
+							<td colspan="4" align="left">
 							<div class="border">
 								<!-- 私もボタン-->
 
 
 								<label class="check-box" for="meToo${status.index}">
-								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
-								<span class="text">私も</span>
-								<img src="/OpenQA/images/preMeToo.jpg"><c:out value="${value.metoo}" />
+								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')" style="display: none;">
+								<span class="text"></span>
 								</label>
 
 
