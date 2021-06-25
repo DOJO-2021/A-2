@@ -11,27 +11,27 @@
 	..tab_wrap{width:500px; margin:80px auto;}
 	input[type="radio"]{display:none;}
 	.tab_area{font-size:0; margin:0 10px;}
-	.tab_area label{width:150px; display:inline-block; padding:12px 0; color:#999; background:#32995f; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
+	.tab_area label{width:150px; display:inline-block; padding:12px 0; color:#000; background:#ddd; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
 	.tab_area label:hover{opacity:0.5;}
 	.panel_area{background:#fff;}
 	.tab_panel{width:100%; display:none;}
 	.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
 	.close{display:none}
-	#tab0:checked ~ .tab_area .tab0_label{background:#ddd; color:#000;}
+	#tab0:checked ~ .tab_area .tab0_label{background:#32995f; color:#fff;}
 	#tab0:checked ~ .panel_area #panel0{display:block;}
-	#tab1:checked ~ .tab_area .tab1_label{background:#ddd; color:#000;}
+	#tab1:checked ~ .tab_area .tab1_label{background:#32995f; color:#fff;}
 	#tab1:checked ~ .panel_area #panel1{display:block;}
-	#tab2:checked ~ .tab_area .tab2_label{background:#ddd; color:#000;}
+	#tab2:checked ~ .tab_area .tab2_label{background:#32995f; color:#fff;}
 	#tab2:checked ~ .panel_area #panel2{display:block;}
-	#tab3:checked ~ .tab_area .tab3_label{background:#ddd; color:#000;}
+	#tab3:checked ~ .tab_area .tab3_label{background:#32995f; color:#fff;}
 	#tab3:checked ~ .panel_area #panel3{display:block;}
-	#tab4:checked ~ .tab_area .tab4_label{background:#ddd; color:#000;}
+	#tab4:checked ~ .tab_area .tab4_label{background:#32995f; color:#fff;}
 	#tab4:checked ~ .panel_area #panel4{display:block;}
-	#tab5:checked ~ .tab_area .tab5_label{background:#ddd; color:#000;}
+	#tab5:checked ~ .tab_area .tab5_label{background:#32995f; color:#fff;}
 	#tab5:checked ~ .panel_area #panel5{display:block;}
-	#tab6:checked ~ .tab_area .tab6_label{background:#ddd; color:#000;}
+	#tab6:checked ~ .tab_area .tab6_label{background:#32995f; color:#fff;}
 	#tab6:checked ~ .panel_area #panel6{display:block;}
-	#tab7:checked ~ .tab_area .tab7_label{background:#ddd; color:#000;}
+	#tab7:checked ~ .tab_area .tab7_label{background:#32995f; color:#fff;}
 	#tab7:checked ~ .panel_area #panel7{display:block;}
 
 	table, td, th {
