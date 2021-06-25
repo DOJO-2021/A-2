@@ -14,7 +14,7 @@
 	.tab_area label{width:150px; margin:0 5px; display:inline-block; padding:12px 0; color:#999; background:#ddd; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
 	.tab_area label:hover{opacity:0.5;}
 	.panel_area{background:#fff;}
-	.tab_panel{width:100%; padding:80px 0; display:none;}
+	.tab_panel{width:100%; display:none;}
 	.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
 	.close{display:none}
 	#tab0:checked ~ .tab_area .tab0_label{background:#fff; color:#000;}
