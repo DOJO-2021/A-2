@@ -88,7 +88,8 @@
 							<td>
 								<!-- 私もボタン -->
 								<div class="open" id="good${status.index}">
-									<img src="/OpenQA/images/preMeToo.png" alt="私も">
+								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
+									<img src="/OpenQA/images/preMeToo.jpg" alt="私も" id="watashimo${status.index}" width="30" height="30">
 									<c:out value="${value.metoo}" />
 								</div>
 								<!-- replyボタン -->
@@ -175,7 +176,7 @@
 							<div class="border">
 								<!-- 私もボタン-->
 								<input type="checkbox" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
-								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+								<img src="/OpenQA/images/preMeToo.jpg" id="watashima${status.index}" width="30" height="30"><c:out value="${value.metoo}" />
 							</div>
 							</td>
 						</tr>
@@ -375,6 +376,8 @@ function solution(indexNo,q_id){
 		var intMetoo = parseInt(metoo);
 		var meToo =document.getElementById('meToo'+indexNo);
 		if(meToo.checked){
+			document.getElementById("watashimo"+indexNo).src="/OpenQA/images/meToo.png";
+			document.getElementById("watashima"+indexNo).src="/OpenQA/images/meToo.png";
 			intMetoo ++;
 			//var q_id =document.getElementById('q_id');
 			$.ajax({
