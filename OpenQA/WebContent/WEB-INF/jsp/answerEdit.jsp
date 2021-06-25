@@ -12,6 +12,12 @@
 <script type="text/javascript" src="/OpenQA/js/common.js"></script>
 </head>
 <body>
+			<h1>
+			<img src="/OpenQA/images/mainLogo.png" class="sitelogo"  width="80" height="80">
+			Open Q&amp;A System</h1>
+			<hr>
+
+
 <h2>回答編集</h2>
 <form method="POST" name = "subBut" action="/OpenQA/UpdateDeleteServlet" enctype="multipart/form-data">
 	<input type="hidden" name="a_id" value="${param.a_id}">

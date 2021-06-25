@@ -9,6 +9,15 @@
 
 </head>
 <body>
+
+
+			<h1>
+				<img src="/OpenQA/images/mainLogo.png" class="sitelogo"  width="80" height="80">
+
+			Open Q&amp;A System</h1>
+			<hr>
+
+
 <h2>質問登録</h2>
 <form method="POST" name = "subBut" action="/OpenQA/RegistServlet?mode=question"  enctype="multipart/form-data" id="form">
 <table>
