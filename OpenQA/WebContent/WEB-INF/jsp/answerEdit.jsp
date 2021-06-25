@@ -19,7 +19,7 @@
 	<input type="hidden" name="mode" value="aa">
 <table>
   <tr>
-	<th>
+	<th colspan="2" align="left">
 
 		from. ${user.name}
 
@@ -28,9 +28,16 @@
 	</th>
   </tr>
   <tr>
-	<td>
-	<p>回答<textarea name="content">${param.content}</textarea></p>
 
+	<td>
+		回答
+	</td>
+	<td>
+		<textarea name="content" style="width: 550px; height: 100px">${param.content}</textarea>
+	</td>
+   </tr>
+   <tr>
+	<td colspan="2" align="right">
 		<img src="/OpenQA/images/${param.images}" alt = "" id="p1">
 
 	<input type="hidden" name="preImage" value="${param.images}" id="preImage">

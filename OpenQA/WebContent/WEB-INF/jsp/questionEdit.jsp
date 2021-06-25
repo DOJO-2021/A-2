@@ -17,7 +17,7 @@
 <input type="hidden" name="p_id" value="${param.q_id} ">
 <table>
 <tr>
-	<th>
+	<th colspan="2" align="left">
 		<!-- 回答者を指定する -->
 		<select name="to">
 			<option value="" >回答者を選択</option>
@@ -49,28 +49,41 @@
 
 <tr>
 
+	<td style="text-align: center">
+		タイトル
+	</td>
 	<td>
-
-	<p>タイトル <input type="text" name="title" value="${param.title}" id="title"></p>
-	<p>内容<textarea name="content" id="content">${param.content}</textarea></p>
+		<input type="text" name="title" value="${param.title}" id="title" style="width: 550px;">
+	</td>
+</tr>
+<tr>
+	<td style="text-align: center">
+		内容
+	</td>
+	<td>
+		<textarea name="content" id="content" style="width: 550px; height: 100px">${param.content}</textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="right">
 		<img src="/OpenQA/images/${param.images}" alt = "" id="p1">
-	<input type="hidden" value="${param.images}" name="preImage" id="preImage">
-	<canvas id="preview" style="max-width:200px;"></canvas><br>
+		<input type="hidden" value="${param.images}" name="preImage" id="preImage">
+		<canvas id="preview" style="max-width:200px;"></canvas><br>
 
-	<input type="button" id="btn1" value="画像削除" onclick="cls();">
-	<label>
-		<img src="images/insert.jpeg" alt="画像添付">
-		<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);" id="image">
-	</label>
+		<input type="button" id="btn1" value="画像削除" onclick="cls();">
+		<label>
+			<img src="images/insert.jpeg" alt="画像添付">
+			<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);" id="image">
+		</label>
 
-	<input type="hidden" name="q_id" value="${param.q_id}">
-	<input type="hidden" name="solution" value="${param.solution}">
-	<input type="hidden" name="meToo" value="${param.meToo}">
-	<input type="hidden" name="so" value="0">
-	<input type="hidden" name="meto" value="0">
+		<input type="hidden" name="q_id" value="${param.q_id}">
+		<input type="hidden" name="solution" value="${param.solution}">
+		<input type="hidden" name="meToo" value="${param.meToo}">
+		<input type="hidden" name="so" value="0">
+		<input type="hidden" name="meto" value="0">
 
 
-	<input type="submit" name="SUBMIT" value="質問編集">
+		<input type="submit" name="SUBMIT" value="質問編集">
 	</td>
 </tr>
 </table>

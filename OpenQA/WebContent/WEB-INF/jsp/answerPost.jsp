@@ -13,7 +13,7 @@
 <input type=hidden name="q_id" value="${param.q_id}">
 <table>
 <tr>
-	<th>
+	<th  colspan="2" align="left">
 
 		from. ${user.name}
 
@@ -24,8 +24,14 @@
 </tr>
 <tr>
 	<td>
-	<p>回答<textarea name="content"></textarea></p>
-
+		回答
+	</td>
+	<td>
+		<textarea name="content" style="width: 550px; height: 100px"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="right">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<label>

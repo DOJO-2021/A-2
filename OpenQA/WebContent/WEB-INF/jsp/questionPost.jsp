@@ -6,13 +6,14 @@
 <meta charset="UTF-8">
 <title>Open Q&A System</title>
 <script type="text/javascript" src="/OpenQA/js/common.js"></script>
+
 </head>
 <body>
 <h2>質問登録</h2>
 <form method="POST" name = "subBut" action="/OpenQA/RegistServlet?mode=question"  enctype="multipart/form-data" id="form">
 <table>
 <tr>
-	<th>
+	<th colspan="2" align="left">
 		<!-- 回答者を指定する -->
 		<select name="to" id="to">
 			<option value="">回答者を選択</option>
@@ -44,8 +45,22 @@
 </tr>
 <tr>
 	<td>
-	<p>タイトル <input type="text" name="title" id="title"></p>
-	<p>内容<textarea name="content" id="content"></textarea></p>
+		タイトル
+	</td>
+	<td>
+		<input type="text" name="title" id="title" style="width: 550px;">
+	</td>
+</tr>
+<tr>
+	<td style="text-align: center">
+		内容
+	</td>
+	<td>
+	<p><textarea name="content" id="content" style="width: 550px; height: 100px"></textarea></p>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="right">
 	<canvas id="preview" style="max-width:200px;"></canvas><br>
 
 	<label>
