@@ -11,15 +11,15 @@
 	..tab_wrap{width:500px; margin:80px auto;}
 	input[type="radio"]{display:none;}
 	.tab_area{font-size:0; margin:0 10px;}
-	.tab_area label{width:150px; margin:0 5px; display:inline-block; padding:12px 0; color:#999; background:#ddd; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
+	.tab_area label{width:150px; display:inline-block; padding:12px 0; color:#000; background:#32995f; text-align:center; font-size:13px; cursor:pointer; transition:ease 0.2s opacity;}
 	.tab_area label:hover{opacity:0.5;}
 	.panel_area{background:#fff;}
-	.tab_panel{width:100%; padding:80px 0; display:none;}
+	.tab_panel{width:100%; display:none;}
 	.tab_panel p{font-size:14px; letter-spacing:1px; text-align:center;}
 	.close{display:none}
-	#tab1:checked ~ .tab_area .tab1_label{background:#fff; color:#000;}
+	#tab1:checked ~ .tab_area .tab1_label{background:#ddd; color:#000;}
 	#tab1:checked ~ .panel_area #panel1{display:block;}
-	#tab2:checked ~ .tab_area .tab2_label{background:#fff; color:#000;}
+	#tab2:checked ~ .tab_area .tab2_label{background:#ddd; color:#000;}
 	#tab2:checked ~ .panel_area #panel2{display:block;}
 
 	.table {
@@ -48,6 +48,24 @@
 		white-space: nowrap;
 		text-overflow: ellipsis; /*非表示のあふれた内容をどのようにユーザーに知らせるのかを設定*/
 	}
+	.check-box input + .text:before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: 0.25em;
+  margin: 0 5px 0 0;
+  background-image: none, url("/OpenQA/images/preMeToo.png");
+  background-size: 125% auto, 100%;
+  background-position: top 100% left 100%, 0 0;
+  background-repeat: no-repeat, no-repeat;
+  width: 30px;
+  height: 30px;
+}
+
+.check-box input:checked + .text:before {
+  background-image: url("/OpenQA/images/meToo.png");
+}
+
 
 </style>
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
@@ -136,7 +154,7 @@ ID:${sessionScope.user.id}</h5>
 								<div class="open" id="good${status.index}">
 								<input type="checkbox" class="memento" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
 									<label for="meToo${status.index}" class="formmemento"></label>
-									<img src="/OpenQA/images/preMeToo.png" alt="私も">
+									<img src="/OpenQA/images/preMeToo.png" alt="私も"  width="30" height="30">
 									<c:out value="${value.metoo}" />
 								</div>
 								<!-- replyボタン -->
@@ -226,7 +244,7 @@ ID:${sessionScope.user.id}</h5>
 								<div style="text-align: right;">
 									<input type="checkbox" class="memento" name="meToo" value="0" id="meToo${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}')">
 									<label for="meToo${status.index}" class="formmemento"></label>
-									<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+									<img src="/OpenQA/images/preMeToo.png"  width="30" height="30"><c:out value="${value.metoo}" />
 								</div>
 							</td>
 
