@@ -16,7 +16,7 @@
 		</p>
 
 		<p>
-			PW<input type="text" name="pw" id="pw" placeholder="新しいPW">
+			PW<input type="text" name="pw" id="pw" placeholder="PW">
 			<div class="tooltip">半角英字と数字を組み合わせた６桁以上で入力してください。</div>
 		</p>
 		<p>
@@ -32,25 +32,28 @@
 		<p>
 			講師用PW<input type="text" name="ins_pw" id="ins_pw" placeholder="講師用PW">
 		</p>
-		<input type="submit" name="SUBMIT" value="登録">
+		<input type="submit" name="SUBMIT" value="登録" onclick="return checkForm();">
 	</form>
 </body>
 <script>
-function ceckForm() {
-	var id = document.getElementById("id");
-	var pw = document.getElementById("pw");
-	var ins_pw = document.getElementById("ins_pw");
+function checkForm() {
+	var id = document.getElementById('id');
+	var pw = document.getElementById('pw');
+	var ins_pw = document.getElementById('ins_pw');
 
 	if(id.value == ???) {
 		window.alert("そのIDは使われています。");
+		return false;
 	}
 
 	if(pw.value != pw2.value) {
 		window.alert("確認用PWが一致しません。");
+		return false;
 	}
 
 	if(ins_pw != "HiguchiIsGod") {
-		window.alert("講師用PWが違います。")
+		window.alert("講師用PWが違います。");
+		return false;
 	}
 }
 
