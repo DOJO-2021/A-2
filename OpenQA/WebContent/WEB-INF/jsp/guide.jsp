@@ -11,7 +11,7 @@
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
 <div class="content">
 	<h1>使用ガイド</h1>
-	<table border="1px solid">
+	<table>
 		<tr>
 			<td style="text-align: left;">
 				<img src="/OpenQA/images/meToo.png" alt="私も"  width="30" height="30">
