@@ -82,7 +82,10 @@ ID:${sessionScope.user.id}</h5>
 <input type="radio" id="tab1" name="tab_btn" checked>
 <input type="radio" id="tab2" name="tab_btn">
 
-	<div class="tab_area">
+	<div class="tab_area" style="
+    text-align: left;
+    padding-left: 165px;
+">
 	<label class="tab1_label" for="tab1">質問</label>
 	<label class="tab2_label" for="tab2">回答</label>
 	</div>
