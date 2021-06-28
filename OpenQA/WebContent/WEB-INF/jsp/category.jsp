@@ -124,7 +124,7 @@
 							<td>
 								<!-- 私もボタン -->
 								<div class="open" id="good${listSt.index}${status.index}">
-									<img src="/OpenQA/images/preMeToo.png" alt="私も">
+									<img src="/OpenQA/images/preMeToo.png" alt="私も" width="30" height="30">
 									<c:out value="${value.metoo}" />
 								</div> <!-- replyボタン -->
 								<div class="close" id="reply${listSt.index}${status.index}">
@@ -203,7 +203,7 @@
 							<div class="border">
 								<!-- 私もボタン-->
 								<input type="checkbox" name="meToo" value="0" id="meToo${listSt.index}${status.index}"  onchange="meToo('${status.index}','${value.q_id}','${value.metoo}', '${listSt.index}')">
-								<img src="/OpenQA/images/preMeToo.png"><c:out value="${value.metoo}" />
+								<img src="/OpenQA/images/preMeToo.png" width="30" height="30"> <c:out value="${value.metoo}" />
 								</div>
 							</td>
 						</tr>
