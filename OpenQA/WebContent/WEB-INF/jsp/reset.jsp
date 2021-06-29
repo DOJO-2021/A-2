@@ -23,7 +23,7 @@
 			確認用PW<input type="text" name="pw2" placeholder="確認用PW">
 		</p>
 
-		<input type="submit" name="reset" value="再設定" onclick="return checkForm();">
+		<input type="submit" name="reset" value="再設定" onsubmit="return checkForm();">
 	</form>
 </body>
 <script>
