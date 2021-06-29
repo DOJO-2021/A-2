@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
-<form method="POST" action="/OpenQA/RegistServlet?mode=userRegist" id="form">
+<form method="POST" action="/OpenQA/RegistServlet" id="form">
 
 		<div>
 			ID<input type="text" name="ID" id="id" placeholder="ID">
@@ -45,6 +45,7 @@ function checkForm() {
 	var id = document.getElementById('id');
 	var pw = document.getElementById('pw');
 	var ins_pw = document.getElementById('ins_pw');
+	var type = document.getElementsByName('type');
 
 	if(id.value == "") {
 		window.alert("IDを入力してください。");
@@ -60,7 +61,7 @@ function checkForm() {
 		return false;
 	}
 
-	if(ins_pw != "HiguchiIsGod") {
+	if(type == 1 && ins_pw != "HiguchiIsGod") {
 		window.alert("講師用PWが違います。");
 		return false;
 	}

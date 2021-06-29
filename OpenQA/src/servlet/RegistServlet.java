@@ -100,26 +100,28 @@ public class RegistServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			int type = Integer.parseInt(request.getParameter("type"));
 			String ins_pw = request.getParameter("ins_pw");
+			UserDAO bDao = new UserDAO();
+
 
 			// 講師用PWが合っているか確認
 			if(type == 1) {
 				if(ins_pw.equals("HiguchiIsGod")) {
-					// 登録処理を行う
-					UserDAO bDao = new UserDAO();
 					// 登録成功したらresult.javaに表示
 					if (bDao.insert(id, pw, name, type)) {
 						request.setAttribute("result",
-								new Result("会員登録が成功しました。", "welcome～の画像パスを挿入", "/OpenQA/RegistServlet"));
+								new Result("会員登録が成功しました。", "あり", "aa"));
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+						dispatcher.forward(request, response);
 					}
 				}
-			}
-
-			// 登録処理を行う
-			UserDAO bDao = new UserDAO();
-			// 登録成功したらresult.javaに表示
-			if (bDao.insert(id, pw, name, type)) {
-				request.setAttribute("result",
-						new Result("会員登録が成功しました。", "welcome～の画像パスを挿入", "/OpenQA/RegistServlet"));
+			} else {
+				// 登録成功したらresult.javaに表示
+				if (bDao.insert(id, pw, name, type)) {
+					request.setAttribute("result",
+						new Result("会員登録が成功しました。", "あり", "aa"));
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
 		}
 
