@@ -17,7 +17,9 @@ import javax.servlet.http.Part;
 
 import dao.AnswerDAO;
 import dao.QuestionDAO;
+import dao.UserDAO;
 import model.Almighty;
+import model.Result;
 import model.User;
 
 /**
@@ -69,6 +71,29 @@ public class UpdateDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
+
+		try {if(request.getParameter("SUBMIT")!=null) {
+				if(request.getParameter("SUBMIT").equals("再設定")) {
+				String id = request.getParameter("ID");
+				String pw = request.getParameter("pw");
+
+				UserDAO uDao = new UserDAO();
+
+				uDao.update(pw, id);
+
+				request.setAttribute("result",
+						new Result("PWを再設定しました。", "PWを再設定しましたね。えらい", "aa"));
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+				dispatcher.forward(request, response);
+				}
+			}
+
+		}catch (Exception e){
+
+		}
+
+
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/OpenQA/LoginServlet");
 			return;

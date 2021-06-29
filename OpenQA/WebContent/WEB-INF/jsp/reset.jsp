@@ -8,6 +8,14 @@
 <link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
+
+
+			<h1>
+				<img src="/OpenQA/images/mainLogo.png" class="sitelogo"  width="80" height="80">
+
+			Open Q&amp;A System</h1>
+			<hr>
+
 <form method="POST" action="/OpenQA/RegistServlet?mode=reset" id="form">
 		<p>
 			ID<input type="text" name="ID" id="id" placeholder="ID">
@@ -23,7 +31,7 @@
 			確認用PW<input type="text" name="pw2" placeholder="確認用PW">
 		</p>
 
-		<input type="submit" name="reset" value="再設定" onclick="return checkForm();">
+		<input type="submit" name="reset" value="再設定" onsubmit="return checkForm();">
 	</form>
 </body>
 <script>
