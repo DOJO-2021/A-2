@@ -82,7 +82,7 @@ public class UpdateDeleteServlet extends HttpServlet {
 				uDao.update(pw, id);
 
 				request.setAttribute("result",
-						new Result("PWを再設定しました。", "", "/OpenQA/RegistServlet"));
+						new Result("PWを再設定しました。", "PWを再設定しましたね。えらい", "aa"));
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 				dispatcher.forward(request, response);

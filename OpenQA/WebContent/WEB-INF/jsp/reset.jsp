@@ -8,6 +8,14 @@
 <link rel="stylesheet" href="/OpenQA/css/common.css">
 </head>
 <body>
+
+
+			<h1>
+				<img src="/OpenQA/images/mainLogo.png" class="sitelogo"  width="80" height="80">
+
+			Open Q&amp;A System</h1>
+			<hr>
+
 <form method="POST" action="/OpenQA/RegistServlet?mode=reset" id="form">
 		<p>
 			ID<input type="text" name="ID" id="id" placeholder="ID">
